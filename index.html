@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maria — Designer</title>
+  <link rel="preload" href="logotype3D.webm" as="fetch" crossorigin>
+  <link rel="preload" href="logotype3D.mp4" as="fetch" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -110,6 +112,9 @@
       transform: scale(0.26);
       transform-origin: center center;
       filter: saturate(1.02) contrast(1.02);
+      will-change: transform;
+      mix-blend-mode: screen;
+      background: transparent;
     }
 
     .site-loader-copy,
@@ -1338,7 +1343,45 @@
     const siteLoaderCount = document.getElementById('siteLoaderCount');
 
     function startSiteLoader() {
-      const resourceUrls = new Set();
+      const archiveResources = [
+        'archive/immorbi_My_favorite_character_ever_named_immorbi_--chaos_15_-_5e11ff3a-2c5b-473b-9f3a-9c7d8807d775_0.png',
+        'archive/immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__06e40325-5e21-4046-a2eb-ba7164c8cee3_3.png',
+        'archive/immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__1bf59100-000a-41f7-9073-4e5887178fcb_3.png',
+        'archive/immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__55e9ae9a-0cc4-4625-b055-2a315548c307_0.png',
+        'archive/immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__99b2ba88-ae65-4703-bdd1-ec4924f39139_0.png',
+        'archive/immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__ed2c9144-d537-4c96-b5d6-4fd14137ccb6_1.png',
+        'archive/immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__edbc4bef-9ebc-42f5-a884-dd3a24d0c841_0.png',
+        'archive/immorbi_abstract_halftone_background_monochrome_palette_soft__37ee213c-3dc7-41d7-8032-8ac94dde7fe2_0.png',
+        'archive/immorbi_butterflys_on_white_bg_--chaos_15_--ar_7758_--raw_--p_6f2b03e9-e5dd-497d-8a8f-1d2060f0046e_0.png',
+        'archive/immorbi_butterflys_on_white_bg_--chaos_15_--ar_7758_--raw_--p_c0940894-1ca2-45c7-8d94-4e3a01ba0d65_1.png',
+        'archive/immorbi_butterflys_on_white_bg_--chaos_15_--ar_7758_--raw_--p_c0940894-1ca2-45c7-8d94-4e3a01ba0d65_3.png',
+        'archive/immorbi_cinematic_drone_orbit_shot_around_a_cozy_white_two-st_5a9067c5-adf7-4c68-afa5-18f68de9f9ad_1.png',
+        'archive/immorbi_cinematic_drone_orbit_shot_around_a_cozy_white_two-st_5a9067c5-adf7-4c68-afa5-18f68de9f9ad_2.png',
+        'archive/immorbi_cozy_white_two-story_house_surrounded_by_a_green_lawn_6b60530f-e0ec-471b-bf02-70c24874f664_3.png',
+        'archive/immorbi_cozy_white_two-story_house_surrounded_by_a_green_lawn_f65ab472-af42-4b67-8f7d-ceddad3c45de_0.png',
+        'archive/immorbi_httpss.mj.runQcJhy5ANN4c_a_close-up_selfie_portrait_o_f01a3c33-7117-42ee-b05d-62ef9e35db2d_1.png',
+        'archive/immorbi_minimal_Google_Forms_inspired_UI_clean_white_cards_so_162b2ac7-7ff3-468c-b65d-3e57d2a252a8_1.png',
+        'archive/immorbi_minimal_Google_Forms_inspired_UI_clean_white_cards_so_162b2ac7-7ff3-468c-b65d-3e57d2a252a8_2.png',
+        'archive/immorbi_minimal_Google_Forms_inspired_UI_clean_white_cards_so_46441979-cc59-4402-8b13-a5db88de73c9_2.png',
+        'archive/immorbi_minimal_Google_Forms_inspired_UI_clean_white_cards_so_77c0398f-d9a1-4ce9-8136-64607ef51566_2.png',
+        'archive/immorbi_ultra_minimal_Google_Forms_interface_mockup_clean_whi_00d5bbba-519d-4237-b03a-af4019da2c05_0.png',
+        'archive/immorbi_ultra_minimal_Google_Forms_interface_mockup_clean_whi_00d5bbba-519d-4237-b03a-af4019da2c05_1.png',
+        'archive/immorbi_vintage_CRT_computer_where_ONLY_the_monitor_is_made_of__1da2700d-cf84-425c-92b1-dc4bd925f3e1.png'
+      ];
+
+      const resourceUrls = new Set([
+        'logotype3D.webm',
+        'logotype3D.mp4',
+        'Comp 1_4_1.slow.clean.mp4',
+        'Case1.mp4',
+        'Comp 1_8.mp4',
+        'cover_brending.png',
+        'image 32.png',
+        'logo.svg',
+        'logoD.png',
+        ...archiveResources
+      ]);
+
       document.querySelectorAll('img[src], source[src], video[poster]').forEach((node) => {
         const src = node.getAttribute('src') || node.getAttribute('poster');
         if (src) resourceUrls.add(src);
@@ -1348,15 +1391,15 @@
       const totalResources = Math.max(urls.length, 1);
       let loadedResources = 0;
       let displayedProgress = 1;
-      let targetProgress = 1;
+      let targetProgress = 8;
       let finished = false;
-      const minDuration = 1500;
+      const minDuration = 2200;
       const startTime = performance.now();
 
       function updateTargetProgress() {
         const resourceProgress = Math.round((loadedResources / totalResources) * 92);
         const elapsed = performance.now() - startTime;
-        const timeProgress = Math.min(92, Math.round((elapsed / minDuration) * 92));
+        const timeProgress = Math.min(92, Math.round(8 + (elapsed / minDuration) * 84));
         targetProgress = Math.max(resourceProgress, timeProgress, targetProgress);
       }
 
@@ -1376,6 +1419,7 @@
           const video = document.createElement('video');
           video.preload = 'metadata';
           video.muted = true;
+          video.playsInline = true;
           video.src = url;
           video.addEventListener('loadeddata', markLoaded, { once: true });
           video.addEventListener('error', markLoaded, { once: true });
