@@ -58,30 +58,131 @@
       cursor: url('cursor.svg') 16 18, auto;
     }
 
-    body {
-      padding-top: 60px;
-    }
-
     ::selection {
       background: var(--text);
       color: var(--bg);
     }
 
-    .topbar {
-      position: fixed;
+    .layout {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 25%;
+      min-width: 280px;
+      min-height: 100vh;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 28px;
+      flex-shrink: 0;
+      position: sticky;
       top: 0;
-      left: 0;
+      align-self: flex-start;
+      background: #fff;
+    }
+
+    .sidebar-logo {
+      display: inline-flex;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar-logo:hover {
+      opacity: 0.9;
+      cursor: url('cursor2.svg') 16 18, pointer;
+    }
+
+    .sidebar-logo img {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
+
+    .sidebar-video {
+      margin-top: 12px;
+      margin-bottom: auto;
+      background: #fff;
+    }
+
+    .sidebar-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #fff;
+    }
+
+    .menu-list {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-top: 1px solid var(--text);
+      color: var(--text);
+      text-decoration: none;
+      transition: opacity 0.3s;
+      gap: 16px;
+    }
+
+    .menu-item:last-child {
+      border-bottom: 1px solid var(--text);
+    }
+
+    .menu-item:hover {
+      opacity: 0.5;
+      cursor: url('cursor2.svg') 16 18, pointer;
+    }
+
+    .menu-item-title {
+      font-size: clamp(24px, 2.5vw, 40px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .menu-item.active .menu-item-title,
+    .menu-item.active .menu-item-desc {
+      color: var(--text);
+    }
+
+    .menu-item:not(.active) .menu-item-title,
+    .menu-item:not(.active) .menu-item-desc {
+      color: #c0c0c0;
+    }
+
+    .menu-item:not(.active):hover .menu-item-title,
+    .menu-item:not(.active):hover .menu-item-desc {
+      color: var(--text);
+    }
+
+    .menu-item-desc {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
       width: 100%;
       z-index: 10;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: #ffffff;
       border-bottom: 1px solid var(--border);
+      display: none;
     }
 
     .topbar-inner {
-      max-width: var(--max);
-      margin: 0 auto;
       padding: 18px var(--pad);
       display: flex;
       justify-content: space-between;
@@ -109,22 +210,25 @@
       cursor: url('cursor2.svg') 16 18, pointer;
     }
 
-    .topbar-title {
-      color: var(--text-muted);
+    .profile-main {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg);
     }
 
     main {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 64px var(--pad) 80px;
+      padding: 124px var(--pad) 80px;
     }
 
     .profile-page {
       display: grid;
-      grid-template-columns: 240px minmax(0, 820px);
-      justify-content: center;
+      grid-template-columns: 240px minmax(0, 920px);
+      justify-content: start;
       align-items: start;
-      gap: 72px;
+      gap: 88px;
+      margin-left: clamp(36px, 6vw, 92px);
     }
 
     .info-photo {
@@ -183,7 +287,7 @@
     .info-text {
       font-size: 18px;
       line-height: 1.62;
-      max-width: 31ch;
+      max-width: 38ch;
     }
 
     .info-tools {
@@ -219,8 +323,18 @@
     }
 
     @media (max-width: 768px) {
-      body {
-        padding-top: 56px;
+      .layout {
+        display: block;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .topbar {
+        display: block;
+        position: fixed;
+        left: 0;
       }
 
       .topbar-inner {
@@ -229,6 +343,10 @@
 
       .topbar-title {
         display: none;
+      }
+
+      .profile-main {
+        width: 100%;
       }
 
       main {
@@ -282,45 +400,77 @@
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a href="index.html" class="back-link">← Back to start</a>
-      <span class="topbar-title">Profile / Maria Danilova</span>
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="sidebar-logo" href="index.html" aria-label="Go to start page">
+        <img src="logo.svg" alt="Maria Danilova">
+      </a>
+
+      <div class="sidebar-video">
+        <video autoplay loop muted playsinline preload="auto">
+          <source src="Comp 1_4_1.slow.clean.mp4" type="video/mp4">
+          <source src="Comp 1_4_1.mov" type="video/quicktime">
+        </video>
+      </div>
+
+      <nav class="menu-list">
+        <a class="menu-item" href="index.html">
+          <span class="menu-item-title">Work</span>
+          <span class="menu-item-desc">VIEW MY WORK<br>IN MOTION</span>
+        </a>
+        <a class="menu-item" href="archive.html">
+          <span class="menu-item-title">Archive</span>
+          <span class="menu-item-desc">EVERY PROJECT<br>IN ONE SPACE</span>
+        </a>
+        <a class="menu-item active" href="profile.html">
+          <span class="menu-item-title">Profile</span>
+          <span class="menu-item-desc">ABOUT ME &<br>MY PRACTICE</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div class="profile-main">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <a href="index.html" class="back-link">← Back to start</a>
+          <span class="topbar-title">Profile / Maria Danilova</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="profile-page">
+          <div class="info-photo">
+            <div class="info-photo-main">
+              <img src="image 32.png" alt="Maria Danilova">
+            </div>
+            <span class="info-photo-cursor" aria-hidden="true">
+              <img src="cursor2.svg" alt="">
+            </span>
+          </div>
+
+          <div class="info-content">
+            <div class="info-title">Info</div>
+            <div class="info-text">
+              Designer, Art Director, UI/UX designer, and vibe coder.
+              <br>
+              I work across art communities, gallery projects, and digital culture, shaping identities, editorials, and interfaces that carry both structure and atmosphere.
+              <br>
+              Multidisciplinary, detail-obsessed, and emotionally invested in typography.
+              <br><br>
+              Available for collaborations.
+            </div>
+            <div class="info-tools">
+              Skills: Illustrator, InDesign, Photoshop, Figma, After Effects, Codex, Claude, Midjourney
+            </div>
+            <div class="info-contact">
+              <a href="mailto:damilova.danmar@gmail.com">damilova.danmar@gmail.com</a>
+              <a href="https://www.instagram.com/immorbi/" target="_blank" rel="noreferrer">Instagram</a>
+              <a href="https://t.me/immorbi" target="_blank" rel="noreferrer">Telegram</a>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-  </header>
-
-  <main>
-    <section class="profile-page">
-      <div class="info-photo">
-        <div class="info-photo-main">
-          <img src="image 32.png" alt="Maria Danilova">
-        </div>
-        <span class="info-photo-cursor" aria-hidden="true">
-          <img src="cursor2.svg" alt="">
-        </span>
-      </div>
-
-      <div class="info-content">
-        <div class="info-title">Info</div>
-        <div class="info-text">
-          Designer, Art Director, UI/UX designer, and vibe coder.
-          <br>
-          I work across art communities, gallery projects, and digital culture, shaping identities, editorials, and interfaces that carry both structure and atmosphere.
-          <br>
-          Multidisciplinary, detail-obsessed, and emotionally invested in typography.
-          <br><br>
-          Available for collaborations.
-        </div>
-        <div class="info-tools">
-          Skills: Illustrator, InDesign, Photoshop, Figma, After Effects, Codex, Claude, Midjourney
-        </div>
-        <div class="info-contact">
-          <a href="mailto:damilova.danmar@gmail.com">damilova.danmar@gmail.com</a>
-          <a href="https://www.instagram.com/immorbi/" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://t.me/immorbi" target="_blank" rel="noreferrer">Telegram</a>
-        </div>
-      </div>
-    </section>
-  </main>
+  </div>
 </body>
 </html>
