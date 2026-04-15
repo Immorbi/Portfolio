@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — Maria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced Leger.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced Normale.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced DemiGras.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced Gros.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --text: #222222;
+      --text-light: #8a8a8a;
+      --text-muted: #c8c8c8;
+      --bg: #ffffff;
+      --border: #e0e0e0;
+      --font: 'DeFonte', -apple-system, sans-serif;
+      --max: 1280px;
+      --pad: 48px;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      overflow-x: hidden;
+      cursor: url('cursor.svg') 16 18, auto;
+    }
+
+    body {
+      padding-top: 60px;
+    }
+
+    ::selection {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px var(--pad);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link,
+    .topbar-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+
+    .back-link {
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .back-link:hover {
+      opacity: 0.5;
+      cursor: url('cursor2.svg') 16 18, pointer;
+    }
+
+    .topbar-title {
+      color: var(--text-muted);
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 64px var(--pad) 80px;
+    }
+
+    .profile-page {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 520px);
+      justify-content: center;
+      align-items: start;
+      gap: 72px;
+    }
+
+    .info-photo {
+      position: relative;
+      width: 240px;
+      aspect-ratio: 3 / 4;
+      overflow: visible;
+      transform: rotate(-8deg);
+    }
+
+    .info-photo-main {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .info-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center top;
+      transform: translateY(-30px) scale(1.2);
+      transform-origin: center top;
+    }
+
+    .info-photo-cursor {
+      position: absolute;
+      top: -18px;
+      right: -14px;
+      width: 64px;
+      height: 64px;
+      z-index: 2;
+      pointer-events: none;
+      animation: spin-cursor 6s linear infinite;
+    }
+
+    .info-photo-cursor img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @keyframes spin-cursor {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .info-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      margin-bottom: 26px;
+    }
+
+    .info-text {
+      font-size: 18px;
+      line-height: 1.62;
+      max-width: 16ch;
+    }
+
+    .info-tools {
+      margin-top: 28px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      max-width: 460px;
+    }
+
+    .info-contact {
+      margin-top: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .info-contact a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 12px;
+      transition: opacity 0.3s;
+    }
+
+    .info-contact a:hover {
+      opacity: 0.5;
+      cursor: url('cursor2.svg') 16 18, pointer;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 56px;
+      }
+
+      .topbar-inner {
+        padding: calc(env(safe-area-inset-top) + 14px) 20px 14px;
+      }
+
+      .topbar-title {
+        display: none;
+      }
+
+      main {
+        padding: 54px 20px 28px;
+      }
+
+      .profile-page {
+        grid-template-columns: 1fr;
+        justify-content: start;
+        gap: 20px;
+      }
+
+      .info-photo {
+        width: min(76vw, 250px);
+        transform: rotate(-8deg) translateX(4px);
+      }
+
+      .info-photo-cursor {
+        width: 56px;
+        height: 56px;
+        top: -16px;
+        right: -10px;
+      }
+
+      .info-title {
+        margin-bottom: 16px;
+        font-size: 11px;
+      }
+
+      .info-text {
+        font-size: 16px;
+        line-height: 1.52;
+        max-width: none;
+      }
+
+      .info-tools {
+        margin-top: 18px;
+        font-size: 10px;
+        line-height: 1.7;
+        max-width: none;
+      }
+
+      .info-contact {
+        margin-top: 24px;
+      }
+
+      .info-contact a {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="back-link">← Back to start</a>
+      <span class="topbar-title">Profile / Maria Danilova</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="profile-page">
+      <div class="info-photo">
+        <div class="info-photo-main">
+          <img src="image 32.png" alt="Maria Danilova">
+        </div>
+        <span class="info-photo-cursor" aria-hidden="true">
+          <img src="cursor2.svg" alt="">
+        </span>
+      </div>
+
+      <div class="info-content">
+        <div class="info-title">Info</div>
+        <div class="info-text">
+          Designer, Art Director, UI/UX designer, and vibe coder.
+          <br>
+          I work across art communities, gallery projects, and digital culture, shaping identities, editorials, and interfaces that carry both structure and atmosphere.
+          <br>
+          Multidisciplinary, detail-obsessed, and emotionally invested in typography.
+          <br><br>
+          Available for collaborations.
+        </div>
+        <div class="info-tools">
+          Skills: Illustrator, InDesign, Photoshop, Figma, After Effects, Codex, Claude, Midjourney
+        </div>
+        <div class="info-contact">
+          <a href="mailto:damilova.danmar@gmail.com">damilova.danmar@gmail.com</a>
+          <a href="https://www.instagram.com/immorbi/" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://t.me/immorbi" target="_blank" rel="noreferrer">Telegram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
