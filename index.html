@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maria — Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced Leger.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced Normale.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced DemiGras.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced Gros.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --text: #222222;
+      --text-light: #888888;
+      --bg: #ffffff;
+      --border: #e0e0e0;
+      --font: 'DeFonte', -apple-system, sans-serif;
+      --sidebar-width: 25%;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      cursor: url('cursor.svg') 16 18, auto;
+    }
+
+    ::selection {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    /* --- Layout --- */
+    .layout {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+    }
+
+    /* --- Sidebar (1/4) --- */
+    .sidebar {
+      width: var(--sidebar-width);
+      min-width: 280px;
+      height: 100vh;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 28px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    /* Logo */
+    .sidebar-logo {
+      cursor: url('cursor2.svg') 16 18, pointer;
+      display: inline-flex;
+      position: relative;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar-logo:hover {
+      opacity: 0.9;
+    }
+
+    .sidebar-logo img {
+      height: 52px;
+      width: auto;
+      display: block;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar-logo .logo-hover {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+
+    .sidebar-logo:hover .logo-default {
+      opacity: 1;
+    }
+
+    .sidebar-logo:hover .logo-hover {
+      opacity: 0;
+    }
+
+    /* Sidebar video */
+    .sidebar-video {
+      margin-top: 12px;
+      margin-bottom: auto;
+      background: #fff;
+      isolation: isolate;
+    }
+
+    .sidebar-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #fff;
+    }
+
+    /* Status */
+    .sidebar-status {
+      margin-top: 12px;
+      text-align: left;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.6;
+      color: var(--text);
+      align-self: flex-start;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1.5px solid var(--text);
+      vertical-align: middle;
+      margin-right: 3px;
+      position: relative;
+      top: -1px;
+    }
+
+    /* Menu */
+    .menu-list {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-top: 2px solid var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.3s;
+    }
+
+    .menu-item:last-child {
+      border-bottom: 2px solid var(--text);
+    }
+
+    .menu-item:hover {
+      opacity: 0.5;
+      cursor: url('cursor2.svg') 16 18, pointer;
+    }
+
+    .menu-item-title {
+      font-size: clamp(24px, 2.5vw, 40px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .menu-item.active .menu-item-title {
+      color: var(--text);
+    }
+
+    .menu-item:not(.active) .menu-item-title {
+      color: #c0c0c0;
+    }
+
+    .menu-item:not(.active):hover .menu-item-title {
+      color: var(--text);
+    }
+
+    .menu-item-desc {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    .menu-item.active .menu-item-desc {
+      color: var(--text);
+    }
+
+    .menu-item:not(.active) .menu-item-desc {
+      color: #c0c0c0;
+    }
+
+    .menu-item:not(.active):hover .menu-item-desc {
+      color: var(--text);
+    }
+
+    /* --- Main Content (3/4) --- */
+    .main {
+      flex: 1;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slides {
+      display: flex;
+      height: 100%;
+      width: max-content;
+      transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    .slide {
+      width: calc(100vw - var(--sidebar-width) - 40px);
+      min-width: calc(100vw - 280px - 40px);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      flex-shrink: 0;
+    }
+
+    /* --- Project Slide --- */
+    .project-image {
+      flex: 1;
+      background: #f2f2f2;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      aspect-ratio: 16 / 10;
+      max-height: calc(100vh - 100px);
+    }
+
+    .project-image:hover {
+      cursor: url('cursor2.svg') 16 18, pointer;
+    }
+
+    .project-image img,
+    .project-image video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-image.project-image-video video {
+      object-fit: cover;
+      background: transparent;
+    }
+
+    .project-image.case1-preview video {
+      object-position: center 18%;
+    }
+
+    .project-image.case2-preview video {
+      object-position: center center;
+    }
+
+    .project-image.is-link {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .project-image.is-link::after {
+      content: none;
+    }
+
+    .project-image.is-link img,
+    .project-image.is-link video {
+      transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1), filter 0.3s;
+    }
+
+    .project-image.is-link:hover img,
+    .project-image.is-link:hover video {
+      transform: scale(1.03);
+      filter: brightness(0.92);
+    }
+
+    .project-image.is-link:hover {
+      cursor: url('cursor2.svg') 16 18, pointer;
+    }
+
+    .project-image.is-link .project-cover {
+      transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1), filter 0.3s;
+    }
+
+    .project-image.is-link:hover .project-cover {
+      transform: scale(1.03);
+      filter: brightness(0.96);
+    }
+
+    .project-cover {
+      width: 100%;
+      height: 100%;
+      background: #f6f6f3;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      padding: clamp(18px, 2.2vw, 28px);
+    }
+
+    .project-cover.brandbook {
+      background:
+        linear-gradient(180deg, #f5f5f1 0 46%, #0e38ed 46% 100%);
+      color: #111111;
+    }
+
+    .cover-sheet {
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(2px);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-rows: 1fr auto;
+      gap: 18px;
+      padding: clamp(18px, 2vw, 26px);
+      border: 1px solid rgba(17, 17, 17, 0.08);
+    }
+
+    .cover-brand {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+    }
+
+    .cover-brand-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .cover-logo {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(24px, 2.6vw, 40px);
+      line-height: 0.84;
+      font-weight: 800;
+      color: #0e38ed;
+      letter-spacing: -0.06em;
+      text-transform: lowercase;
+    }
+
+    .cover-star {
+      width: clamp(64px, 8vw, 120px);
+      aspect-ratio: 1;
+      background: #0e38ed;
+      clip-path: polygon(50% 0%, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0% 50%, 42% 42%);
+      filter: drop-shadow(0 0 18px rgba(14, 56, 237, 0.18));
+      flex-shrink: 0;
+    }
+
+    .cover-quote {
+      max-width: 18ch;
+      font-size: clamp(20px, 2.2vw, 34px);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      color: #1e2736;
+    }
+
+    .cover-note {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0e38ed;
+    }
+
+    .cover-palette {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      align-content: start;
+    }
+
+    .swatch {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(17, 17, 17, 0.08);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .swatch-chip {
+      width: 34px;
+      height: 34px;
+    }
+
+    .swatch-meta {
+      min-width: 0;
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      line-height: 1.35;
+      color: #5f636b;
+      text-transform: uppercase;
+    }
+
+    .swatch-meta strong {
+      display: block;
+      color: #111111;
+      font-size: 11px;
+    }
+
+    .cover-footer {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .cover-table {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(17, 17, 17, 0.08);
+      padding: 12px 14px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      line-height: 1.5;
+      color: #202020;
+    }
+
+    .cover-table strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+    }
+
+    .cover-rule {
+      color: #ffffff;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-align: left;
+    }
+
+    .cover-rule strong {
+      font-size: clamp(18px, 2vw, 28px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 15ch;
+      margin-bottom: 8px;
+    }
+
+    .cover-rule span {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .project-image-placeholder {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c0c0c0;
+    }
+
+    .project-bottom {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding-top: 16px;
+    }
+
+    .project-name {
+      font-size: clamp(18px, 2vw, 26px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .project-category {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.02em;
+      text-align: right;
+    }
+
+    /* --- Info Slide --- */
+    /* --- Profile Overlay --- */
+    .profile-overlay {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-overlay.active {
+      display: flex;
+    }
+
+    .profile-page {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 60px;
+      padding: 40px;
+    }
+
+    .info-photo {
+      position: relative;
+      width: 210px;
+      height: 280px;
+      overflow: visible;
+      flex-shrink: 0;
+      transform: rotate(-15deg);
+    }
+
+    .info-photo-main {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .info-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center top;
+      transform: translateY(-30px) scale(1.2);
+      transform-origin: center top;
+    }
+
+    .info-photo-cursor {
+      position: absolute;
+      top: -18px;
+      right: -16px;
+      width: 67px;
+      height: 67px;
+      z-index: 3;
+      pointer-events: none;
+      animation: spin-cursor 6s linear infinite;
+    }
+
+    .info-photo-cursor img,
+    .info-photo-cursor video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @keyframes spin-cursor {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .info-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .info-title {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+
+    .info-text {
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 480px;
+      color: var(--text);
+    }
+
+    .info-tools {
+      margin-top: 28px;
+      max-width: 480px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .info-contact {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .info-contact a {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: opacity 0.3s;
+    }
+
+    .info-contact a:hover {
+      opacity: 0.5;
+      cursor: url('cursor2.svg') 16 18, pointer;
+    }
+
+    /* --- Page Indicator --- */
+    .page-counter {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      width: 72px;
+      height: 28px;
+    }
+
+    .page-counter-arrow {
+      position: relative;
+      display: block;
+      width: 64px;
+      height: 18px;
+      color: var(--text-light);
+    }
+
+    .page-counter-arrow::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 52px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .page-counter-arrow::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-top: 1px solid currentColor;
+      border-right: 1px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      html, body {
+        height: auto;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .layout {
+        flex-direction: column;
+        height: auto;
+        min-height: 100dvh;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-width: unset;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 16px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .sidebar-logo {
+        width: auto;
+        height: auto;
+        margin-bottom: 0;
+      }
+
+      .sidebar-logo img {
+        height: 38px;
+      }
+
+      .sidebar-video {
+        width: 100%;
+        margin-top: 4px;
+        margin-bottom: 0;
+        order: 3;
+      }
+
+      .sidebar-video video {
+        max-height: 132px;
+        object-fit: contain;
+        object-position: center top;
+      }
+
+      .menu-list {
+        width: 100%;
+        margin-top: 12px;
+        display: grid;
+        gap: 0;
+        order: 4;
+      }
+
+      .menu-item {
+        padding: 12px 0;
+        gap: 16px;
+      }
+
+      .menu-item-title {
+        font-size: 22px;
+      }
+
+      .menu-item-desc {
+        font-size: 8px;
+      }
+
+      .main {
+        height: auto;
+        overflow: visible;
+      }
+
+      .slides {
+        width: 100%;
+        display: grid;
+        transform: none !important;
+        transition: none;
+      }
+
+      .slide {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: auto;
+        padding: 16px;
+        gap: 14px;
+      }
+
+      .project-image {
+        aspect-ratio: 4 / 5;
+        max-height: none;
+        min-height: 0;
+      }
+
+      .project-image.project-image-video video {
+        height: 100%;
+        max-height: none;
+      }
+
+      .project-cover {
+        padding: 12px;
+      }
+
+      .cover-sheet {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .cover-brand-top {
+        gap: 12px;
+      }
+
+      .cover-logo {
+        font-size: 30px;
+      }
+
+      .cover-star {
+        width: 72px;
+      }
+
+      .cover-quote {
+        max-width: none;
+        font-size: 22px;
+      }
+
+      .cover-palette,
+      .cover-footer,
+      .project-bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .project-bottom {
+        display: grid;
+        gap: 6px;
+        align-items: start;
+      }
+
+      .project-category {
+        text-align: left;
+      }
+
+      .profile-overlay {
+        left: 0;
+        overflow-y: auto;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 88px 20px 28px;
+      }
+
+      .profile-page {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 28px;
+        padding: 0;
+      }
+
+      .info-photo {
+        width: min(68vw, 210px);
+        height: auto;
+        aspect-ratio: 3 / 4;
+        transform: rotate(-8deg);
+      }
+
+      .info-photo-cursor {
+        width: 51px;
+        height: 51px;
+      }
+
+      .info-title {
+        margin-bottom: 20px;
+      }
+
+      .info-text {
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: none;
+      }
+
+      .info-tools {
+        margin-top: 22px;
+        max-width: none;
+      }
+
+      .info-contact {
+        margin-top: 28px;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .page-counter {
+        display: none;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .sidebar {
+        padding: 14px;
+      }
+
+      .menu-item-title {
+        font-size: 18px;
+      }
+
+      .menu-item-desc {
+        max-width: 112px;
+      }
+
+      .slide {
+        padding: 14px;
+      }
+
+      .project-image.is-link::after {
+        content: none;
+      }
+
+      .cover-table,
+      .cover-rule span,
+      .swatch-meta {
+        font-size: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a class="sidebar-logo" href="index.html" data-goto="0" aria-label="Go to start page">
+        <img class="logo-default" src="logo.svg" alt="Marija Danilova">
+        <img class="logo-hover" src="logoD.png" alt="">
+      </a>
+
+      <div class="sidebar-video">
+        <video autoplay loop muted playsinline preload="auto">
+          <source src="Comp 1_4_1.slow.clean.mp4" type="video/mp4">
+          <source src="Comp 1_4_1.mov" type="video/quicktime">
+        </video>
+      </div>
+
+      <nav class="menu-list">
+        <a class="menu-item active" data-section="work" data-goto="0">
+          <span class="menu-item-title">Work</span>
+          <span class="menu-item-desc">VIEW MY WORK<br>IN MOTION</span>
+        </a>
+        <a class="menu-item" href="archive.html" data-section="archive">
+          <span class="menu-item-title">Archive</span>
+          <span class="menu-item-desc">EVERY PROJECT<br>IN ONE SPACE</span>
+        </a>
+        <a class="menu-item" data-section="profile" data-goto="info">
+          <span class="menu-item-title">Profile</span>
+          <span class="menu-item-desc">ABOUT ME &<br>MY PRACTICE</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main">
+      <div class="slides" id="slides">
+
+        <!-- Project 1 — The Gallery -->
+        <div class="slide" data-index="0">
+          <div class="project-image project-image-video case1-preview is-link" onclick="window.location.href='cases/the-gallery.html'">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Poster collection for The Gallery">
+              <source src="Case1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="project-bottom">
+            <span class="project-name">Poster Collection / The Gallery</span>
+            <span class="project-category">Graphic Design / Print</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="slide" data-index="1">
+          <div class="project-image project-image-video case2-preview is-link" onclick="window.location.href='cases/terrain-editorial.html'">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="DIRTALK brandbook case preview">
+              <source src="Comp 1_8.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="project-bottom">
+            <span class="project-name">DIRTALK Brandbook</span>
+            <span class="project-category">Brand Identity / Editorial System</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="page-counter" aria-hidden="true">
+        <span class="page-counter-arrow"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Profile overlay -->
+  <div class="profile-overlay" id="profileOverlay">
+    <div class="profile-page">
+      <div class="info-photo">
+        <div class="info-photo-main">
+          <img src="image 32.png" alt="Maria Danilova">
+        </div>
+        <span class="info-photo-cursor" aria-hidden="true">
+          <img src="cursor2.svg" alt="">
+        </span>
+      </div>
+      <div class="info-content">
+        <div class="info-title">Info</div>
+        <div class="info-text">
+          Designer, Art Director, UI/UX designer, and vibe coder.
+          <br>
+          I work across art communities, gallery projects, and digital culture, shaping identities, editorials, and interfaces that carry both structure and atmosphere.
+          <br>
+          Multidisciplinary, detail-obsessed, and emotionally invested in typography.
+          <br><br>
+          Available for collaborations.
+        </div>
+        <div class="info-tools">
+          Skills: Illustrator, InDesign, Photoshop, Figma, After Effects, Codex, Claude, Midjourney
+        </div>
+        <div class="info-contact">
+          <a href="mailto:damilova.danmar@gmail.com">damilova.danmar@gmail.com</a>
+          <a href="https://www.instagram.com/immorbi/" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://t.me/immorbi" target="_blank" rel="noreferrer">Telegram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slidesEl = document.getElementById('slides');
+    const allSlides = document.querySelectorAll('.slide');
+    const total = allSlides.length;
+    const menuItems = document.querySelectorAll('.menu-item');
+    const mainEl = document.querySelector('.main');
+
+    let current = 0;
+    let isAnimating = false;
+
+    // Compute slide width from actual DOM element
+    function getSlideWidth() {
+      return allSlides[0].offsetWidth;
+    }
+
+    function isMobileLayout() {
+      return window.innerWidth <= 768;
+    }
+
+    function goTo(index) {
+      if (index < 0 || index >= total || isAnimating) return;
+      if (isMobileLayout()) {
+        current = index;
+        hideProfile();
+        menuItems.forEach(m => m.classList.remove('active'));
+        document.querySelector('[data-section="work"]').classList.add('active');
+        allSlides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      isAnimating = true;
+      current = index;
+
+      const w = getSlideWidth();
+      slidesEl.style.transform = `translateX(-${current * w}px)`;
+      // Update active menu
+      hideProfile();
+      menuItems.forEach(m => m.classList.remove('active'));
+      document.querySelector('[data-section="work"]').classList.add('active');
+
+      setTimeout(() => { isAnimating = false; }, 700);
+    }
+
+    // Wheel → horizontal scroll (only on main area)
+    let wheelAccum = 0;
+    const THRESHOLD = 60;
+
+    mainEl.addEventListener('wheel', (e) => {
+      if (isMobileLayout()) return;
+      e.preventDefault();
+      wheelAccum += e.deltaY + e.deltaX;
+
+      if (Math.abs(wheelAccum) >= THRESHOLD) {
+        if (wheelAccum > 0) goTo(current + 1);
+        else goTo(current - 1);
+        wheelAccum = 0;
+      }
+    }, { passive: false });
+
+    let wheelTimer;
+    mainEl.addEventListener('wheel', () => {
+      clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(() => { wheelAccum = 0; }, 200);
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+    });
+
+    // Touch (on main)
+    let touchStartX = 0;
+    mainEl.addEventListener('touchstart', (e) => {
+      if (isMobileLayout()) return;
+      touchStartX = e.touches[0].clientX;
+    });
+
+    mainEl.addEventListener('touchend', (e) => {
+      if (isMobileLayout()) return;
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) goTo(current + 1);
+        else goTo(current - 1);
+      }
+    });
+
+    // Profile overlay
+    const profileOverlay = document.getElementById('profileOverlay');
+
+    function showProfile() {
+      profileOverlay.classList.add('active');
+      menuItems.forEach(m => m.classList.remove('active'));
+      document.querySelector('[data-section="profile"]').classList.add('active');
+    }
+
+    function hideProfile() {
+      profileOverlay.classList.remove('active');
+      menuItems.forEach(m => m.classList.remove('active'));
+      document.querySelector('[data-section="work"]').classList.add('active');
+    }
+
+    // Menu / logo navigation (scoped — do NOT hijack real links like project cases)
+    document.querySelectorAll('.sidebar [data-goto], .menu-item[data-goto]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = el.dataset.goto;
+        if (target === 'info') {
+          showProfile();
+        } else {
+          hideProfile();
+          goTo(parseInt(target));
+        }
+      });
+    });
+
+    // Recalculate on resize
+    window.addEventListener('resize', () => {
+      if (isMobileLayout()) {
+        slidesEl.style.transition = 'none';
+        slidesEl.style.transform = 'none';
+        return;
+      }
+      const w = getSlideWidth();
+      slidesEl.style.transition = 'none';
+      slidesEl.style.transform = `translateX(-${current * w}px)`;
+      requestAnimationFrame(() => {
+        slidesEl.style.transition = 'transform 0.7s cubic-bezier(0.76, 0, 0.24, 1)';
+      });
+    });
+
+    // Live clock
+    function updateStatus() {
+      const now = new Date();
+      const days = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+      const day = days[now.getDay()];
+      const h = now.getHours();
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 || 12;
+
+      const locEl = document.querySelector('.status-location');
+      const timeEl = document.querySelector('.status-time');
+      if (locEl) locEl.textContent = 'TBILISI \u00B7 PARIS';
+      if (timeEl) timeEl.textContent = `${day} ${h12}:${mins} ${ampm}`;
+    }
+    updateStatus();
+    setInterval(updateStatus, 30000);
+  </script>
+
+</body>
+</html>

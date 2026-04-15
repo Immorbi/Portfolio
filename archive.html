@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive — Maria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced Leger.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced Normale.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced DemiGras.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('DeFonte reduced Gros.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #fff;
+      font-family: 'DeFonte', -apple-system, sans-serif;
+      cursor: url('cursor.svg') 16 18, auto;
+    }
+
+    ::selection {
+      background: #222;
+      color: #fff;
+    }
+
+    /* Back link */
+    .back {
+      position: fixed;
+      top: 24px;
+      left: 28px;
+      z-index: 100;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      color: #222;
+      transition: opacity 0.3s;
+    }
+
+    .back:hover { opacity: 0.4; }
+
+    .page-title {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      z-index: 100;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #c8c8c8;
+    }
+
+    /* Canvas */
+    .canvas {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    /* Draggable image */
+    .drag-img {
+      position: absolute;
+      cursor: url('cursor.svg') 16 18, grab;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: box-shadow 0.3s, transform 0.3s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    .drag-img:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      z-index: 50;
+      cursor: url('cursor2.svg') 16 18, grab;
+    }
+
+    .drag-img.is-dragging {
+      cursor: url('cursor2.svg') 16 18, grabbing;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+      transition: box-shadow 0.15s;
+      z-index: 999 !important;
+    }
+
+    .drag-img img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .back,
+      .page-title {
+        top: 16px;
+      }
+
+      .back {
+        left: 16px;
+      }
+
+      .page-title {
+        right: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back">← Back</a>
+  <span class="page-title">Archive</span>
+
+  <div class="canvas" id="canvas"></div>
+
+  <script>
+    (function () {
+      const images = [
+        'immorbi_My_favorite_character_ever_named_immorbi_--chaos_15_-_5e11ff3a-2c5b-473b-9f3a-9c7d8807d775_0.png',
+        'immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__06e40325-5e21-4046-a2eb-ba7164c8cee3_3.png',
+        'immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__1bf59100-000a-41f7-9073-4e5887178fcb_3.png',
+        'immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__55e9ae9a-0cc4-4625-b055-2a315548c307_0.png',
+        'immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__99b2ba88-ae65-4703-bdd1-ec4924f39139_0.png',
+        'immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__ed2c9144-d537-4c96-b5d6-4fd14137ccb6_1.png',
+        'immorbi_a_dreamy_pastel_girl_with_long_wavy_blonde_hair_pale__edbc4bef-9ebc-42f5-a884-dd3a24d0c841_0.png',
+        'immorbi_abstract_halftone_background_monochrome_palette_soft__37ee213c-3dc7-41d7-8032-8ac94dde7fe2_0.png',
+        'immorbi_butterflys_on_white_bg_--chaos_15_--ar_7758_--raw_--p_6f2b03e9-e5dd-497d-8a8f-1d2060f0046e_0.png',
+        'immorbi_butterflys_on_white_bg_--chaos_15_--ar_7758_--raw_--p_c0940894-1ca2-45c7-8d94-4e3a01ba0d65_1.png',
+        'immorbi_butterflys_on_white_bg_--chaos_15_--ar_7758_--raw_--p_c0940894-1ca2-45c7-8d94-4e3a01ba0d65_3.png',
+        'immorbi_cinematic_drone_orbit_shot_around_a_cozy_white_two-st_5a9067c5-adf7-4c68-afa5-18f68de9f9ad_1.png',
+        'immorbi_cinematic_drone_orbit_shot_around_a_cozy_white_two-st_5a9067c5-adf7-4c68-afa5-18f68de9f9ad_2.png',
+        'immorbi_cozy_white_two-story_house_surrounded_by_a_green_lawn_6b60530f-e0ec-471b-bf02-70c24874f664_3.png',
+        'immorbi_cozy_white_two-story_house_surrounded_by_a_green_lawn_f65ab472-af42-4b67-8f7d-ceddad3c45de_0.png',
+        'immorbi_httpss.mj.runQcJhy5ANN4c_a_close-up_selfie_portrait_o_f01a3c33-7117-42ee-b05d-62ef9e35db2d_1.png',
+        'immorbi_minimal_Google_Forms_inspired_UI_clean_white_cards_so_162b2ac7-7ff3-468c-b65d-3e57d2a252a8_1.png',
+        'immorbi_minimal_Google_Forms_inspired_UI_clean_white_cards_so_162b2ac7-7ff3-468c-b65d-3e57d2a252a8_2.png',
+        'immorbi_minimal_Google_Forms_inspired_UI_clean_white_cards_so_46441979-cc59-4402-8b13-a5db88de73c9_2.png',
+        'immorbi_minimal_Google_Forms_inspired_UI_clean_white_cards_so_77c0398f-d9a1-4ce9-8136-64607ef51566_2.png',
+        'immorbi_ultra_minimal_Google_Forms_interface_mockup_clean_whi_00d5bbba-519d-4237-b03a-af4019da2c05_0.png',
+        'immorbi_ultra_minimal_Google_Forms_interface_mockup_clean_whi_00d5bbba-519d-4237-b03a-af4019da2c05_1.png',
+        'immorbi_vintage_CRT_computer_where_ONLY_the_monitor_is_made_of__1da2700d-cf84-425c-92b1-dc4bd925f3e1.png',
+      ];
+
+      const canvas = document.getElementById('canvas');
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+      const sizes = [160, 180, 200, 220, 260, 300];
+      let topZ = 10;
+
+      // Seed-based pseudo-random for consistent initial layout
+      function seededRandom(seed) {
+        let s = seed;
+        return function () {
+          s = (s * 16807 + 0) % 2147483647;
+          return (s - 1) / 2147483646;
+        };
+      }
+      const rand = seededRandom(42);
+
+      const isMobile = window.innerWidth <= 768;
+      const activeSizes = isMobile ? [120, 140, 160, 180, 200] : sizes;
+
+      images.forEach(function (src, i) {
+        const el = document.createElement('div');
+        el.className = 'drag-img';
+
+        const size = activeSizes[Math.floor(rand() * activeSizes.length)];
+        const x = rand() * (W - size - 32) + 16;
+        const y = rand() * (H - size - 96) + 64;
+        const rot = (rand() - 0.5) * (isMobile ? 10 : 16);
+
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        el.style.transform = 'rotate(' + rot + 'deg)';
+        el.style.zIndex = i + 1;
+
+        const img = document.createElement('img');
+        img.src = 'archive/' + src;
+        img.alt = '';
+        img.draggable = false;
+        el.appendChild(img);
+
+        canvas.appendChild(el);
+      });
+
+      // Drag logic
+      let dragged = null;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      canvas.addEventListener('pointerdown', function (e) {
+        const el = e.target.closest('.drag-img');
+        if (!el) return;
+        e.preventDefault();
+        dragged = el;
+        dragged.classList.add('is-dragging');
+        topZ++;
+        dragged.style.zIndex = topZ;
+
+        const rect = dragged.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+
+        dragged.setPointerCapture(e.pointerId);
+      });
+
+      canvas.addEventListener('pointermove', function (e) {
+        if (!dragged) return;
+        e.preventDefault();
+        dragged.style.left = (e.clientX - offsetX) + 'px';
+        dragged.style.top = (e.clientY - offsetY) + 'px';
+      });
+
+      canvas.addEventListener('pointerup', function (e) {
+        if (!dragged) return;
+        dragged.classList.remove('is-dragging');
+        dragged = null;
+      });
+    })();
+  </script>
+
+</body>
+</html>
