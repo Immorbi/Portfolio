@@ -62,6 +62,114 @@
       color: var(--bg);
     }
 
+    body.site-loading .layout,
+    body.site-loading .profile-overlay {
+      visibility: hidden;
+    }
+
+    .site-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #ffffff;
+      color: var(--text);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      padding: clamp(24px, 4vw, 42px);
+      overflow: hidden;
+      transition: opacity 0.7s cubic-bezier(0.76, 0, 0.24, 1), visibility 0.7s;
+    }
+
+    .site-loader.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .site-loader-video {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .site-loader-video::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.34) 100%),
+        radial-gradient(circle at center, rgba(255,255,255,0) 16%, rgba(255,255,255,0.74) 84%);
+    }
+
+    .site-loader-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: scale(0.26);
+      transform-origin: center center;
+      filter: saturate(1.02) contrast(1.02);
+    }
+
+    .site-loader-copy,
+    .site-loader-progress {
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-loader-copy {
+      max-width: 420px;
+    }
+
+    .site-loader-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(34, 34, 34, 0.5);
+      margin-bottom: 14px;
+    }
+
+    .site-loader-title {
+      font-size: clamp(34px, 6vw, 84px);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      max-width: 8ch;
+    }
+
+    .site-loader-progress {
+      width: min(320px, 42vw);
+      margin-left: 32px;
+    }
+
+    .site-loader-meter {
+      width: 100%;
+      height: 2px;
+      background: rgba(34, 34, 34, 0.12);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .site-loader-fill {
+      width: 0%;
+      height: 100%;
+      background: #222222;
+      transition: width 0.18s linear;
+    }
+
+    .site-loader-count {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      color: rgba(34, 34, 34, 0.7);
+    }
+
     /* --- Layout --- */
     .layout {
       display: flex;
@@ -166,7 +274,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 0;
-      border-top: 2px solid var(--text);
+      border-top: 1px solid var(--text);
       cursor: pointer;
       text-decoration: none;
       color: var(--text);
@@ -174,7 +282,7 @@
     }
 
     .menu-item:last-child {
-      border-bottom: 2px solid var(--text);
+      border-bottom: 1px solid var(--text);
     }
 
     .menu-item:hover {
@@ -283,6 +391,10 @@
 
     .project-image.case2-preview video {
       object-position: center center;
+    }
+
+    .project-image.case2-preview {
+      background: #f6f6f3 url('cover_brending.png') center / cover no-repeat;
     }
 
     .project-image.is-link {
@@ -690,6 +802,24 @@
 
     /* --- Responsive --- */
     @media (max-width: 768px) {
+      .site-loader {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 28px;
+        padding: 20px 18px 24px;
+      }
+
+      .site-loader-title {
+        font-size: clamp(28px, 10vw, 54px);
+        max-width: 10ch;
+      }
+
+      .site-loader-progress {
+        width: 100%;
+        margin-left: 0;
+      }
+
       html, body {
         height: auto;
         min-height: 100%;
@@ -709,11 +839,12 @@
         height: auto;
         border-right: none;
         border-bottom: 1px solid var(--border);
-        padding: 16px;
+        padding: max(12px, env(safe-area-inset-top)) 16px 16px;
+        background: #ffffff;
         flex-direction: row;
         flex-wrap: wrap;
-        align-items: center;
-        gap: 14px;
+        align-items: flex-start;
+        gap: 10px;
       }
 
       .sidebar-logo {
@@ -728,20 +859,21 @@
 
       .sidebar-video {
         width: 100%;
-        margin-top: 4px;
+        margin-top: 0;
         margin-bottom: 0;
         order: 3;
+        background: #ffffff;
       }
 
       .sidebar-video video {
-        max-height: 132px;
+        max-height: 156px;
         object-fit: contain;
         object-position: center top;
       }
 
       .menu-list {
         width: 100%;
-        margin-top: 12px;
+        margin-top: 4px;
         display: grid;
         gap: 0;
         order: 4;
@@ -782,7 +914,7 @@
       }
 
       .project-image {
-        aspect-ratio: 4 / 5;
+        aspect-ratio: 16 / 10;
         max-height: none;
         min-height: 0;
       }
@@ -919,7 +1051,29 @@
     }
   </style>
 </head>
-<body>
+<body class="site-loading">
+
+  <div class="site-loader" id="siteLoader" aria-live="polite">
+    <div class="site-loader-video" aria-hidden="true">
+      <video autoplay loop muted playsinline webkit-playsinline preload="auto">
+        <source src="logotype3D.webm" type="video/webm">
+        <source src="logotype3D.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="site-loader-copy">
+      <div class="site-loader-label">Loading portfolio</div>
+      <div class="site-loader-title">Maria Danilova</div>
+    </div>
+    <div class="site-loader-progress">
+      <div class="site-loader-meter">
+        <div class="site-loader-fill" id="siteLoaderFill"></div>
+      </div>
+      <div class="site-loader-count">
+        <span id="siteLoaderCount">1</span>
+        <span>100</span>
+      </div>
+    </div>
+  </div>
 
   <div class="layout">
 
@@ -973,7 +1127,7 @@
         <!-- Project 2 -->
         <div class="slide" data-index="1">
           <div class="project-image project-image-video case2-preview is-link" onclick="window.location.href='cases/terrain-editorial.html'">
-            <video autoplay loop muted playsinline preload="metadata" aria-label="DIRTALK brandbook case preview">
+            <video autoplay loop muted playsinline webkit-playsinline preload="auto" poster="cover_brending.png" aria-label="DIRTALK brandbook case preview">
               <source src="Comp 1_8.mp4" type="video/mp4">
             </video>
           </div>
@@ -1155,6 +1309,107 @@
         slidesEl.style.transition = 'transform 0.7s cubic-bezier(0.76, 0, 0.24, 1)';
       });
     });
+
+    function ensurePreviewVideosPlay() {
+      document.querySelectorAll('.project-image video, .sidebar-video video').forEach((video) => {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        const playAttempt = video.play();
+        if (playAttempt && typeof playAttempt.catch === 'function') {
+          playAttempt.catch(() => {});
+        }
+      });
+    }
+
+    window.addEventListener('load', ensurePreviewVideosPlay);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) ensurePreviewVideosPlay();
+    });
+    document.addEventListener('touchstart', ensurePreviewVideosPlay, { passive: true });
+
+    const siteLoader = document.getElementById('siteLoader');
+    const siteLoaderFill = document.getElementById('siteLoaderFill');
+    const siteLoaderCount = document.getElementById('siteLoaderCount');
+
+    function startSiteLoader() {
+      const resourceUrls = new Set();
+      document.querySelectorAll('img[src], source[src], video[poster]').forEach((node) => {
+        const src = node.getAttribute('src') || node.getAttribute('poster');
+        if (src) resourceUrls.add(src);
+      });
+
+      const urls = Array.from(resourceUrls);
+      const totalResources = Math.max(urls.length, 1);
+      let loadedResources = 0;
+      let displayedProgress = 1;
+      let targetProgress = 1;
+      let finished = false;
+      const minDuration = 1500;
+      const startTime = performance.now();
+
+      function updateTargetProgress() {
+        const resourceProgress = Math.round((loadedResources / totalResources) * 92);
+        const elapsed = performance.now() - startTime;
+        const timeProgress = Math.min(92, Math.round((elapsed / minDuration) * 92));
+        targetProgress = Math.max(resourceProgress, timeProgress, targetProgress);
+      }
+
+      function renderProgress(value) {
+        siteLoaderCount.textContent = String(value);
+        siteLoaderFill.style.width = `${value}%`;
+      }
+
+      function markLoaded() {
+        loadedResources += 1;
+        updateTargetProgress();
+      }
+
+      urls.forEach((url) => {
+        const lower = url.toLowerCase();
+        if (/\.(mp4|mov|webm)$/i.test(lower)) {
+          const video = document.createElement('video');
+          video.preload = 'metadata';
+          video.muted = true;
+          video.src = url;
+          video.addEventListener('loadeddata', markLoaded, { once: true });
+          video.addEventListener('error', markLoaded, { once: true });
+        } else {
+          const img = new Image();
+          img.onload = markLoaded;
+          img.onerror = markLoaded;
+          img.src = url;
+        }
+      });
+
+      const tick = setInterval(() => {
+        updateTargetProgress();
+        if (displayedProgress < targetProgress) {
+          displayedProgress += 1;
+          renderProgress(displayedProgress);
+        }
+
+        if (finished && displayedProgress >= 100) {
+          clearInterval(tick);
+          document.body.classList.remove('site-loading');
+          siteLoader.classList.add('is-hidden');
+          setTimeout(() => siteLoader.remove(), 800);
+        }
+      }, 18);
+
+      window.addEventListener('load', () => {
+        const complete = () => {
+          finished = true;
+          targetProgress = 100;
+        };
+        const remaining = Math.max(0, minDuration - (performance.now() - startTime));
+        setTimeout(complete, remaining);
+      }, { once: true });
+
+      renderProgress(displayedProgress);
+    }
+
+    startSiteLoader();
 
     // Live clock
     function updateStatus() {
