@@ -659,6 +659,50 @@
       display: flex;
     }
 
+    .profile-topbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 2;
+    }
+
+    .profile-topbar-link,
+    .profile-topbar-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .profile-topbar-link {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-decoration: none;
+      padding: 0;
+      white-space: nowrap;
+      line-height: 1;
+      cursor: url('cursor2.svg') 16 18, pointer;
+      transition: opacity 0.3s;
+    }
+
+    .profile-topbar-link:hover {
+      opacity: 0.5;
+    }
+
+    .profile-topbar-title {
+      color: var(--text-light);
+    }
+
     .profile-page {
       display: flex;
       flex-direction: row;
@@ -988,51 +1032,73 @@
         min-height: 100dvh;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        align-items: flex-start;
+        align-items: stretch;
         justify-content: flex-start;
-        padding: calc(env(safe-area-inset-top) + 18px) 20px 28px;
+        padding: 0;
+      }
+
+      .profile-topbar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: calc(env(safe-area-inset-top) + 16px) 20px 10px;
+        border-bottom: none;
+        background: var(--bg);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
       }
 
       .profile-page {
         width: 100%;
         flex-direction: column;
         align-items: flex-start;
-        gap: 28px;
-        padding: 0;
+        gap: 20px;
+        padding: 34px 20px 28px;
         min-height: calc(100dvh - env(safe-area-inset-top) - 46px);
       }
 
       .info-photo {
-        width: min(68vw, 210px);
+        width: min(76vw, 250px);
         height: auto;
         aspect-ratio: 3 / 4;
-        transform: rotate(-8deg);
+        transform: rotate(-8deg) translateX(4px);
       }
 
       .info-photo-cursor {
-        width: 51px;
-        height: 51px;
+        width: 56px;
+        height: 56px;
+        top: -16px;
+        right: -10px;
       }
 
       .info-title {
-        margin-bottom: 20px;
+        margin-bottom: 16px;
+        font-size: 11px;
       }
 
       .info-text {
         font-size: 16px;
-        line-height: 1.6;
+        line-height: 1.52;
         max-width: none;
       }
 
       .info-tools {
-        margin-top: 22px;
+        margin-top: 18px;
         max-width: none;
+        font-size: 10px;
+        line-height: 1.7;
       }
 
       .info-contact {
-        margin-top: 28px;
+        margin-top: 24px;
         align-items: flex-start;
         text-align: left;
+        gap: 10px;
+      }
+
+      .info-contact a {
+        font-size: 11px;
       }
 
       .page-counter {
@@ -1167,6 +1233,9 @@
 
   <!-- Profile overlay -->
   <div class="profile-overlay" id="profileOverlay">
+    <div class="profile-topbar">
+      <button type="button" class="profile-topbar-link" id="profileBackLink">← Back to start</button>
+    </div>
     <div class="profile-page">
       <div class="info-photo">
         <div class="info-photo-main">
@@ -1287,6 +1356,7 @@
 
     // Profile overlay
     const profileOverlay = document.getElementById('profileOverlay');
+    const profileBackLink = document.getElementById('profileBackLink');
 
     function showProfile() {
       profileOverlay.classList.add('active');
@@ -1302,6 +1372,8 @@
       menuItems.forEach(m => m.classList.remove('active'));
       document.querySelector('[data-section="work"]').classList.add('active');
     }
+
+    profileBackLink.addEventListener('click', hideProfile);
 
     // Menu / logo navigation (scoped — do NOT hijack real links like project cases)
     document.querySelectorAll('.sidebar [data-goto], .menu-item[data-goto]').forEach(el => {
