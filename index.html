@@ -69,6 +69,10 @@
       visibility: hidden;
     }
 
+    body.profile-open {
+      overflow: hidden;
+    }
+
     .site-loader {
       position: fixed;
       inset: 0;
@@ -648,6 +652,7 @@
       display: none;
       align-items: center;
       justify-content: center;
+      overflow: auto;
     }
 
     .profile-overlay.active {
@@ -974,11 +979,18 @@
       }
 
       .profile-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
         left: 0;
+        width: 100%;
+        min-height: 100dvh;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         align-items: flex-start;
         justify-content: flex-start;
-        padding: 88px 20px 28px;
+        padding: calc(env(safe-area-inset-top) + 18px) 20px 28px;
       }
 
       .profile-page {
@@ -987,6 +999,7 @@
         align-items: flex-start;
         gap: 28px;
         padding: 0;
+        min-height: calc(100dvh - env(safe-area-inset-top) - 46px);
       }
 
       .info-photo {
@@ -1277,12 +1290,15 @@
 
     function showProfile() {
       profileOverlay.classList.add('active');
+      document.body.classList.add('profile-open');
+      profileOverlay.scrollTop = 0;
       menuItems.forEach(m => m.classList.remove('active'));
       document.querySelector('[data-section="profile"]').classList.add('active');
     }
 
     function hideProfile() {
       profileOverlay.classList.remove('active');
+      document.body.classList.remove('profile-open');
       menuItems.forEach(m => m.classList.remove('active'));
       document.querySelector('[data-section="work"]').classList.add('active');
     }
@@ -1375,12 +1391,12 @@
         'logotype3D.mp4',
         'Comp 1_4_1.slow.clean.mp4',
         'Case1.mp4',
+        'Comp 1_8.web.mp4',
         'Comp 1_8.mp4',
         'cover_brending.png',
         'image 32.png',
         'logo.svg',
-        'logoD.png',
-        ...archiveResources
+        'logoD.png'
       ]);
 
       document.querySelectorAll('img[src], source[src], video[poster]').forEach((node) => {
@@ -1394,13 +1410,13 @@
       let displayedProgress = 1;
       let targetProgress = 8;
       let finished = false;
-      const minDuration = 2200;
+      const minDuration = 1200;
       const startTime = performance.now();
 
       function updateTargetProgress() {
-        const resourceProgress = Math.round((loadedResources / totalResources) * 92);
+        const resourceProgress = Math.round((loadedResources / totalResources) * 94);
         const elapsed = performance.now() - startTime;
-        const timeProgress = Math.min(92, Math.round(8 + (elapsed / minDuration) * 84));
+        const timeProgress = Math.min(94, Math.round(10 + (elapsed / minDuration) * 84));
         targetProgress = Math.max(resourceProgress, timeProgress, targetProgress);
       }
 
@@ -1432,6 +1448,14 @@
         }
       });
 
+      function prefetchArchiveResources() {
+        archiveResources.forEach((url) => {
+          const img = new Image();
+          img.decoding = 'async';
+          img.src = url;
+        });
+      }
+
       const tick = setInterval(() => {
         updateTargetProgress();
         if (displayedProgress < targetProgress) {
@@ -1444,6 +1468,11 @@
           document.body.classList.remove('site-loading');
           siteLoader.classList.add('is-hidden');
           setTimeout(() => siteLoader.remove(), 800);
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(prefetchArchiveResources, { timeout: 2000 });
+          } else {
+            setTimeout(prefetchArchiveResources, 1200);
+          }
         }
       }, 18);
 
