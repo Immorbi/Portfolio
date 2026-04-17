@@ -253,15 +253,14 @@
     .sidebar-video {
       margin-top: 12px;
       margin-bottom: auto;
-      background: #fff;
-      isolation: isolate;
+      overflow: hidden;
     }
 
     .sidebar-video video {
-      width: 100%;
+      width: calc(100% + 4px);
       height: auto;
       display: block;
-      background: #fff;
+      margin: -2px;
     }
 
     /* Status */
