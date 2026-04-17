@@ -432,6 +432,38 @@
       background: #ffffff;
     }
 
+    .project-image.is-soon {
+      position: relative;
+      cursor: default;
+    }
+
+    .project-image.is-soon::before {
+      content: "Soon";
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 2;
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: rgba(34, 34, 34, 0.78);
+      padding: 8px 10px;
+      line-height: 1;
+    }
+
+    .project-image.is-soon img,
+    .project-image.is-soon video {
+      filter: grayscale(0.08) brightness(0.9);
+    }
+
+    .slide.is-soon .project-name,
+    .slide.is-soon .project-category {
+      color: #a8a8a8;
+    }
+
     .project-image.is-link {
       cursor: pointer;
       position: relative;
@@ -1253,8 +1285,8 @@
         </div>
 
         <!-- Project 3 -->
-        <div class="slide" data-index="2">
-          <div class="project-image case3-preview is-link" onclick="window.location.href='cases/helikon-art.html'">
+        <div class="slide is-soon" data-index="2">
+          <div class="project-image case3-preview is-soon">
             <img src="assets/helikon/helikon-home.png" alt="Helikon Art Center website preview">
           </div>
           <div class="project-bottom">

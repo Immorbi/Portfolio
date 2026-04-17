@@ -328,6 +328,14 @@
       transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
     }
 
+    .tool-card-preview img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center center;
+    }
+
     .tool-card:not(.is-soon):hover .preview-inner {
       transform: scale(1.03);
     }
@@ -556,7 +564,7 @@
       <a class="tool-card" href="pixelator/index.html">
         <div class="tool-card-preview">
           <div class="preview-inner">
-            <canvas id="pixelPreview" style="width:100%;height:100%;display:block;image-rendering:pixelated;"></canvas>
+            <img src="tools/PixelTool.png" alt="Pixel Art Studio preview cover">
           </div>
         </div>
         <div class="tool-card-body">
@@ -675,136 +683,6 @@
     }
   });
 
-  // ─── Pixel Art preview canvas ────────────────────
-  const canvas = document.getElementById('pixelPreview');
-  const ctx = canvas.getContext('2d');
-
-  function drawPixelPreview() {
-    const W = canvas.parentElement.offsetWidth || 400;
-    const H = canvas.parentElement.offsetHeight || 300;
-    canvas.width = W;
-    canvas.height = H;
-
-    const BLOCK = 14;
-    const cols = Math.ceil(W / BLOCK);
-    const rows = Math.ceil(H / BLOCK);
-
-    // Abstract pixel art palette — vibrant colors
-    const pxPalette = [
-      '#f4f0eb','#e8ddd0','#d4c4b0',
-      '#c8b090','#b89870','#a08060',
-      '#604030','#402818','#281408',
-      '#d4503c','#e87840','#f0a050',
-      '#e8c870','#a0c060','#507840',
-      '#40607c','#6090a8','#90b8cc',
-      '#c8d8e0','#e8f0f4',
-    ];
-
-    // Draw a pseudo-portrait-like composition
-    // Sky/bg
-    for(let r = 0; r < rows; r++) {
-      for(let c = 0; c < cols; c++) {
-        const nx = c / cols;
-        const ny = r / rows;
-
-        let color;
-        // Sky gradient top
-        if (ny < 0.35) {
-          const t = ny / 0.35;
-          color = t < 0.5 ? pxPalette[16] : pxPalette[15];
-        }
-        // Ground
-        else if (ny > 0.65) {
-          color = nx % 2 === 0 ? pxPalette[3] : pxPalette[4];
-        }
-        // Figure area (center column)
-        else if (nx > 0.3 && nx < 0.7) {
-          const cx = Math.abs(nx - 0.5) / 0.2;
-          if (cy_dist(nx, ny) < 0.18) {
-            color = pxPalette[7 + Math.floor(Math.random() * 3)];
-          } else {
-            color = pxPalette[14 + Math.floor(ny * 5) % 4];
-          }
-        }
-        else {
-          color = pxPalette[Math.floor(14 + ny * 6) % pxPalette.length];
-        }
-
-        ctx.fillStyle = color;
-        ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK - 1, BLOCK - 1);
-      }
-    }
-  }
-
-  function cy_dist(x, y) {
-    return Math.sqrt((x - 0.5)**2 + (y - 0.5)**2);
-  }
-
-  // Nicer static mosaic — abstract pixel landscape
-  function drawMosaic() {
-    const W = canvas.parentElement.offsetWidth || 400;
-    const H = canvas.parentElement.offsetHeight || 300;
-    canvas.width = W;
-    canvas.height = H;
-
-    const BLOCK = 12;
-    const cols = Math.ceil(W / BLOCK);
-    const rows = Math.ceil(H / BLOCK);
-
-    // Color bands — simulate a pixelated photo
-    const bands = [
-      { y: 0.0, h: 0.3, colors: ['#c8d8e8','#a0b8cc','#90a8c0','#b0c8d8'] },       // sky
-      { y: 0.3, h: 0.12, colors: ['#708090','#607080','#506070','#405060'] },        // horizon
-      { y: 0.42, h: 0.18, colors: ['#a08060','#907050','#806040','#704830'] },       // ground mid
-      { y: 0.6, h: 0.2, colors: ['#c8a870','#b89060','#a87850','#906040'] },        // warm ground
-      { y: 0.8, h: 0.2, colors: ['#e8c880','#d8b870','#c8a860','#b89050'] },        // foreground
-    ];
-
-    // Noise seeds
-    const noise = [];
-    for(let i = 0; i < cols * rows; i++) noise.push(Math.random());
-
-    for(let r = 0; r < rows; r++) {
-      for(let c = 0; c < cols; c++) {
-        const ny = r / rows;
-        const nx = c / cols;
-        const n = noise[r * cols + c];
-
-        // Find band
-        let band = bands[bands.length - 1];
-        for(const b of bands) {
-          if (ny >= b.y && ny < b.y + b.h) { band = b; break; }
-        }
-
-        // Add a central "figure" silhouette
-        const dx = nx - 0.5;
-        const dy = ny - 0.55;
-        const inFigure = (Math.abs(dx) < 0.08 + Math.sin(ny * 20) * 0.005) && ny > 0.28 && ny < 0.72;
-        const inHead = (Math.abs(dx) < 0.06) && ny > 0.22 && ny < 0.32;
-
-        let color;
-        if (inHead) {
-          const headPalette = ['#3a2818','#4a3020','#5a3828','#2a1808'];
-          color = headPalette[Math.floor(n * headPalette.length)];
-        } else if (inFigure) {
-          const figPalette = ['#1e1e2a','#282838','#323248','#1a1a28','#2e2e40'];
-          color = figPalette[Math.floor(n * figPalette.length)];
-        } else {
-          // Pick from band colors with noise variation
-          const ci = Math.floor(n * band.colors.length);
-          color = band.colors[ci];
-        }
-
-        ctx.fillStyle = color;
-        ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK - 1, BLOCK - 1);
-      }
-    }
-  }
-
-  // Run once DOM is laid out
-  requestAnimationFrame(() => {
-    drawMosaic();
-  });
 </script>
 </body>
 </html>

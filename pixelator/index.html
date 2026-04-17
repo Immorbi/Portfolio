@@ -632,12 +632,14 @@
 // ─── Brand mark (MM pixel logo) ──────────────────
 const mmPat = [1,0,0,0,1, 1,1,0,1,1, 1,0,1,0,1, 1,0,0,0,1, 1,0,0,0,1];
 const bm = document.getElementById('brandMark');
-mmPat.forEach(v => {
-  const px = document.createElement('div');
-  px.className = 'bpx';
-  px.style.cssText = `width:4px;height:4px;border-radius:.5px;background:${v ? '#222' : 'transparent'}`;
-  bm.appendChild(px);
-});
+if (bm) {
+  mmPat.forEach(v => {
+    const px = document.createElement('div');
+    px.className = 'bpx';
+    px.style.cssText = `width:4px;height:4px;border-radius:.5px;background:${v ? '#222' : 'transparent'}`;
+    bm.appendChild(px);
+  });
+}
 
 // ─── Upload icon ─────────────────────────────────
 const upIcon = document.getElementById('uploadIcon');
