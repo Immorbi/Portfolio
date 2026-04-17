@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools — morbimixel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('../DeFonte reduced Leger.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('../DeFonte reduced Normale.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('../DeFonte reduced DemiGras.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DeFonte';
+      src: url('../DeFonte reduced Gros.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --text: #222222;
+      --text-light: #888888;
+      --text-muted: #c0c0c0;
+      --bg: #ffffff;
+      --border: #e0e0e0;
+      --font: 'DeFonte', -apple-system, sans-serif;
+      --sidebar-width: 25%;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      cursor: url('../cursor.svg') 16 18, auto;
+    }
+
+    ::selection {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .layout {
+      display: block;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* ─── Sidebar ─────────────────────────────────── */
+    .sidebar {
+      display: none;
+    }
+
+    .sidebar-logo {
+      cursor: url('../cursor2.svg') 16 18, pointer;
+      display: inline-flex;
+      position: relative;
+      transition: opacity 0.3s;
+    }
+    .sidebar-logo:hover { opacity: 0.9; }
+    .sidebar-logo img {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
+
+    .sidebar-video {
+      margin-top: 12px;
+      margin-bottom: auto;
+      overflow: hidden;
+    }
+    .sidebar-video video {
+      width: calc(100% + 4px);
+      height: auto;
+      display: block;
+      margin: -2px;
+    }
+
+    .menu-list {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-top: 1px solid var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.3s;
+    }
+    .menu-item:last-child { border-bottom: 1px solid var(--text); }
+    .menu-item:hover {
+      opacity: 0.5;
+      cursor: url('../cursor2.svg') 16 18, pointer;
+    }
+
+    .menu-item-title {
+      font-size: clamp(24px, 2.5vw, 40px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .menu-item.active .menu-item-title { color: var(--text); }
+    .menu-item:not(.active) .menu-item-title { color: #c0c0c0; }
+    .menu-item:not(.active):hover .menu-item-title { color: var(--text); }
+
+    .menu-item-desc {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: right;
+      line-height: 1.5;
+    }
+    .menu-item.active .menu-item-desc { color: var(--text); }
+    .menu-item:not(.active) .menu-item-desc { color: #c0c0c0; }
+    .menu-item:not(.active):hover .menu-item-desc { color: var(--text); }
+
+    /* ─── Main ───────────────────────────────────── */
+    .tools-main {
+      min-height: 100vh;
+      overflow-y: visible;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Topbar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .topbar-inner {
+      padding: 18px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .back-link,
+    .topbar-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+
+    .back-link {
+      color: var(--text);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .back-link:hover {
+      opacity: 0.5;
+      cursor: url('../cursor2.svg') 16 18, pointer;
+    }
+
+    .topbar-title {
+      color: var(--text-muted);
+    }
+
+    /* Hero */
+    .tools-hero {
+      padding: 24px 32px 28px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .hero-left { flex: 1; }
+
+    .hero-eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-family: 'DeFonte', sans-serif;
+      font-synthesis: none;
+      font-size: clamp(42px, 5vw, 72px);
+      font-weight: 300;
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    .hero-title em {
+      font-family: 'DeFonte', sans-serif;
+      font-synthesis: none;
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    /* ─── Tools Grid ──────────────────────────────── */
+    .tools-grid {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      align-content: start;
+      flex: 1;
+    }
+
+    .tool-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s cubic-bezier(0.76,0,0.24,1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card:not(.is-soon):hover {
+      border-color: #bbb;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+      cursor: url('../cursor2.svg') 16 18, pointer;
+    }
+
+    /* Preview */
+    .tool-card-preview {
+      position: relative;
+      background: #ffffff;
+    }
+
+    .tool-card-preview .preview-inner {
+      width: 100%;
+      min-height: 258px;
+      transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    .tool-card:not(.is-soon):hover .preview-inner {
+      transform: scale(1.01);
+    }
+
+    /* Coming soon */
+    .tool-card.is-soon { opacity: 0.55; }
+
+    .tool-card-cover {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.78fr) minmax(0, 1.22fr);
+      min-height: 258px;
+    }
+
+    .tool-card-visual {
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .tool-card-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 28px 24px 26px;
+      min-height: 100%;
+    }
+
+    .tool-card-panel.is-lilac { background: #d6b3fb; }
+    .tool-card-panel.is-butter { background: #efe4b9; }
+    .tool-card-panel.is-mist { background: #dbe1f6; }
+
+    .tool-card-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .tool-card-name {
+      font-size: clamp(26px, 2.6vw, 34px);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      color: #222222;
+    }
+
+    .tool-card-badge {
+      align-self: flex-start;
+      font-family: 'Manrope', sans-serif;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #222222;
+      border: 1px solid rgba(34,34,34,0.18);
+      padding: 4px 9px;
+      background: rgba(255,255,255,0.42);
+    }
+
+    .tool-card-desc {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      line-height: 1.6;
+      color: #222222;
+      max-width: 34ch;
+    }
+
+    .tool-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .tool-card-tags {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-family: 'Manrope', sans-serif;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #222222;
+    }
+
+    .tool-card-arrow {
+      font-size: 18px;
+      color: #222222;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s, transform 0.25s cubic-bezier(0.76,0,0.24,1);
+      flex-shrink: 0;
+    }
+
+    .tool-card:not(.is-soon):hover .tool-card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .cover-flower {
+      position: relative;
+      width: min(220px, 88%);
+      aspect-ratio: 1;
+    }
+
+    .cover-flower::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle, #222 0 2px, transparent 2.5px) 0 0/10px 10px;
+      -webkit-mask:
+        radial-gradient(ellipse 20% 29% at 50% 18%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 82% 34%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 82% 66%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 50% 82%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 18% 66%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 18% 34%, #000 98%, transparent 100%);
+      mask:
+        radial-gradient(ellipse 20% 29% at 50% 18%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 82% 34%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 82% 66%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 50% 82%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 18% 66%, #000 98%, transparent 100%),
+        radial-gradient(ellipse 20% 29% at 18% 34%, #000 98%, transparent 100%);
+    }
+
+    .cover-swatches {
+      width: min(210px, 88%);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .cover-swatch {
+      aspect-ratio: 1;
+      border: 1px solid rgba(34,34,34,0.08);
+    }
+
+    .cover-swatch.is-rose { background: #efb5c6; }
+    .cover-swatch.is-ink { background: #222222; }
+    .cover-swatch.is-butter { background: #efe4b9; }
+    .cover-swatch.is-lavender { background: #d6b3fb; }
+
+    .cover-grid {
+      width: min(220px, 90%);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .cover-grid-px {
+      aspect-ratio: 1;
+      background: #222222;
+    }
+
+    .cover-grid-px.is-light { background: #ffffff; border: 1px solid rgba(34,34,34,0.12); }
+    .cover-grid-px.is-blue { background: #7c90ff; }
+    .cover-grid-px.is-soft { background: #c7d0ff; }
+
+    /* ─── Scrollbar ───────────────────────────────── */
+    .tools-main::-webkit-scrollbar { width: 4px; }
+    .tools-main::-webkit-scrollbar-track { background: transparent; }
+    .tools-main::-webkit-scrollbar-thumb { background: var(--border); }
+
+    /* ─── Mobile ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      html, body { height: auto; overflow-x: hidden; overflow-y: auto; }
+
+      .layout { display: block; height: auto; }
+
+      .sidebar {
+        display: none;
+      }
+
+      .tools-main { height: auto; overflow-y: visible; }
+
+      .tools-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 20px 22px;
+        gap: 16px;
+      }
+      .hero-right {
+        text-align: left;
+        max-width: 34ch;
+      }
+      .hero-logo {
+        margin-left: 0;
+        max-width: 116px;
+        margin-bottom: 14px;
+      }
+      .hero-desc {
+        font-size: 11px;
+        line-height: 1.7;
+      }
+      .tools-grid {
+        padding: 20px;
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .tool-card {
+        border-radius: 14px;
+      }
+      .tool-card-cover {
+        grid-template-columns: 1fr;
+      }
+      .tool-card-preview .preview-inner,
+      .tool-card-cover {
+        min-height: unset;
+      }
+      .tool-card-visual {
+        min-height: 180px;
+        padding: 20px;
+      }
+      .tool-card-panel {
+        padding: 18px 18px 20px;
+      }
+      .tool-card-name {
+        font-size: 24px;
+      }
+      .tool-card-desc {
+        font-size: 11px;
+        line-height: 1.7;
+      }
+      .tool-card-arrow {
+        opacity: 1;
+        transform: none;
+      }
+      .cover-flower,
+      .cover-swatches,
+      .cover-grid {
+        width: min(180px, 90%);
+      }
+      .topbar-inner { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="../" aria-label="Go to start page">
+      <img src="../logo.svg" alt="Maria Danilova">
+    </a>
+
+    <div class="sidebar-video">
+      <video autoplay loop muted playsinline preload="auto">
+        <source src="../Comp 1_4_1.slow.clean.mp4" type="video/mp4">
+        <source src="../Comp 1_4_1.mov" type="video/quicktime">
+      </video>
+    </div>
+
+    <nav class="menu-list">
+      <a class="menu-item" href="../">
+        <span class="menu-item-title">Work</span>
+        <span class="menu-item-desc">VIEW MY WORK<br>IN MOTION</span>
+      </a>
+      <a class="menu-item" href="../archive/">
+        <span class="menu-item-title">Archive</span>
+        <span class="menu-item-desc">EVERY PROJECT<br>IN ONE SPACE</span>
+      </a>
+      <a class="menu-item" href="../profile/">
+        <span class="menu-item-title">Profile</span>
+        <span class="menu-item-desc">ABOUT ME &<br>MY PRACTICE</span>
+      </a>
+      <a class="menu-item active" href="./">
+        <span class="menu-item-title">Tools</span>
+        <span class="menu-item-desc">MY<br>TOOLS</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <div class="tools-main">
+
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="../" class="back-link">← Back to start</a>
+        <span class="topbar-title">My Tools</span>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="tools-hero">
+      <div class="hero-left">
+<h1 class="hero-title">Design<br><em>Tools</em></h1>
+      </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <div class="tools-grid">
+
+      <!-- Tool 1 — Pixelator -->
+      <a class="tool-card" href="../pixelator/">
+        <div class="tool-card-preview">
+          <div class="preview-inner tool-card-cover">
+            <div class="tool-card-visual">
+              <div class="cover-flower" aria-hidden="true"></div>
+            </div>
+            <div class="tool-card-panel is-lilac">
+              <div class="tool-card-copy">
+                <span class="tool-card-name">Pixel Art Studio</span>
+                <p class="tool-card-desc">Upload any image and turn it into a mosaic of colored pixel blocks. Control size, shape, gap, and color mode.</p>
+              </div>
+              <div class="tool-card-meta">
+                <div class="tool-card-tags">
+                  <span class="tag">Image</span>
+                  <span class="tag">Pixel</span>
+                  <span class="tag">Mosaic</span>
+                </div>
+                <span class="tool-card-arrow">→</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Tool 2 — Coming Soon -->
+      <div class="tool-card is-soon">
+        <div class="tool-card-preview">
+          <div class="preview-inner tool-card-cover">
+            <div class="tool-card-visual">
+              <div class="cover-swatches" aria-hidden="true">
+                <div class="cover-swatch is-rose"></div>
+                <div class="cover-swatch is-ink"></div>
+                <div class="cover-swatch is-butter"></div>
+                <div class="cover-swatch is-lavender"></div>
+              </div>
+            </div>
+            <div class="tool-card-panel is-butter">
+              <div class="tool-card-copy">
+                <span class="tool-card-badge">Soon</span>
+                <span class="tool-card-name">Palette Studio</span>
+                <p class="tool-card-desc">Extract and build color palettes from images. Export as CSS variables, Figma tokens, or plain hex lists.</p>
+              </div>
+              <div class="tool-card-meta">
+                <div class="tool-card-tags">
+                  <span class="tag">Color</span>
+                  <span class="tag">Palette</span>
+                  <span class="tag">Export</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tool 3 — Coming Soon -->
+      <div class="tool-card is-soon">
+        <div class="tool-card-preview">
+          <div class="preview-inner tool-card-cover">
+            <div class="tool-card-visual">
+              <div class="cover-grid" aria-hidden="true">
+                <div class="cover-grid-px"></div>
+                <div class="cover-grid-px is-light"></div>
+                <div class="cover-grid-px is-blue"></div>
+                <div class="cover-grid-px is-light"></div>
+                <div class="cover-grid-px is-soft"></div>
+                <div class="cover-grid-px"></div>
+                <div class="cover-grid-px is-light"></div>
+                <div class="cover-grid-px is-blue"></div>
+                <div class="cover-grid-px"></div>
+                <div class="cover-grid-px is-soft"></div>
+                <div class="cover-grid-px"></div>
+                <div class="cover-grid-px is-light"></div>
+                <div class="cover-grid-px is-blue"></div>
+                <div class="cover-grid-px is-light"></div>
+                <div class="cover-grid-px"></div>
+                <div class="cover-grid-px is-soft"></div>
+              </div>
+            </div>
+            <div class="tool-card-panel is-mist">
+              <div class="tool-card-copy">
+                <span class="tool-card-badge">Soon</span>
+                <span class="tool-card-name">Grid Builder</span>
+                <p class="tool-card-desc">Build and visualize layout grids for editorial and digital design. Generate CSS grid snippets instantly.</p>
+              </div>
+              <div class="tool-card-meta">
+                <div class="tool-card-tags">
+                  <span class="tag">Layout</span>
+                  <span class="tag">Grid</span>
+                  <span class="tag">CSS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ─── morbimixel logomark (5×5 pixel "MM") ───────
+  const mmColors = ['#222222','#888888','#e0e0e0','#222222'];
+  // M shape left + M shape right condensed into 5×5
+  const mmPattern = [
+    1,0,0,0,1,
+    1,1,0,1,1,
+    1,0,1,0,1,
+    1,0,0,0,1,
+    1,0,0,0,1,
+  ];
+  const logomark = document.getElementById('mmLogomark');
+  if (logomark) {
+    mmPattern.forEach(v => {
+      const px = document.createElement('div');
+      px.className = 'px';
+      px.style.width = '5px';
+      px.style.height = '5px';
+      px.style.background = v ? '#222222' : 'transparent';
+      logomark.appendChild(px);
+    });
+  }
+
+</script>
+</body>
+</html>

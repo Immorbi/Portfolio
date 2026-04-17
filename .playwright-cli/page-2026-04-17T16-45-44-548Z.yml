@@ -1,0 +1,76 @@
+- generic [ref=e2]:
+  - banner:
+    - generic [ref=e4]:
+      - link "Company Company" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img "Company" [ref=e8]
+        - generic [ref=e9]: Company
+      - list [ref=e11]:
+        - listitem [ref=e12]:
+          - link "Manifesto" [ref=e14] [cursor=pointer]:
+            - /url: /manifesto
+        - listitem [ref=e15]:
+          - link "Residence" [ref=e17] [cursor=pointer]:
+            - /url: /residence
+        - listitem [ref=e18]:
+          - link "Archive" [ref=e20] [cursor=pointer]:
+            - /url: /archive
+        - listitem [ref=e21]:
+          - link "Contacts" [ref=e23] [cursor=pointer]:
+            - /url: "#popup:embedcode"
+      - link "Apply" [ref=e28] [cursor=pointer]:
+        - /url: /apply
+        - generic [ref=e30]: Apply
+  - generic [ref=e37]: Helikon is an artist-run art-residency, created oin the ideas of unconventional desire to create. Art in helikon art center can vary from anything to everything.
+  - generic [ref=e44]:
+    - generic [ref=e51]:
+      - text: HELIKON is not a sanctuary. It is a laboratory. A system where art, thought, and matter collide and reform.
+      - text: We do not curate comfort. We construct conditions
+      - text: for radical experimentation. Every residency is a node
+      - text: in a distributed network of Helikon Art Center is located in the Izmit Municipality of Türkiye. The Art Center was found in 2010 year by the Turkish artist Orhan Özçalık.
+      - text: It’s first international art residency in Türkiye. Up until this year Helikon has organised 17 international residencies and hosted 250 artists from 30 countries. Helikon is equipped with wood / stone / ceramic studios and open spaces for any processes of art creation.
+    - generic [ref=e55]: Countries
+    - generic [ref=e57]: "38"
+    - generic [ref=e61]: "123"
+    - generic [ref=e63]: Artists
+    - generic [ref=e67]: Active Projects
+    - generic [ref=e69]: "17"
+  - contentinfo [ref=e70]:
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - generic [ref=e77]:
+          - generic [ref=e78]: CONTACT NODE
+          - generic [ref=e79]:
+            - generic [ref=e80]: EMAIL
+            - textbox "your@email.com" [ref=e81]
+          - generic [ref=e82]:
+            - generic [ref=e83]: MESSAGE
+            - textbox "Enter your message..." [ref=e84]
+          - button "Send" [ref=e85] [cursor=pointer]
+        - iframe [ref=e87]:
+          
+      - generic [ref=e88]:
+        - generic [ref=e89]:
+          - generic [ref=e90]: EMAIL
+          - link "helikonartresidency@gmail.com" [ref=e92] [cursor=pointer]:
+            - /url: mailto:helikonartresidency@gmail.com
+            - img [ref=e93]
+            - text: helikonartresidency@gmail.com
+        - generic [ref=e96]:
+          - generic [ref=e97]: LOCATION
+          - link "Bahçecik, Başiskele Kocaeli, Turkey" [ref=e99] [cursor=pointer]:
+            - /url: https://maps.google.com/?q=40.6499021,29.8961385
+            - img [ref=e100]
+            - text: Bahçecik, Başiskele
+            - text: Kocaeli, Turkey
+        - generic [ref=e103]:
+          - generic [ref=e104]: SOCIAL
+          - generic [ref=e105]:
+            - link "@helikonart.center" [ref=e106] [cursor=pointer]:
+              - /url: https://www.instagram.com/helikonart.center/
+              - img [ref=e107]
+              - text: "@helikonart.center"
+            - link "HelikonArtCenter" [ref=e111] [cursor=pointer]:
+              - /url: https://www.facebook.com/HelikonArtCenter/
+              - img [ref=e112]
+              - text: HelikonArtCenter
