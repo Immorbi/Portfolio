@@ -189,6 +189,33 @@
       align-items: center;
     }
 
+    .topbar-nav {
+      display: none;
+      padding: 0 20px 12px 24px;
+      gap: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .topbar-nav a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: opacity 0.3s, color 0.3s;
+    }
+
+    .topbar-nav a.is-active {
+      color: var(--text);
+    }
+
+    .topbar-nav a:hover {
+      opacity: 0.5;
+      cursor: url('cursor2.svg') 16 18, pointer;
+    }
+
     .back-link,
     .topbar-title {
       font-family: 'Manrope', sans-serif;
@@ -341,6 +368,12 @@
         padding: calc(env(safe-area-inset-top) + 14px) 20px 14px;
       }
 
+      .topbar-nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
       .topbar-title {
         display: none;
       }
@@ -350,7 +383,7 @@
       }
 
       main {
-        padding: 112px 20px 28px 24px;
+        padding: 150px 20px 28px 24px;
       }
 
       .profile-page {
@@ -427,6 +460,10 @@
           <span class="menu-item-title">Profile</span>
           <span class="menu-item-desc">ABOUT ME &<br>MY PRACTICE</span>
         </a>
+        <a class="menu-item" href="tools.html">
+          <span class="menu-item-title">Tools</span>
+          <span class="menu-item-desc">MORBIMIXEL<br>DESIGN STUDIO</span>
+        </a>
       </nav>
     </aside>
 
@@ -436,6 +473,12 @@
           <a href="index.html" class="back-link">← Back to start</a>
           <span class="topbar-title">Profile / Maria Danilova</span>
         </div>
+        <nav class="topbar-nav" aria-label="Profile mobile navigation">
+          <a href="index.html">Work</a>
+          <a href="archive.html">Archive</a>
+          <a href="profile.html" class="is-active">Profile</a>
+          <a href="tools.html">Tools</a>
+        </nav>
       </header>
 
       <main>
