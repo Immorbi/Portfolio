@@ -899,7 +899,7 @@ function render() {
       ctx.fillStyle = `rgb(${r},${g},${b})`;
 
       const gh = gap/2;
-      const px=sx+gh, py=sy+gh, pw=sw-gap, ph=sh-gap;
+      const px=sx+gh, py=sy+gh, pw=pixelSize-gap, ph=pixelSize-gap;
       if (pw<=0||ph<=0) { ctx.restore(); continue; }
 
       const cx=px+pw/2, cy=py+ph/2, s=Math.min(pw,ph);
