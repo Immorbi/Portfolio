@@ -467,7 +467,22 @@
   /* ─── Mobile ─────────────────────────────────── */
   @media (max-width: 768px) {
     html, body { height: auto; overflow-x: hidden; overflow-y: auto; }
+
     .layout { flex-direction: column; height: auto; min-height: 100dvh; }
+
+    /* Canvas: full-width preview at top */
+    .canvas-area {
+      order: -1;
+      height: auto;
+      min-height: 70vw;
+      padding: 20px 16px;
+    }
+    #outputCanvas {
+      max-width: 100%;
+      max-height: 80vw;
+    }
+
+    /* Sidebar becomes a scrollable controls panel below */
     .sidebar {
       width: 100%;
       height: auto;
@@ -475,15 +490,48 @@
       border-bottom: 1px solid var(--border);
       overflow-y: visible;
     }
-    .canvas-area {
-      min-height: 60vw;
-      height: auto;
-      padding-top: 0;
+
+    /* Compact upload zone: horizontal row instead of big block */
+    .upload-zone {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
     }
-    #outputCanvas {
-      max-width: calc(100% - 24px);
-      max-height: 80vw;
+    .upload-flower {
+      width: 32px;
+      height: 32px;
+      margin: 0;
+      flex-shrink: 0;
     }
+    .upload-sub { display: none; }
+    .upload-title { font-size: 13px; }
+
+    /* Sliders: 2-column grid */
+    .controls-section:first-of-type {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 20px;
+    }
+    .controls-section:first-of-type .section-label {
+      grid-column: 1 / -1;
+      margin-bottom: 0;
+    }
+    .controls-section:first-of-type .control-item:last-child {
+      grid-column: 1 / -1;
+    }
+
+    /* Stats: 4 in a single row */
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    .stat-val { font-size: 16px; }
+
+    /* Actions: side by side */
+    .actions-section { flex-direction: row; padding: 16px 20px 24px; }
+    .btn-primary, .btn-secondary { flex: 1; }
+
+    .topbar-inner { padding: calc(env(safe-area-inset-top) + 14px) 20px 14px; }
   }
 </style>
 </head>
