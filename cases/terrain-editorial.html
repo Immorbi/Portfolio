@@ -974,6 +974,40 @@
         gap: 10px;
       }
 
+      .brief {
+        grid-template-columns: 1fr;
+        gap: 28px 0;
+        padding: 32px 0 40px;
+      }
+    }
+  </style>
+
+  <style>
+    .brief {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 48px;
+      border-top: 1px solid var(--border);
+      padding: 44px 0 60px;
+    }
+    .brief-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .brief-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .brief-text {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
     }
   </style>
 </head>
@@ -1011,6 +1045,21 @@
       <div class="meta-item">
         <span class="meta-label">Year</span>
         <span class="meta-value">2025</span>
+      </div>
+    </section>
+
+    <section class="brief">
+      <div class="brief-col">
+        <div class="brief-label">Goal</div>
+        <p class="brief-text">Establish a strong visual identity for a media project centered on women in the industry — credible on editorial covers, native on social.</p>
+      </div>
+      <div class="brief-col">
+        <div class="brief-label">Task</div>
+        <p class="brief-text">Develop a complete identity system — logo, color, typography, and post formats — packaged into a compact, ready-to-use brandbook.</p>
+      </div>
+      <div class="brief-col">
+        <div class="brief-label">Solution</div>
+        <p class="brief-text">A flexible system built around a strong typographic core, designed to scale across formats and tones without losing its distinct voice.</p>
       </div>
     </section>
 

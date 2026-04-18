@@ -430,6 +430,41 @@
       .mosaic-card.small {
         min-height: 0;
       }
+
+      .brief {
+        grid-template-columns: 1fr;
+        gap: 28px 0;
+        padding: 32px 0 40px;
+      }
+    }
+  </style>
+
+  <style>
+    .brief {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 48px;
+      border-top: 1px solid var(--border);
+      padding: 44px 0 60px;
+    }
+    .brief-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .brief-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .brief-text {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
     }
   </style>
 </head>
@@ -466,6 +501,21 @@
       <div class="meta-item">
         <span class="meta-label">Year</span>
         <span class="meta-value">2025</span>
+      </div>
+    </section>
+
+    <section class="brief">
+      <div class="brief-col">
+        <div class="brief-label">Goal</div>
+        <p class="brief-text">Build a digital platform for an artist-run residency that holds manifesto, logistics, archive, and applications — without losing atmosphere.</p>
+      </div>
+      <div class="brief-col">
+        <div class="brief-label">Task</div>
+        <p class="brief-text">Design the information architecture and visual language for an editorial website carrying multiple content zones inside one coherent structure.</p>
+      </div>
+      <div class="brief-col">
+        <div class="brief-label">Solution</div>
+        <p class="brief-text">A calm, layered editorial system where navigation rhythm is part of the design language — each section scales to the content it holds.</p>
       </div>
     </section>
 

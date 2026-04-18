@@ -722,6 +722,41 @@
       .next-case a {
         font-size: 28px;
       }
+
+      .brief {
+        grid-template-columns: 1fr;
+        gap: 28px 0;
+        padding: 32px 0 40px;
+      }
+    }
+  </style>
+
+  <style>
+    .brief {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 48px;
+      border-top: 1px solid var(--border);
+      padding: 44px 0 60px;
+    }
+    .brief-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .brief-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .brief-text {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
     }
   </style>
 </head>
@@ -765,6 +800,20 @@
       </div>
     </section>
 
+    <section class="brief">
+      <div class="brief-col">
+        <div class="brief-label">Goal</div>
+        <p class="brief-text">Give a constantly-changing gallery program a unified visual presence across nine events in print and digital formats.</p>
+      </div>
+      <div class="brief-col">
+        <div class="brief-label">Task</div>
+        <p class="brief-text">Design a series of event posters for an independent art space where each show brings its own aesthetic language and needs.</p>
+      </div>
+      <div class="brief-col">
+        <div class="brief-label">Solution</div>
+        <p class="brief-text">A flexible graphic framework with fixed visual anchors — letting each poster speak in its own voice while staying recognizable as a family.</p>
+      </div>
+    </section>
 
   </main>
 
