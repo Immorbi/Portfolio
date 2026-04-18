@@ -313,8 +313,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 20px;
-      padding: 24px 28px 24px 26px;
+      gap: 14px;
+      padding: 16px 18px 14px 16px;
       min-height: 100%;
     }
 
@@ -325,15 +325,16 @@
     .tool-card-copy {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 10px;
     }
 
     .tool-card-name {
-      font-size: clamp(26px, 2.6vw, 34px);
+      font-size: clamp(25px, 2.45vw, 32px);
       font-weight: 400;
       letter-spacing: -0.03em;
-      line-height: 0.95;
+      line-height: 0.92;
       color: #222222;
+      max-width: 8ch;
     }
 
     .tool-card-badge {
@@ -351,10 +352,10 @@
 
     .tool-card-desc {
       font-family: 'Manrope', sans-serif;
-      font-size: 13px;
-      line-height: 1.55;
+      font-size: 12px;
+      line-height: 1.58;
       color: #222222;
-      max-width: 38ch;
+      max-width: 32ch;
     }
 
     .tool-card-meta {
@@ -489,38 +490,53 @@
         border-radius: 16px;
       }
       .tool-card-cover {
-        grid-template-columns: 1fr;
-        min-height: unset;
+        grid-template-columns: minmax(132px, 42%) 1fr;
+        min-height: 172px;
       }
       .tool-card-visual {
         width: 100%;
-        height: 200px;
-        min-height: unset;
-        padding: 24px;
+        height: 100%;
+        min-height: 172px;
+        padding: 14px;
       }
       .tool-card-visual--cover {
         padding: 0;
-        height: 200px;
+        height: 100%;
       }
       .tool-card-cover-img {
         width: 100%;
-        height: 200px;
+        height: 100%;
         object-fit: cover;
       }
       .tool-card-panel {
-        padding: 16px 18px;
+        padding: 14px 16px 12px 14px;
+        gap: 10px;
+      }
+      .tool-card-copy {
+        gap: 8px;
       }
       .tool-card-name {
-        font-size: 20px;
+        font-size: 22px;
+        max-width: 6ch;
       }
       .tool-card-desc {
-        font-size: 11px;
-        line-height: 1.6;
+        font-size: 10px;
+        line-height: 1.45;
+        max-width: none;
+      }
+      .tool-card-meta {
+        gap: 10px;
+      }
+      .tool-card-tags {
+        gap: 10px;
+      }
+      .tag {
+        font-size: 7px;
       }
       .cover-flower,
       .cover-swatches,
       .cover-grid {
-        width: min(180px, 90%);
+        width: min(148px, 88%);
       }
       .topbar-inner { padding: 18px 20px; }
     }
@@ -587,11 +603,11 @@
         <div class="tool-card-preview">
           <div class="preview-inner tool-card-cover">
             <div class="tool-card-visual tool-card-visual--cover">
-              <img src="PixelTool.png" alt="Pixel Art Studio cover" class="tool-card-cover-img">
+              <img src="PixelTool.png" alt="Pixel Studio cover" class="tool-card-cover-img">
             </div>
             <div class="tool-card-panel is-lilac">
               <div class="tool-card-copy">
-                <span class="tool-card-name">Pixel Art Studio</span>
+                <span class="tool-card-name">Pixel Studio</span>
                 <p class="tool-card-desc">Upload any image and turn it into a mosaic of colored pixel blocks. Control size, shape, gap, and color mode.</p>
               </div>
               <div class="tool-card-meta">
