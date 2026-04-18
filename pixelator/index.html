@@ -466,72 +466,103 @@
 
   /* ─── Mobile ─────────────────────────────────── */
   @media (max-width: 768px) {
-    html, body { height: auto; overflow-x: hidden; overflow-y: auto; }
+    /* App-like layout: full-screen, no body scroll */
+    html, body {
+      height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
 
-    .layout { flex-direction: column; height: auto; min-height: 100dvh; }
+    .app-topbar {
+      flex-shrink: 0;
+    }
+    .topbar-inner {
+      padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px 12px;
+    }
 
-    /* Canvas: full-width preview at top */
+    /* Layout fills remaining height */
+    .layout {
+      flex: 1;
+      min-height: 0;
+      flex-direction: column;
+      height: auto;
+      overflow: hidden;
+    }
+
+    /* Canvas: fixed proportional height at top, always visible */
     .canvas-area {
       order: -1;
-      height: auto;
-      min-height: 70vw;
-      padding: 20px 16px;
+      flex: none;
+      height: 52vw;
+      padding: 10px 14px;
     }
     #outputCanvas {
       max-width: 100%;
-      max-height: 80vw;
+      max-height: calc(52vw - 20px);
     }
 
-    /* Sidebar becomes a scrollable controls panel below */
+    /* Sidebar: scrollable middle section */
     .sidebar {
+      flex: 1;
+      min-height: 0;
       width: 100%;
       height: auto;
       border-right: none;
-      border-bottom: 1px solid var(--border);
-      overflow-y: visible;
+      border-top: 1px solid var(--border);
+      overflow-y: auto;
+      /* Space for the sticky bottom bar */
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 72px);
     }
 
-    /* Compact upload zone: horizontal row instead of big block */
+    /* Compact upload: horizontal row */
     .upload-zone {
-      padding: 12px 14px;
+      padding: 11px 14px;
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-align: left;
     }
-    .upload-flower {
-      width: 32px;
-      height: 32px;
-      margin: 0;
-      flex-shrink: 0;
-    }
+    .upload-flower { width: 30px; height: 30px; margin: 0; flex-shrink: 0; }
     .upload-sub { display: none; }
     .upload-title { font-size: 13px; }
 
     /* Sliders: 2-column grid */
-    .controls-section:first-of-type {
+    .controls-section {
+      padding: 16px 20px;
+    }
+    .controls-section:nth-child(2) {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px 20px;
+      gap: 14px 20px;
     }
-    .controls-section:first-of-type .section-label {
+    .controls-section:nth-child(2) .section-label {
       grid-column: 1 / -1;
       margin-bottom: 0;
     }
-    .controls-section:first-of-type .control-item:last-child {
+    .controls-section:nth-child(2) .control-item:last-child {
       grid-column: 1 / -1;
     }
 
-    /* Stats: 4 in a single row */
-    .stats-grid { grid-template-columns: repeat(4, 1fr); }
-    .stat-val { font-size: 16px; }
+    /* Stats: hide to save space */
+    .stats-section { display: none; }
 
-    /* Actions: side by side */
-    .actions-section { flex-direction: row; padding: 16px 20px 24px; }
+    /* Actions: sticky bottom bar, always visible */
+    .actions-section {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      flex-direction: row;
+      margin-top: 0;
+      padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 10px);
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      gap: 8px;
+    }
     .btn-primary, .btn-secondary { flex: 1; }
-
-    .topbar-inner { padding: calc(env(safe-area-inset-top) + 14px) 20px 14px; }
   }
 </style>
 </head>
