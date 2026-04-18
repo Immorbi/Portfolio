@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <title>Tools — morbimixel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -234,8 +235,9 @@
     .tools-grid {
       padding: 32px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      grid-template-columns: max-content;
       gap: 16px;
+      justify-content: start;
       align-content: start;
       flex: 1;
     }
@@ -252,6 +254,8 @@
       transition: box-shadow 0.25s, transform 0.25s cubic-bezier(0.76,0,0.24,1);
       position: relative;
       overflow: hidden;
+      width: fit-content;
+      max-width: 100%;
     }
 
     .tool-card:not(.is-soon):hover {
@@ -281,7 +285,7 @@
 
     .tool-card-cover {
       display: grid;
-      grid-template-columns: 200px 1fr;
+      grid-template-columns: 200px minmax(268px, 312px);
       min-height: 200px;
     }
 
@@ -314,7 +318,7 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 14px;
-      padding: 16px 18px 14px 16px;
+      padding: 16px 16px 14px 14px;
       min-height: 100%;
     }
 
@@ -352,10 +356,10 @@
 
     .tool-card-desc {
       font-family: 'Manrope', sans-serif;
-      font-size: 14px;
-      line-height: 1.58;
+      font-size: 12px;
+      line-height: 1.46;
       color: #222222;
-      max-width: 32ch;
+      max-width: 27ch;
     }
 
     .tool-card-meta {
