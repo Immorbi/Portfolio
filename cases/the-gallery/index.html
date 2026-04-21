@@ -601,6 +601,32 @@
       transform: rotate(45deg);
     }
 
+    .brief {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 48px;
+      padding: 44px 0 60px;
+    }
+    .brief-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .brief-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .brief-text {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
     /* --- Responsive --- */
     @media (max-width: 900px) {
       :root { --pad: 24px; }
@@ -613,6 +639,7 @@
       .section-text { margin-left: 0; }
       .footer { grid-template-columns: 1fr; gap: 32px; padding: 64px 0 48px; }
       .next-case { text-align: left; }
+      .brief { grid-template-columns: 1fr; gap: 24px 0; padding: 32px 0 40px; }
     }
 
     @media (max-width: 520px) {
@@ -732,34 +759,6 @@
     }
   </style>
 
-  <style>
-    .brief {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0 48px;
-      
-      padding: 44px 0 60px;
-    }
-    .brief-col {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .brief-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .brief-text {
-      font-family: var(--font);
-      font-size: 16px;
-      line-height: 1.65;
-      color: var(--text);
-    }
-  </style>
 </head>
 <body>
 
