@@ -369,6 +369,32 @@
       transform: rotate(45deg);
     }
 
+    .brief {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 48px;
+      padding: 44px 0 60px;
+    }
+    .brief-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .brief-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .brief-text {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
     @media (max-width: 900px) {
       :root {
         --pad: 24px;
@@ -391,8 +417,14 @@
 
       .section-head,
       .mosaic,
-      .footer {
+      .footer,
+      .brief {
         grid-template-columns: 1fr;
+      }
+
+      .brief {
+        gap: 24px 0;
+        padding: 32px 0 40px;
       }
 
       .section-head {
@@ -441,31 +473,38 @@
   </style>
 
   <style>
-    .brief {
+    .hero-card video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .device-duo {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0 48px;
-      
-      padding: 44px 0 60px;
+      grid-template-columns: 1.65fr 0.6fr;
+      gap: 28px;
+      align-items: center;
     }
-    .brief-col {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .device-desktop,
+    .device-mobile {
+      background: var(--panel);
+      overflow: hidden;
     }
-    .brief-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    .device-desktop img,
+    .device-mobile img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
-    .brief-text {
-      font-family: var(--font);
-      font-size: 16px;
-      line-height: 1.65;
-      color: var(--text);
+    /* Fix portrait mobile screenshots in mosaic */
+    .mosaic-card.tall  { height: 680px; min-height: 0; }
+    .mosaic-card.small { height: 328px; min-height: 0; }
+    .mosaic-card img   { object-position: top center; }
+    @media (max-width: 900px) {
+      .device-duo {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
     }
   </style>
 </head>
@@ -522,7 +561,9 @@
 
     <section class="hero">
       <div class="hero-card">
-        <img src="../../assets/helikon/helikon-home.png" alt="Helikon Art Center homepage">
+        <video autoplay loop muted playsinline>
+          <source src="../../Comp 1_9.mp4" type="video/mp4">
+        </video>
       </div>
     </section>
 
@@ -544,14 +585,14 @@
 
       <div class="mosaic">
         <div class="mosaic-card tall">
-          <img src="../../assets/helikon/helikon-residence.png" alt="Helikon residence page">
+          <img src="../../assets/helikon/helikon-home.png" alt="Helikon homepage">
         </div>
         <div class="mosaic-stack">
           <div class="mosaic-card small">
-            <img src="../../assets/helikon/helikon-home.png" alt="Helikon homepage detail">
+            <img src="../../assets/helikon/helikon-mobile-home.png" alt="Helikon mobile homepage">
           </div>
           <div class="mosaic-card small">
-            <img src="../../assets/helikon/helikon-archive.png" alt="Helikon archive page detail">
+            <img src="../../assets/helikon/helikon-mobile-residence.png" alt="Helikon mobile residence">
           </div>
         </div>
       </div>
@@ -582,8 +623,13 @@
         </div>
       </div>
 
-      <div class="single-visual">
-        <img src="../../assets/helikon/helikon-archive.png" alt="Helikon archive overview">
+      <div class="device-duo">
+        <div class="device-desktop">
+          <img src="../../assets/helikon/helikon-residence.png" alt="Helikon residence page desktop">
+        </div>
+        <div class="device-mobile">
+          <img src="../../assets/helikon/helikon-mobile-residence.png" alt="Helikon residence page mobile">
+        </div>
       </div>
     </section>
 
