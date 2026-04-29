@@ -14,25 +14,21 @@
       font-family: 'DeFonte';
       src: url('../../DeFonte reduced Leger.ttf') format('truetype');
       font-weight: 300;
-      font-style: normal;
     }
     @font-face {
       font-family: 'DeFonte';
       src: url('../../DeFonte reduced Normale.ttf') format('truetype');
       font-weight: 400;
-      font-style: normal;
     }
     @font-face {
       font-family: 'DeFonte';
       src: url('../../DeFonte reduced DemiGras.ttf') format('truetype');
       font-weight: 600;
-      font-style: normal;
     }
     @font-face {
       font-family: 'DeFonte';
       src: url('../../DeFonte reduced Gros.ttf') format('truetype');
       font-weight: 700;
-      font-style: normal;
     }
 
     *, *::before, *::after {
@@ -42,16 +38,18 @@
     }
 
     :root {
-      --text: #222222;
-      --text-light: #757575;
-      --text-muted: #c7c7c7;
-      --bg: #ffffff;
-      --panel: #f5f5f5;
-      --border: #e3e3e3;
+      --bg: #0d0d0d;
+      --bg-2: #141414;
+      --bg-light: #f0ece6;
+      --text: #f0ece6;
+      --text-dim: rgba(240,236,230,0.45);
+      --text-muted: rgba(240,236,230,0.22);
+      --border: rgba(240,236,230,0.1);
+      --accent: #c8b89a;
       --font: 'DeFonte', -apple-system, sans-serif;
-      --serif: 'DeFonte', Georgia, serif;
-      --max: 1280px;
-      --pad: 48px;
+      --mono: 'Manrope', sans-serif;
+      --max: 1440px;
+      --pad: 64px;
     }
 
     html, body {
@@ -63,620 +61,815 @@
       cursor: url('../../cursor.svg') 16 18, auto;
     }
 
-    body {
-      padding-top: 60px;
-    }
+    body { padding-top: 56px; }
 
     ::selection {
       background: var(--text);
       color: var(--bg);
     }
 
-    a {
-      color: inherit;
-    }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .topbar {
+    /* ── NAV ── */
+    .nav {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
-      z-index: 10;
-      background: #ffffff;
+      z-index: 100;
+      background: var(--bg);
       border-bottom: 1px solid var(--border);
     }
-
-    .topbar-inner {
+    .nav-inner {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 18px var(--pad);
+      padding: 16px var(--pad);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-
-    .back-link,
-    .topbar-title,
-    .eyebrow,
-    .meta-label,
-    .section-label,
-    .next-case-label {
-      font-family: 'Manrope', sans-serif;
+    .nav-back {
+      font-family: var(--mono);
       font-size: 11px;
       font-weight: 600;
-      text-transform: uppercase;
       letter-spacing: 0.12em;
-    }
-
-    .back-link {
+      text-transform: uppercase;
       text-decoration: none;
-      transition: opacity 0.3s;
+      opacity: 0.45;
+      transition: opacity 0.25s;
     }
-
-    .back-link:hover,
-    .next-case a:hover {
-      opacity: 0.5;
-      cursor: url('../../cursor2.svg') 16 18, pointer;
-    }
-
-    .topbar-title,
-    .eyebrow,
-    .meta-label,
-    .section-label,
-    .next-case-label {
-      color: var(--text-muted);
-    }
-
-    main {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 var(--pad);
-    }
-
-    .intro {
-      padding: 96px 0 72px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .eyebrow {
-      margin-bottom: 32px;
-    }
-
-    .intro h1 {
-      font-size: clamp(44px, 7vw, 104px);
-      font-weight: 400;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      max-width: 11ch;
-      margin-bottom: 40px;
-    }
-
-    .intro-lede,
-    .section-text,
-    .quote-block p,
-    .footer-copy {
-      font-family: var(--serif);
-      line-height: 1.72;
-    }
-
-    .intro-lede {
-      font-size: clamp(18px, 1.5vw, 22px);
-      max-width: 700px;
-    }
-
-    .meta {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      padding: 48px 0 72px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .meta-value {
-      font-family: 'Manrope', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    .hero {
-      padding: 72px 0;
-    }
-
-    .hero-card {
-      width: 100%;
-      overflow: hidden;
-      background: #ffffff;
-    }
-
-    .hero-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .section {
-      padding: 72px 0;
-      
-    }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 48px;
-      margin-bottom: 56px;
-    }
-
-    .section h2 {
-      font-size: clamp(28px, 3.4vw, 44px);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.08;
-      max-width: 14ch;
-      margin-top: 12px;
-    }
-
-    .section-text {
-      font-size: 17px;
-      max-width: 660px;
-      margin-left: auto;
-    }
-
-    .section-text p + p {
-      margin-top: 18px;
-    }
-
-    .mosaic {
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .mosaic-card {
-      background: var(--panel);
-      overflow: hidden;
-    }
-
-    .mosaic-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .mosaic-card.tall {
-      min-height: 720px;
-    }
-
-    .mosaic-stack {
-      display: grid;
-      gap: 24px;
-    }
-
-    .mosaic-card.small {
-      min-height: 348px;
-    }
-
-    .quote-block {
-      background: #111111;
-      color: #ffffff;
-      margin: 0 calc(var(--pad) * -1);
-      padding: 96px var(--pad);
-    }
-
-    .quote-inner {
-      max-width: 840px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .quote-block p {
-      font-size: clamp(24px, 3vw, 40px);
-      line-height: 1.34;
-    }
-
-    .quote-caption {
-      margin-top: 22px;
-      font-family: 'Manrope', sans-serif;
-      font-size: 10px;
+    .nav-back:hover { opacity: 1; cursor: url('../../cursor2.svg') 16 18, pointer; }
+    .nav-label {
+      font-family: var(--mono);
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.42);
+      color: var(--text-dim);
     }
 
-    .single-visual {
-      background: var(--panel);
-      overflow: hidden;
-    }
-
-    .single-visual img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .footer {
-      padding: 96px 0 64px;
-      
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: end;
-    }
-
-    .footer-copy {
-      font-size: 15px;
-      color: var(--text-light);
-    }
-
-    .next-case {
-      text-align: right;
-    }
-
-    .next-case a {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      font-size: clamp(28px, 3vw, 40px);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      transition: opacity 0.3s;
-    }
-
-    .next-case a span.arrow {
-      position: relative;
-      width: 32px;
-      height: 18px;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    .next-case a span.arrow::before,
-    .next-case a span.arrow::after {
-      content: "";
-      position: absolute;
-      display: block;
-    }
-
-    .next-case a span.arrow::before {
-      top: 8px;
-      left: 0;
-      width: 26px;
-      height: 1px;
-      background: currentColor;
-    }
-
-    .next-case a span.arrow::after {
-      top: 4px;
-      right: 1px;
-      width: 10px;
-      height: 10px;
-      border-top: 1px solid currentColor;
-      border-right: 1px solid currentColor;
-      transform: rotate(45deg);
-    }
-
-    .brief {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0 48px;
-      padding: 44px 0 60px;
-    }
-    .brief-col {
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      justify-content: flex-end;
+      padding: 0 var(--pad) 72px;
+      max-width: var(--max);
+      margin: 0 auto;
+      position: relative;
     }
-    .brief-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 9px;
+    .hero-num {
+      position: absolute;
+      top: 0; right: var(--pad);
+      font-family: var(--mono);
+      font-size: clamp(200px, 22vw, 340px);
+      font-weight: 700;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: var(--bg-2);
+      user-select: none;
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-size: clamp(56px, 9.5vw, 140px);
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+      margin-bottom: 56px;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 64px;
+      flex-wrap: wrap;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero-meta-label {
+      font-family: var(--mono);
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
-    .brief-text {
-      font-family: var(--font);
-      font-size: 16px;
-      line-height: 1.65;
+    .hero-meta-val {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--text);
     }
 
-    @media (max-width: 900px) {
-      :root {
-        --pad: 24px;
-      }
-
-      .intro {
-        padding: 56px 0 48px;
-      }
-
-      .meta {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-        padding: 32px 0 48px;
-      }
-
-      .hero,
-      .section {
-        padding: 56px 0;
-      }
-
-      .section-head,
-      .mosaic,
-      .footer,
-      .brief {
-        grid-template-columns: 1fr;
-      }
-
-      .brief {
-        gap: 24px 0;
-        padding: 32px 0 40px;
-      }
-
-      .section-head {
-        gap: 24px;
-        margin-bottom: 32px;
-      }
-
-      .section-text {
-        margin-left: 0;
-      }
-
-      .quote-block {
-        padding: 72px var(--pad);
-      }
-
-      .next-case {
-        text-align: left;
-      }
+    /* ── LEDE ── */
+    .lede-wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 120px var(--pad);
+      border-top: 1px solid var(--border);
+    }
+    .lede {
+      font-size: clamp(26px, 3.2vw, 48px);
+      font-weight: 400;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+      max-width: 22ch;
+      color: var(--text);
+    }
+    .lede em {
+      font-style: normal;
+      color: var(--accent);
     }
 
-    @media (max-width: 520px) {
-      .topbar-inner {
-        padding: 14px var(--pad);
-        gap: 12px;
-      }
-
-      .topbar-title {
-        font-size: 10px;
-      }
-
-      .intro h1 {
-        margin-bottom: 28px;
-      }
-
-      .mosaic-card.tall,
-      .mosaic-card.small {
-        min-height: 0;
-      }
-
-      .brief {
-        grid-template-columns: 1fr;
-        gap: 28px 0;
-        padding: 32px 0 40px;
-      }
+    /* ── BRIEF ── */
+    .brief-wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad) 120px;
     }
-  </style>
+    .brief-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      border: 1px solid var(--border);
+    }
+    .brief-cell {
+      padding: 40px 36px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .brief-cell:last-child { border-right: none; }
+    .brief-cell-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .brief-cell-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(240,236,230,0.75);
+    }
 
-  <style>
-    .hero-card video {
+    /* ── VIDEO ── */
+    .video-wrap {
+      width: 100%;
+      overflow: hidden;
+      background: var(--bg-2);
+    }
+    .video-wrap video {
       width: 100%;
       height: auto;
       display: block;
     }
-    .device-duo {
-      display: grid;
-      grid-template-columns: 1.65fr 0.6fr;
-      gap: 28px;
-      align-items: center;
+
+    /* ── SECTION ── */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 120px var(--pad);
     }
-    .device-desktop,
-    .device-mobile {
-      background: var(--panel);
+    .section-header {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 64px;
+      align-items: start;
+      margin-bottom: 72px;
+    }
+    .section-num-title {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .section-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .section-title {
+      font-size: clamp(28px, 3.2vw, 48px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 14ch;
+    }
+    .section-body {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 48px;
+    }
+    .section-body p {
+      font-size: 17px;
+      line-height: 1.75;
+      color: rgba(240,236,230,0.7);
+      max-width: 580px;
+    }
+
+    /* ── IMAGE LAYOUTS ── */
+    .img-full {
+      width: 100%;
+      background: var(--bg-2);
       overflow: hidden;
     }
-    .device-desktop img,
-    .device-mobile img {
+    .img-full img,
+    .img-full video {
       width: 100%;
       height: auto;
       display: block;
     }
-    /* Fix portrait mobile screenshots in mosaic */
-    .mosaic-card.tall  { height: 680px; min-height: 0; }
-    .mosaic-card.small { height: 328px; min-height: 0; }
-    .mosaic-card img   { object-position: top center; }
-    @media (max-width: 900px) {
-      .device-duo {
+
+    .img-mosaic {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3px;
+    }
+    .img-mosaic-left {
+      background: var(--bg-2);
+      overflow: hidden;
+    }
+    .img-mosaic-right {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+    }
+    .img-mosaic-right > div {
+      background: var(--bg-2);
+      overflow: hidden;
+    }
+    .img-mosaic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .img-mosaic-left {
+      min-height: 720px;
+    }
+    .img-mosaic-right > div {
+      min-height: 356px;
+    }
+
+    .img-duo {
+      display: grid;
+      grid-template-columns: 1.7fr 0.55fr;
+      gap: 3px;
+      align-items: end;
+    }
+    .img-duo > div {
+      background: var(--bg-2);
+      overflow: hidden;
+    }
+    .img-duo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── SITE SCROLL SHOWCASE ── */
+    .pages-wrap {
+      background: #111;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .pages-label-bar {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 56px var(--pad) 40px;
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+    }
+    .pages-section-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .pages-section-title {
+      font-size: clamp(22px, 2.4vw, 34px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    /* horizontal scroll strip */
+    .pages-strip {
+      display: flex;
+      gap: 3px;
+      padding: 0 var(--pad) 64px;
+      max-width: var(--max);
+      margin: 0 auto;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .pages-strip::-webkit-scrollbar { display: none; }
+
+    .page-card {
+      flex: 0 0 auto;
+      width: clamp(280px, 38vw, 540px);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .page-card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .page-card-img {
+      background: #1a1a1a;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .page-card-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* full-width stacked pages */
+    .pages-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 0 var(--pad) 64px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .stack-row {
+      display: grid;
+      gap: 3px;
+    }
+    .stack-row.two { grid-template-columns: 1fr 1fr; }
+    .stack-row.three { grid-template-columns: 1.4fr 0.3fr 0.3fr; }
+    .stack-item {
+      background: #1a1a1a;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+    }
+    .stack-item-label {
+      padding: 12px 16px;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240,236,230,0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      flex-shrink: 0;
+    }
+    .stack-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .stack-item.fixed-h img {
+      height: 340px;
+      object-fit: cover;
+    }
+    .stack-item.tall-h img {
+      height: 480px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .stack-row.two,
+      .stack-row.three { grid-template-columns: 1fr; }
+      .stack-item.fixed-h img,
+      .stack-item.tall-h img { height: 260px; }
+      .pages-strip { padding-bottom: 48px; }
+      .page-card { width: clamp(260px, 72vw, 380px); }
+    }
+
+    /* ── STATS ── */
+    .stats-wrap {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 96px var(--pad);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 40px 0 0;
+    }
+    .stat-num {
+      font-size: clamp(56px, 6vw, 88px);
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--text);
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── STATEMENT ── */
+    .statement-wrap {
+      background: var(--bg-light);
+      color: #0d0d0d;
+    }
+    .statement-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 120px var(--pad);
+    }
+    .statement-text {
+      font-size: clamp(28px, 3.5vw, 52px);
+      font-weight: 400;
+      line-height: 1.22;
+      letter-spacing: -0.025em;
+      max-width: 28ch;
+    }
+    .statement-source {
+      margin-top: 40px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(13,13,13,0.35);
+    }
+
+    /* ── FOOTER ── */
+    .case-footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 96px var(--pad) 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: end;
+      border-top: 1px solid var(--border);
+    }
+    .footer-info {
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-dim);
+    }
+    .next-case {
+      text-align: right;
+    }
+    .next-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .next-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      font-size: clamp(28px, 3.4vw, 48px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      transition: opacity 0.25s;
+    }
+    .next-link:hover { opacity: 0.5; cursor: url('../../cursor2.svg') 16 18, pointer; }
+    .arrow {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .arrow::before, .arrow::after {
+      content: "";
+      position: absolute;
+      display: block;
+    }
+    .arrow::before {
+      top: 9px; left: 0;
+      width: 30px; height: 1px;
+      background: currentColor;
+    }
+    .arrow::after {
+      top: 4px; right: 1px;
+      width: 11px; height: 11px;
+      border-top: 1px solid currentColor;
+      border-right: 1px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.35s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      :root { --pad: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --pad: 24px; }
+
+      .hero-num { font-size: 28vw; }
+      .hero-meta { gap: 32px; }
+
+      .lede-wrap { padding: 80px var(--pad); }
+      .brief-grid { grid-template-columns: 1fr; }
+      .brief-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .brief-cell:last-child { border-bottom: none; }
+      .brief-wrap { padding-bottom: 80px; }
+
+      .section { padding: 80px var(--pad); }
+      .section-header {
         grid-template-columns: 1fr;
-        max-width: 480px;
-        margin: 0 auto;
+        gap: 32px;
+        margin-bottom: 48px;
       }
+      .section-body { padding-top: 0; }
+
+      .img-mosaic { grid-template-columns: 1fr; }
+      .img-mosaic-left { min-height: 420px; }
+      .img-mosaic-right { grid-template-rows: auto auto; }
+      .img-mosaic-right > div { min-height: 280px; }
+
+      .img-duo { grid-template-columns: 1fr; }
+
+      .stats-inner { grid-template-columns: 1fr; gap: 48px; }
+      .stat { padding: 0; }
+
+      .statement-inner { padding: 80px var(--pad); }
+
+      .case-footer {
+        grid-template-columns: 1fr;
+        padding: 72px var(--pad) 64px;
+      }
+      .next-case { text-align: left; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-inner { padding: 14px var(--pad); }
+      .hero { padding-bottom: 56px; }
+      .hero-meta { flex-direction: column; gap: 24px; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a href="../../index.html" class="back-link">← Back to&nbsp;start</a>
-      <div class="topbar-title">Case 03 / Helikon Art Center</div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="nav-back">← Back to&nbsp;start</a>
+      <div class="nav-label">Case 03 / Helikon Art Center</div>
     </div>
   </header>
 
-  <main>
-    <section class="intro">
-      <div class="eyebrow">Case 03</div>
-      <h1>Helikon Art Center</h1>
-      <p class="intro-lede">
-        A&nbsp;website case for an&nbsp;artist-run residency platform, shaped to&nbsp;hold manifesto, residence details, archive, and application flows inside one calm, editorial structure.
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-num" aria-hidden="true">03</div>
+    <div class="hero-eyebrow reveal">Case 03 — Web Design</div>
+    <h1 class="hero-title reveal reveal-delay-1">Helikon<br>Art Center</h1>
+    <div class="hero-meta reveal reveal-delay-2">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Type</span>
+        <span class="hero-meta-val">Web design<br>Cultural platform</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Role</span>
+        <span class="hero-meta-val">Concept<br>Graphic design</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Scope</span>
+        <span class="hero-meta-val">Information architecture<br>Editorial website</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Year</span>
+        <span class="hero-meta-val">2025</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO — full bleed -->
+  <div class="video-wrap reveal">
+    <video autoplay loop muted playsinline>
+      <source src="../../Comp 1_9.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- LEDE -->
+  <div class="lede-wrap">
+    <p class="lede reveal">
+      A&nbsp;website for an&nbsp;artist-run residency —<br>
+      shaped to&nbsp;hold <em>manifesto,</em> residence details,<br>
+      archive, and application flows<br>
+      inside one <em>calm editorial structure.</em>
+    </p>
+  </div>
+
+  <!-- BRIEF -->
+  <div class="brief-wrap">
+    <div class="brief-grid">
+      <div class="brief-cell reveal">
+        <div class="brief-cell-label">Goal</div>
+        <p class="brief-cell-text">Helikon is&nbsp;artist-run and the site needed to&nbsp;reflect that. Not a&nbsp;corporate platform, not a&nbsp;generic residency template — but something open and self-possessed. It&nbsp;also had to&nbsp;carry genuinely different content types: a&nbsp;manifesto, practical residency info, an&nbsp;archive, an&nbsp;application flow.</p>
+      </div>
+      <div class="brief-cell reveal reveal-delay-1">
+        <div class="brief-cell-label">Task</div>
+        <p class="brief-cell-text">Visual design for a&nbsp;residency platform that needed to&nbsp;feel open and self-possessed rather than institutional. The site had to&nbsp;carry several distinct content types without flattening the character of&nbsp;the space.</p>
+      </div>
+      <div class="brief-cell reveal reveal-delay-2">
+        <div class="brief-cell-label">Solution</div>
+        <p class="brief-cell-text">Designed as&nbsp;a&nbsp;single continuous system rather than a&nbsp;set of&nbsp;separate pages. The proportions, type scale, and pacing change as&nbsp;you move through sections — but the logic stays consistent. It&nbsp;reads as&nbsp;one thing even when the content shifts significantly.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 01 -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-header reveal">
+      <div class="section-num-title">
+        <div class="section-num">01 — Premise</div>
+        <h2 class="section-title">Clarity without losing atmosphere.</h2>
+      </div>
+      <div class="section-body">
+        <p>Helikon Art Center is&nbsp;an&nbsp;artist-run space, so&nbsp;the digital experience had to&nbsp;feel open and self-possessed rather than overly institutional. The structure needed to&nbsp;carry several different tones at&nbsp;once: manifesto, residency logistics, archive material, and contact points for future participants.</p>
+        <p>The goal of&nbsp;the case was to&nbsp;keep that breadth readable — treating the site as&nbsp;one continuous system where navigation, typography, and pacing make the platform feel coherent from the first scroll.</p>
+      </div>
+    </div>
+
+    <div class="img-mosaic reveal">
+      <div class="img-mosaic-left">
+        <img src="../../assets/helikon/helikon-home.png" alt="Helikon homepage">
+      </div>
+      <div class="img-mosaic-right">
+        <div>
+          <img src="../../assets/helikon/helikon-mobile-home.png" alt="Helikon mobile homepage">
+        </div>
+        <div>
+          <img src="../../assets/helikon/helikon-mobile-residence.png" alt="Helikon mobile residence">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-wrap">
+    <div class="stats-inner">
+      <div class="stat reveal">
+        <div class="stat-num">38</div>
+        <div class="stat-label">Countries represented</div>
+      </div>
+      <div class="stat reveal reveal-delay-1">
+        <div class="stat-num">123</div>
+        <div class="stat-label">Artists in residence</div>
+      </div>
+      <div class="stat reveal reveal-delay-2">
+        <div class="stat-num">17</div>
+        <div class="stat-label">Active projects</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 02 -->
+  <section class="section">
+    <div class="section-header reveal">
+      <div class="section-num-title">
+        <div class="section-num">02 — Structure</div>
+        <h2 class="section-title">One system for manifesto, residency, and archive.</h2>
+      </div>
+      <div class="section-body">
+        <p>The navigation rhythm was treated as&nbsp;part of&nbsp;the design language. Each page keeps enough continuity to&nbsp;feel related, but the content blocks change scale depending on&nbsp;whether the user is&nbsp;reading context, moving through residency information, or&nbsp;scanning documentation of&nbsp;past activity.</p>
+        <p>That balance keeps the platform legible. The manifesto can remain spacious and declarative, while the residency and archive pages can become denser — without making the site feel fragmented.</p>
+      </div>
+    </div>
+
+    <div class="img-duo reveal">
+      <div>
+        <img src="../../assets/helikon/helikon-residence.png" alt="Helikon residence page desktop">
+      </div>
+      <div>
+        <img src="../../assets/helikon/helikon-mobile-residence.png" alt="Helikon residence page mobile">
+      </div>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <div class="statement-wrap">
+    <div class="statement-inner">
+      <p class="statement-text reveal">
+        The site had to&nbsp;feel like a&nbsp;cultural space in&nbsp;motion: clear enough for applications and archive browsing, but still warm, porous, and distinctly independent.
       </p>
-    </section>
+      <div class="statement-source reveal reveal-delay-1">Helikon Art Center / Digital Direction</div>
+    </div>
+  </div>
 
-    <section class="meta">
-      <div class="meta-item">
-        <span class="meta-label">Type</span>
-        <span class="meta-value">Web design<br>Cultural platform</span>
+  <!-- SECTION 03 -->
+  <section class="section">
+    <div class="section-header reveal">
+      <div class="section-num-title">
+        <div class="section-num">03 — Outcome</div>
+        <h2 class="section-title">A calmer web presence for an active art space.</h2>
       </div>
-      <div class="meta-item">
-        <span class="meta-label">Role</span>
-        <span class="meta-value">Concept<br>Graphic design</span>
+      <div class="section-body">
+        <p>The resulting direction frames Helikon as&nbsp;both a&nbsp;living residency and an&nbsp;archive of&nbsp;cultural production. It&nbsp;gives the platform a&nbsp;steadier hierarchy, makes page-to-page movement feel more intentional, and lets the content speak without flattening the character of&nbsp;the space.</p>
+        <p>Visually, the case leans on&nbsp;restraint: wide margins, strong type, and a&nbsp;measured editorial pace — allowing the content itself, rather than decorative noise, to&nbsp;carry the sense of&nbsp;place.</p>
       </div>
-      <div class="meta-item">
-        <span class="meta-label">Scope</span>
-        <span class="meta-value">Information architecture<br>Editorial website</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Year</span>
-        <span class="meta-value">2025</span>
-      </div>
-    </section>
+    </div>
 
-    <section class="brief">
-      <div class="brief-col">
-        <div class="brief-label">Goal</div>
-        <p class="brief-text">Helikon is&nbsp;artist-run and the site needed to&nbsp;reflect that. Not a&nbsp;corporate platform, not a&nbsp;generic residency template. It&nbsp;also had to&nbsp;carry genuinely different content types: a&nbsp;manifesto, practical residency info, an&nbsp;archive, an&nbsp;application flow. The challenge was making that feel intentional rather than just stacked.</p>
-      </div>
-      <div class="brief-col">
-        <div class="brief-label">Task</div>
-        <p class="brief-text">Visual design for&nbsp;a residency platform that needed to&nbsp;feel open and&nbsp;self-possessed rather than institutional. The site had to&nbsp;carry several distinct content types without flattening the character of&nbsp;the space.</p>
-      </div>
-      <div class="brief-col">
-        <div class="brief-label">Solution</div>
-        <p class="brief-text">I designed it&nbsp;as&nbsp;a&nbsp;single continuous system rather than a&nbsp;set of&nbsp;separate pages. The proportions, type scale, and pacing change as&nbsp;you move through sections, but the logic stays consistent. It&nbsp;reads as&nbsp;one thing even when the content shifts significantly.</p>
-      </div>
-    </section>
+    <div class="img-full reveal">
+      <img src="../../assets/helikon/helikon-archive.png" alt="Helikon archive page">
+    </div>
+  </section>
 
-    <section class="hero">
-      <div class="hero-card">
-        <video autoplay loop muted playsinline>
-          <source src="../../Comp 1_9.mp4" type="video/mp4">
-        </video>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="section-label">01 — Premise</div>
-          <h2>A&nbsp;residency platform that needed clarity without losing atmosphere.</h2>
-        </div>
-        <div class="section-text">
-          <p>
-            Helikon Art Center is&nbsp;an&nbsp;artist-run space, so&nbsp;the digital experience had to&nbsp;feel open and self-possessed rather than overly institutional. The structure needed to&nbsp;carry several different tones at&nbsp;once: manifesto, residency logistics, archive material, and contact points for future participants.
-          </p>
-          <p>
-            The goal of&nbsp;the case was to&nbsp;keep that breadth readable. Instead of&nbsp;treating the site as&nbsp;a&nbsp;sequence of&nbsp;isolated pages, the layout was shaped as&nbsp;one continuous system where navigation, typography, and pacing make the platform feel coherent from the first scroll.
-          </p>
-        </div>
-      </div>
-
-      <div class="mosaic">
-        <div class="mosaic-card tall">
-          <img src="../../assets/helikon/helikon-home.png" alt="Helikon homepage">
-        </div>
-        <div class="mosaic-stack">
-          <div class="mosaic-card small">
-            <img src="../../assets/helikon/helikon-mobile-home.png" alt="Helikon mobile homepage">
-          </div>
-          <div class="mosaic-card small">
-            <img src="../../assets/helikon/helikon-mobile-residence.png" alt="Helikon mobile residence">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quote-block">
-      <div class="quote-inner">
-        <p>
-          The site had to&nbsp;feel like a&nbsp;cultural space in&nbsp;motion: clear enough for applications and archive browsing, but still warm, porous, and distinctly independent.
-        </p>
-        <div class="quote-caption">Helikon Art Center / Digital Direction</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="section-label">02 — Structure</div>
-          <h2>One system for manifesto, residency details, and the growing archive.</h2>
-        </div>
-        <div class="section-text">
-          <p>
-            The navigation rhythm was treated as&nbsp;part of&nbsp;the design language. Each page keeps enough continuity to&nbsp;feel related, but the content blocks change scale depending on&nbsp;whether the user is&nbsp;reading context, moving through residency information, or&nbsp;scanning documentation of&nbsp;past activity.
-          </p>
-          <p>
-            That balance keeps the platform legible. The manifesto can remain spacious and declarative, while the residency and archive pages can become denser without making the site feel fragmented.
-          </p>
-        </div>
-      </div>
-
-      <div class="device-duo">
-        <div class="device-desktop">
-          <img src="../../assets/helikon/helikon-residence.png" alt="Helikon residence page desktop">
-        </div>
-        <div class="device-mobile">
-          <img src="../../assets/helikon/helikon-mobile-residence.png" alt="Helikon residence page mobile">
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="section-label">03 — Outcome</div>
-          <h2>A&nbsp;calmer web presence for an&nbsp;active art space.</h2>
-        </div>
-        <div class="section-text">
-          <p>
-            The resulting direction frames Helikon as&nbsp;both a&nbsp;living residency and an&nbsp;archive of&nbsp;cultural production. It&nbsp;gives the platform a&nbsp;steadier hierarchy, makes page-to-page movement feel more intentional, and lets the content speak without flattening the character of&nbsp;the space.
-          </p>
-          <p>
-            Visually, the case leans on&nbsp;restraint: wide margins, strong type, and a&nbsp;measured editorial pace. That allows the content itself, rather than decorative noise, to&nbsp;carry the sense of&nbsp;place.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="footer-copy">
-        Web design & art direction — Maria Danilova<br>
-        Helikon Art Center<br>
-        2025
-      </div>
-      <div class="next-case">
-        <div class="next-case-label">Next case</div>
-        <a href="../the-gallery/">The Gallery <span class="arrow" aria-hidden="true"></span></a>
-      </div>
-    </footer>
-  </main>
+  <!-- FOOTER -->
+  <footer class="case-footer">
+    <div class="footer-info reveal">
+      Web design &amp; art direction<br>
+      Maria Danilova<br>
+      Helikon Art Center — 2025
+    </div>
+    <div class="next-case reveal reveal-delay-1">
+      <div class="next-label">Next case</div>
+      <a class="next-link" href="../the-gallery/">
+        The Gallery <span class="arrow" aria-hidden="true"></span>
+      </a>
+    </div>
+  </footer>
 
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
-    const lenis = new Lenis({
-      duration: 1.15,
-      smoothWheel: true,
-      touchMultiplier: 1.1
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
+    // smooth scroll
+    const lenis = new Lenis({ duration: 1.2, smoothWheel: true, touchMultiplier: 1.1 });
+    function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
+
+    // scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
