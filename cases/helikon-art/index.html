@@ -7,7 +7,7 @@
   <title>Helikon Art Center — Maria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
   <style>
     @font-face {
@@ -46,6 +46,8 @@
       --accent:  #e4ff00;
       --font:    'DeFonte', -apple-system, sans-serif;
       --mono:    'Manrope', sans-serif;
+      --xanh:    'Xanh Mono', monospace;
+      --menlo:   'Menlo', 'Courier New', monospace;
       --max:     1440px;
       --pad:     72px;
     }
@@ -752,19 +754,19 @@
           <p class="font-desc">Xanh Mono carries all display and navigation type — its geometric monospaced forms give the site a&nbsp;technical, precise edge. Menlo handles running text, captions, and data, adding a&nbsp;familiar code-adjacent warmth below the headline layer.</p>
           <div class="font-specimen">
             <div class="font-specimen-name">Xanh Mono — Headings &amp; UI</div>
-            <div class="font-alphabet">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm<br>Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</div>
-            <div class="font-chars">0 1 2 3 4 5 6 7 8 9 &nbsp;·&nbsp; ! @ # &amp; * / ?</div>
+            <div class="font-alphabet" style="font-family:var(--xanh);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm<br>Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</div>
+            <div class="font-chars" style="font-family:var(--xanh);">0 1 2 3 4 5 6 7 8 9 &nbsp;·&nbsp; ! @ # &amp; * / ?</div>
           </div>
           <div class="font-specimen">
             <div class="font-specimen-name">Menlo — Body &amp; Captions</div>
-            <div class="font-alphabet" style="font-family:monospace;">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm<br>Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</div>
-            <div class="font-chars" style="font-family:monospace;">0 1 2 3 4 5 6 7 8 9 &nbsp;·&nbsp; ! @ # &amp; * / ?</div>
+            <div class="font-alphabet" style="font-family:var(--menlo);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm<br>Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</div>
+            <div class="font-chars" style="font-family:var(--menlo);">0 1 2 3 4 5 6 7 8 9 &nbsp;·&nbsp; ! @ # &amp; * / ?</div>
           </div>
           <div class="font-bottom-label">Xanh Mono · Menlo · Page headings · Body copy</div>
         </div>
         <div class="font-right">
           <div class="font-right-label-top">for Display headings</div>
-          <div class="font-big-char">Hk</div>
+          <div class="font-big-char" style="font-family:var(--xanh);">Hk</div>
           <div class="font-right-label-bottom">Display + Body · Helikon Art Center</div>
         </div>
       </div>
