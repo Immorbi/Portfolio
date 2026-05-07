@@ -291,6 +291,14 @@
       max-width: 38ch;
     }
 
+    .info-text p {
+      margin-bottom: 14px;
+    }
+
+    .info-text p:last-child {
+      margin-bottom: 0;
+    }
+
     .info-tools {
       margin-top: 28px;
       font-family: 'Manrope', sans-serif;
@@ -321,6 +329,48 @@
     .info-contact a:hover {
       opacity: 0.5;
       cursor: url('../cursor2.svg') 16 18, pointer;
+    }
+
+    .info-exp {
+      margin-top: 48px;
+      max-width: 560px;
+    }
+
+    .info-exp-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      margin-bottom: 20px;
+    }
+
+    .exp-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 32px;
+    }
+
+    .exp-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 7px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-role {
+      font-size: 11px;
+      line-height: 1.4;
+      font-weight: 400;
+      color: #999;
+    }
+
+    .exp-date {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
     @media (max-width: 768px) {
@@ -457,14 +507,10 @@
           <div class="info-content">
             <div class="info-title">Info</div>
             <div class="info-text">
-              Designer with 6+ years experience
-              in multiple design fields.
-              <br><br>
-              She collaborates with artists, independent spaces, and community-driven projects: residencies, publications, food ventures, podcasts, whatever has a point of view worth shaping.
-              <br><br>
-              Multidisciplinary, detail-obsessed, and emotionally invested in typography.
-              <br><br>
-              Available for collaborations.
+              <p>Designer with 6+ years experience in multiple design fields.</p>
+              <p>She collaborates with artists, independent spaces, and community-driven projects: residencies, publications, food ventures, podcasts, whatever has a point of view worth shaping.</p>
+              <p>Multidisciplinary, detail-obsessed, and emotionally invested in typography.</p>
+              <p>Available for collaborations.</p>
             </div>
             <div class="info-tools">
               Skills: Illustrator, InDesign, Photoshop, Figma, After Effects, Codex, Claude, Midjourney
