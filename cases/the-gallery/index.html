@@ -120,6 +120,19 @@
       color: var(--text-muted);
     }
 
+    .topbar-next {
+      display: none;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.3s;
+    }
+    .topbar-next:hover { opacity: 0.5; }
+
     /* --- Layout --- */
     main {
       max-width: var(--max);
@@ -644,16 +657,12 @@
 
     @media (max-width: 520px) {
       .topbar-inner {
-        padding: 14px var(--pad);
-        gap: 12px;
-        flex-wrap: wrap;
+        padding: calc(env(safe-area-inset-top) + 14px) var(--pad) 14px;
         justify-content: space-between;
       }
 
-      .topbar-title {
-        width: 100%;
-        order: 3;
-      }
+      .topbar-title { display: none; }
+      .topbar-next { display: inline-flex; }
 
       .intro h1 {
         font-size: clamp(34px, 12vw, 54px);
@@ -766,6 +775,7 @@
     <div class="topbar-inner">
       <a href="../../index.html" class="back-link">← Back to&nbsp;start</a>
       <span class="topbar-title">Case 01 / The Gallery</span>
+      <a href="../dirtalk/" class="topbar-next">Next →</a>
     </div>
   </header>
 

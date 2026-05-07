@@ -83,6 +83,8 @@
     .back-link { text-decoration: none; transition: opacity 0.3s; }
     .back-link:hover, .next-case a:hover { opacity: 0.5; cursor: url('../../cursor2.svg') 16 18, pointer; }
     .topbar-title, .eyebrow, .meta-label, .section-label, .next-case-label { color: var(--text-muted); }
+    .topbar-next { display: none; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--text); transition: opacity .3s; }
+    .topbar-next:hover { opacity: .5; }
 
     /* --- Layout --- */
     main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
@@ -247,7 +249,8 @@
     @media (max-width: 520px) {
       :root { --post-w: 160px; }
       .topbar-inner { padding: 14px var(--pad); gap: 12px; }
-      .topbar-title { font-size: 10px; }
+      .topbar-title { display: none; }
+      .topbar-next { display: inline-flex; }
       .intro h1 { margin-bottom: 24px; }
     }
   </style>
@@ -258,6 +261,7 @@
     <div class="topbar-inner">
       <a href="../../index.html" class="back-link">← Back to&nbsp;start</a>
       <div class="topbar-title">Case 04 / The Gallery — Editorial</div>
+      <a href="../the-gallery/" class="topbar-next">Next →</a>
     </div>
   </header>
 
