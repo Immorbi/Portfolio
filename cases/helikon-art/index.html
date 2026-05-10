@@ -248,51 +248,63 @@
     .img-duo img { width:100%; height:auto; display:block; }
 
     /* ─── STATS ─── */
-    .stats-wrap {
-      background:var(--off);
+    /* ─── SYSTEM (stats + palette) ─── */
+    .system-section {
       border-top:1px solid var(--border);
-      border-bottom:1px solid var(--border);
+      margin-left:calc(-1 * var(--pad));
+      margin-right:calc(-1 * var(--pad));
     }
-    .stats-inner {
-      max-width:var(--max); margin:0 auto; padding:104px var(--pad);
-      display:grid; grid-template-columns:repeat(3,1fr);
-    }
-    .stat { display:flex; flex-direction:column; gap:12px; }
-    .stat-num {
-      font-size:clamp(64px,8vw,112px);
-      font-weight:300; letter-spacing:-.05em; line-height:1;
-      color:var(--text);
-    }
-    .stat-label {
-      font-family:var(--mono); font-size:11px; font-weight:600;
-      letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
-    }
-
-    /* ─── PALETTE ─── */
-    .palette-wrap {
+    .system-inner {
       max-width:var(--max); margin:0 auto;
-      padding:0 var(--pad) 96px;
+      display:grid; grid-template-columns:1fr 1fr;
     }
-    .palette-label {
+    .system-stats {
+      padding:72px var(--pad);
+      border-right:1px solid var(--border);
+    }
+    .system-section-label {
       font-family:var(--mono); font-size:9px; font-weight:700;
       letter-spacing:.18em; text-transform:uppercase;
-      color:var(--muted); margin-bottom:20px;
+      color:var(--muted); margin-bottom:0;
     }
-    .palette-row { display:flex; gap:3px; }
-    .palette-swatch {
-      flex:1; height:56px; border-radius:4px;
-      position:relative; overflow:hidden;
+    .system-stat {
+      display:flex; justify-content:space-between; align-items:baseline;
+      padding:28px 0;
+      border-bottom:1px solid var(--border);
     }
-    .palette-swatch-name {
-      position:absolute; bottom:8px; left:10px;
+    .system-stat:first-of-type { border-top:1px solid var(--border); margin-top:32px; }
+    .system-stat-label {
+      font-family:var(--mono); font-size:10px; font-weight:600;
+      letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
+    }
+    .system-stat-num {
+      font-size:clamp(48px,4.8vw,68px);
+      font-weight:300; letter-spacing:-.04em; line-height:1;
+    }
+
+    .system-palette { padding:72px var(--pad); }
+    .system-palette-label {
       font-family:var(--mono); font-size:9px; font-weight:700;
-      letter-spacing:.08em; text-transform:uppercase;
-      opacity:.55; color:inherit;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:32px;
+    }
+    .system-swatches { display:flex; flex-direction:column; gap:3px; }
+    .system-swatch {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px 20px; height:64px;
+    }
+    .system-swatch-name {
+      font-family:var(--mono); font-size:10px; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase;
+    }
+    .system-swatch-hex {
+      font-family:var(--mono); font-size:10px; font-weight:400;
+      opacity:.5;
     }
 
     /* ─── SCROLL SHOWCASE ─── */
     .site-scroll {
-      background:var(--cream); color:#0f0f0f;
+      background:var(--bg); color:#0f0f0f;
       padding:120px 0;
     }
     .site-scroll-inner {
@@ -462,85 +474,87 @@
     }
 
     /* ─── FONT SECTION ─── */
-    .font-section { background:#f0ece6; color:#0b0b0b; }
-    .font-inner {
-      max-width:var(--max); margin:0 auto;
-      padding:104px var(--pad);
+    /* ─── FONT SECTION ─── */
+    .font-section {
+      background:#1e1e1e; color:#fff;
+      margin-left:calc(-1 * var(--pad));
+      margin-right:calc(-1 * var(--pad));
     }
-    .font-header {
-      display:flex; justify-content:space-between; align-items:baseline;
-      padding-bottom:32px; margin-bottom:56px;
-      border-bottom:1px solid rgba(11,11,11,.12);
+    .font-inner { max-width:var(--max); margin:0 auto; padding:0 var(--pad); }
+
+    .font-hero {
+      padding:96px 0 80px;
+      border-bottom:1px solid rgba(255,255,255,.1);
     }
-    .font-header-title {
-      font-size:clamp(28px,3.4vw,50px);
-      font-weight:400; letter-spacing:-.025em; line-height:1;
+    .font-hero-name {
+      font-family:var(--xanh);
+      font-size:clamp(56px,9vw,140px);
+      font-weight:400; line-height:.9; letter-spacing:-.03em;
+      color:#fff;
     }
-    .font-header-num {
-      font-family:var(--mono); font-size:10px; font-weight:700;
+    .font-hero-sub {
+      font-family:var(--xanh);
+      font-size:clamp(44px,7vw,112px);
+      font-weight:400; line-height:1.05; letter-spacing:-.03em;
+      color:rgba(255,255,255,.32);
+    }
+
+    .font-body {
+      display:grid; grid-template-columns:1fr 1fr;
+      padding:72px 0 104px;
+    }
+    .font-body-left {
+      padding-right:64px;
+      border-right:1px solid rgba(255,255,255,.1);
+    }
+    .font-body-right { padding-left:64px; }
+
+    .font-label {
+      font-family:var(--mono); font-size:9px; font-weight:700;
       letter-spacing:.16em; text-transform:uppercase;
-      color:rgba(11,11,11,.3);
-    }
-    .font-grid {
-      display:grid; grid-template-columns:1fr 1fr; gap:3px;
-      align-items:stretch;
-    }
-    .font-left {
-      background:#e6e1d9; padding:56px 48px;
+      color:rgba(255,255,255,.3); margin-bottom:20px;
     }
     .font-desc {
-      font-family:var(--mono); font-size:13px; line-height:1.75;
-      color:rgba(11,11,11,.5); max-width:44ch; margin-bottom:48px;
+      font-family:var(--mono); font-size:13px; line-height:1.78;
+      color:rgba(255,255,255,.58); max-width:44ch; margin-bottom:52px;
     }
-    .font-specimen { margin-bottom:36px; }
-    .font-specimen-name {
+    .font-meta-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:28px 32px;
+    }
+    .font-meta-label {
       font-family:var(--mono); font-size:9px; font-weight:700;
-      letter-spacing:.18em; text-transform:uppercase;
-      color:rgba(11,11,11,.38); margin-bottom:10px;
+      letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(255,255,255,.28); margin-bottom:6px;
     }
-    .font-alphabet {
-      font-size:14px; line-height:1.85; color:#0b0b0b;
-      letter-spacing:.01em;
+    .font-meta-value {
+      font-family:var(--mono); font-size:14px; font-weight:500; color:#fff;
     }
-    .font-chars {
-      font-family:var(--mono); font-size:12px; line-height:1.6;
-      color:rgba(11,11,11,.35); margin-top:4px;
+
+    .font-charset {
+      font-family:var(--xanh);
+      font-size:clamp(20px,2vw,28px);
+      line-height:1.65; letter-spacing:.04em;
+      color:#fff; margin-bottom:52px;
     }
-    .font-sample {
-      margin-top:14px; padding-top:14px;
-      border-top:1px solid rgba(11,11,11,.1);
-      font-size:12px; line-height:1.9;
-      color:rgba(11,11,11,.5);
+    .font-weights { display:flex; flex-direction:column; gap:2px; }
+    .fw-regular {
+      font-family:var(--xanh); font-weight:400; font-style:normal;
+      font-size:clamp(36px,4.2vw,60px);
+      line-height:1; color:rgba(255,255,255,.38);
     }
-    .font-bottom-label {
-      margin-top:36px;
-      font-family:var(--mono); font-size:9px; font-weight:700;
-      letter-spacing:.12em; text-transform:uppercase;
-      color:rgba(11,11,11,.22);
+    .fw-italic {
+      font-family:var(--xanh); font-weight:400; font-style:italic;
+      font-size:clamp(52px,6vw,88px);
+      line-height:1; color:rgba(255,255,255,.7);
     }
-    .font-right {
-      background:var(--accent); padding:48px;
-      display:flex; flex-direction:column; justify-content:space-between;
-      min-height:480px;
-    }
-    .font-right-label-top {
-      font-family:var(--mono); font-size:10px; font-weight:700;
-      letter-spacing:.16em; text-transform:uppercase;
-      color:rgba(11,11,11,.4);
-    }
-    .font-big-char {
-      font-size:clamp(120px,18vw,280px);
-      font-weight:700; line-height:.85; letter-spacing:-.05em;
-      color:#0b0b0b;
-    }
-    .font-right-label-bottom {
-      font-family:var(--mono); font-size:9px; font-weight:700;
-      letter-spacing:.12em; text-transform:uppercase;
-      color:rgba(11,11,11,.38); text-align:right;
+    .fw-mono {
+      font-family:var(--menlo); font-weight:700;
+      font-size:clamp(60px,7.5vw,112px);
+      line-height:1; color:#fff;
     }
 
     /* ─── STATEMENT ─── */
-    .statement-wrap { background:#111; }
+    .statement-wrap { background:var(--bg); border-top:1px solid var(--border); }
     .statement-inner {
       max-width:var(--max); margin:0 auto;
       padding:140px var(--pad);
@@ -549,12 +563,43 @@
       font-size:clamp(36px,4.8vw,72px);
       font-weight:400; line-height:1.16; letter-spacing:-.03em;
       max-width:24ch;
-      color:#f0ece6;
+      color:var(--text);
     }
-    .statement-em { color:var(--accent); }
+    .statement-em { color:var(--text); font-weight:600; }
     .statement-source {
       margin-top:48px; font-family:var(--mono); font-size:10px; font-weight:600;
-      letter-spacing:.16em; text-transform:uppercase; color:rgba(240,236,230,.3);
+      letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+    }
+
+    /* ─── BONUS ─── */
+    .bonus-section {
+      background:var(--bg);
+      border-top:1px solid var(--border);
+    }
+    .bonus-inner {
+      max-width:var(--max); margin:0 auto;
+      padding:96px var(--pad) 104px;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:80px; align-items:center;
+    }
+    .bonus-left { display:flex; flex-direction:column; gap:32px; }
+    .bonus-tag {
+      font-family:var(--mono); font-size:9px; font-weight:700;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:var(--text); border:1px solid var(--border);
+      padding:5px 10px; width:fit-content;
+    }
+    .bonus-title {
+      font-size:clamp(28px,3.2vw,48px);
+      font-weight:400; letter-spacing:-.025em; line-height:1.1;
+      color:var(--text);
+    }
+    .bonus-desc {
+      font-family:var(--mono); font-size:13px; line-height:1.75;
+      color:var(--dim); max-width:42ch;
+    }
+    .bonus-poster-wrap img {
+      width:100%; display:block;
     }
 
     /* ─── FOOTER ─── */
@@ -622,17 +667,17 @@
       .mosaic-r{grid-template-columns:1fr 1fr;grid-template-rows:none;}
       .mosaic-r > div{min-height:260px;}
       .img-duo{grid-template-columns:1fr;}
-      .stats-inner{grid-template-columns:1fr;gap:48px;}
+      .system-inner{grid-template-columns:1fr;}
+      .system-stats{border-right:none;border-bottom:1px solid var(--border);}
       .lettering-grid{grid-template-columns:1fr 1fr;}
-      .font-grid{grid-template-columns:1fr;}
-      .font-right{min-height:320px;}
+      .font-body{grid-template-columns:1fr;}
+      .font-body-left{padding-right:0;border-right:none;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:48px;margin-bottom:48px;}
+      .font-body-right{padding-left:0;}
       .browser-screen{height:340px;}
       .browser-screen video{height:340px;}
       .phone-col{display:none;}
       .case-footer{grid-template-columns:1fr; gap:32px; padding:64px var(--pad) 48px;}
       .next-case{text-align:left;}
-      .palette-row{flex-wrap:wrap;}
-      .palette-swatch{min-width:80px;}
     }
     @media(max-width:480px) {
       .hero{padding-bottom:48px;}
@@ -717,73 +762,94 @@
   <!-- FONT SECTION -->
   <div class="font-section">
     <div class="font-inner">
-      <div class="font-header reveal">
-        <div class="font-header-title">Typefaces</div>
-        <div class="font-header-num">02 · Design language</div>
+
+      <div class="font-hero reveal">
+        <div class="font-hero-name">Xanh Mono</div>
+        <div class="font-hero-sub">Typeface</div>
       </div>
-      <div class="font-grid reveal">
-        <div class="font-left">
-          <p class="font-desc">Xanh Mono carries all display and navigation type — its geometric monospaced forms give the site a&nbsp;technical, precise edge. Menlo handles running text, captions, and data, adding a&nbsp;familiar code-adjacent warmth below the headline layer.</p>
-          <div class="font-specimen">
-            <div class="font-specimen-name">Xanh Mono — Headings &amp; UI</div>
-            <div class="font-alphabet" style="font-family:var(--xanh);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm<br>Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</div>
-            <div class="font-chars" style="font-family:var(--xanh);">0 1 2 3 4 5 6 7 8 9 &nbsp;·&nbsp; ! @ # &amp; * / ?</div>
-            <div class="font-sample" style="font-family:var(--xanh);">Helikon is an artist-run residency<br>located on the Aegean coast of Turkey.<br>Open calls · Archive · Residence 2025</div>
+
+      <div class="font-body reveal">
+        <div class="font-body-left">
+          <div class="font-label">Typeface Selection</div>
+          <p class="font-desc">Xanh Mono was chosen for its geometric monospaced structure. It gives Helikon a precise, editorial character — technical without being cold. The italic variant adds expressiveness to display headlines while keeping the grid-based rhythm intact.</p>
+          <div class="font-meta-grid">
+            <div>
+              <div class="font-meta-label">Designer</div>
+              <div class="font-meta-value">Duy Dao</div>
+            </div>
+            <div>
+              <div class="font-meta-label">Foundry</div>
+              <div class="font-meta-value">Google Fonts</div>
+            </div>
+            <div>
+              <div class="font-meta-label">Styles</div>
+              <div class="font-meta-value">Regular · Italic</div>
+            </div>
+            <div>
+              <div class="font-meta-label">Usage</div>
+              <div class="font-meta-value">Display · Navigation · UI</div>
+            </div>
           </div>
-          <div class="font-specimen">
-            <div class="font-specimen-name">Menlo — Body &amp; Captions</div>
-            <div class="font-alphabet" style="font-family:var(--menlo);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm<br>Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</div>
-            <div class="font-chars" style="font-family:var(--menlo);">0 1 2 3 4 5 6 7 8 9 &nbsp;·&nbsp; ! @ # &amp; * / ?</div>
-            <div class="font-sample" style="font-family:var(--menlo);">The residency hosts artists working across<br>disciplines — from painting to sound practice.<br>Applications open twice a year.</div>
-          </div>
-          <div class="font-bottom-label">Xanh Mono · Menlo · Page headings · Body copy</div>
         </div>
-        <div class="font-right">
-          <div class="font-right-label-top">for Display headings</div>
-          <div class="font-big-char" style="font-family:var(--xanh);">Hk</div>
-          <div class="font-right-label-bottom">Display + Body · Helikon Art Center</div>
+        <div class="font-body-right">
+          <div class="font-charset">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789<br>!@#$%&amp;*()_+=;&lt;&gt;.,/?</div>
+          <div class="font-weights">
+            <div class="fw-regular">Regular</div>
+            <div class="fw-italic">Italic</div>
+            <div class="fw-mono">Menlo</div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 
-  <!-- STATS -->
-  <div class="stats-wrap">
-    <div class="stats-inner">
-      <div class="stat reveal">
-        <div class="stat-num">38</div>
-        <div class="stat-label">Countries represented</div>
-      </div>
-      <div class="stat reveal reveal-d1">
-        <div class="stat-num">123</div>
-        <div class="stat-label">Artists in residence</div>
-      </div>
-      <div class="stat reveal reveal-d2">
-        <div class="stat-num">17</div>
-        <div class="stat-label">Active projects</div>
-      </div>
-    </div>
-  </div>
+  <!-- STATS + PALETTE -->
+  <div class="system-section reveal">
+    <div class="system-inner">
 
-  <!-- COLOUR PALETTE -->
-  <div class="palette-wrap reveal">
-    <div class="palette-label">Colour system</div>
-    <div class="palette-row">
-      <div class="palette-swatch" style="background:#f5f3ef;color:#111;">
-        <span class="palette-swatch-name">Off White</span>
+      <div class="system-stats">
+        <div class="system-section-label">03 · Impact</div>
+        <div class="system-stat">
+          <span class="system-stat-label">Countries represented</span>
+          <span class="system-stat-num">38</span>
+        </div>
+        <div class="system-stat">
+          <span class="system-stat-label">Artists in residence</span>
+          <span class="system-stat-num">123</span>
+        </div>
+        <div class="system-stat">
+          <span class="system-stat-label">Active projects</span>
+          <span class="system-stat-num">17</span>
+        </div>
       </div>
-      <div class="palette-swatch" style="background:#e4ff00;color:#0b0b0b;">
-        <span class="palette-swatch-name">Neon</span>
+
+      <div class="system-palette">
+        <div class="system-palette-label">Colour system</div>
+        <div class="system-swatches">
+          <div class="system-swatch" style="background:#f5f3ef;color:#111;">
+            <span class="system-swatch-name">Off White</span>
+            <span class="system-swatch-hex">#F5F3EF</span>
+          </div>
+          <div class="system-swatch" style="background:#e4ff00;color:#0b0b0b;">
+            <span class="system-swatch-name">Neon</span>
+            <span class="system-swatch-hex">#E4FF00</span>
+          </div>
+          <div class="system-swatch" style="background:#4d4dff;color:#fff;">
+            <span class="system-swatch-name">Blue</span>
+            <span class="system-swatch-hex">#4D4DFF</span>
+          </div>
+          <div class="system-swatch" style="background:#c8b8ff;color:#0b0b0b;">
+            <span class="system-swatch-name">Lavender</span>
+            <span class="system-swatch-hex">#C8B8FF</span>
+          </div>
+          <div class="system-swatch" style="background:#1a1a1a;color:rgba(255,255,255,.55);">
+            <span class="system-swatch-name">Dark</span>
+            <span class="system-swatch-hex">#1A1A1A</span>
+          </div>
+        </div>
       </div>
-      <div class="palette-swatch" style="background:#4d4dff;color:#fff;">
-        <span class="palette-swatch-name">Blue</span>
-      </div>
-      <div class="palette-swatch" style="background:#c8b8ff;color:#0b0b0b;">
-        <span class="palette-swatch-name">Lavender</span>
-      </div>
-      <div class="palette-swatch" style="background:#1a1a1a;color:rgba(255,255,255,.5);">
-        <span class="palette-swatch-name">Dark</span>
-      </div>
+
     </div>
   </div>
 
@@ -869,11 +935,18 @@
     </div>
   </div>
 
-  <!-- VIDEO -->
-  <div class="video-wrap reveal">
-    <video autoplay loop muted playsinline>
-      <source src="../../Comp 1_9.mp4" type="video/mp4">
-    </video>
+  <!-- BONUS -->
+  <div class="bonus-section">
+    <div class="bonus-inner reveal">
+      <div class="bonus-left">
+        <span class="bonus-tag">Bonus</span>
+        <div class="bonus-title">Open Call poster for the residency</div>
+        <p class="bonus-desc">Alongside the site, I designed an open call poster for MOLT — a seasonal residency programme at Helikon Art Center. Bold display type, neon colour, and a halftone insect image.</p>
+      </div>
+      <div class="bonus-poster-wrap">
+        <img src="A4 - 4 (2).png" alt="Open Call MOLT — Helikon Art Center poster">
+      </div>
+    </div>
   </div>
 
   <!-- FOOTER -->
