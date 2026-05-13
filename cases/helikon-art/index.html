@@ -428,18 +428,13 @@
       letter-spacing:.16em; text-transform:uppercase;
       color:rgba(15,15,15,.28);
     }
-    .phone { background:#1c1c1e; border-radius:44px; padding:10px; box-shadow:0 24px 64px rgba(0,0,0,.18); }
-    .phone-screen { background:#000; border-radius:36px; overflow:hidden; }
-    .phone-status {
-      background:#fff; padding:10px 20px 4px;
-      display:flex; justify-content:space-between;
+    .phone-video-wrap {
+      border-radius:24px; overflow:hidden;
+      box-shadow:0 24px 64px rgba(0,0,0,.18);
+      width:260px;
     }
-    .phone-time { font-family:var(--mono); font-size:11px; font-weight:700; color:#111; }
-    .phone-icons { font-family:var(--mono); font-size:9px; color:#111; letter-spacing:1px; }
-    .phone-content { height:420px; overflow:hidden; background:#000; }
-    .phone-content video {
-      width:100%; height:100%; display:block;
-      object-fit:cover; object-position:top center;
+    .phone-video-wrap video {
+      width:100%; display:block; line-height:0;
     }
     @keyframes phoneScroll {
       0%,43%   { transform:translateY(0); }
@@ -891,18 +886,10 @@
         </div>
         <div class="phone-col">
           <div class="phone-col-label">Mobile</div>
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="phone-status">
-                <span class="phone-time">9:41</span>
-                <span class="phone-icons">▲◼▐</span>
-              </div>
-              <div class="phone-content">
-                <video autoplay loop muted playsinline>
-                  <source src="../../assets/helikon/IMG_7826.MP4" type="video/mp4">
-                </video>
-              </div>
-            </div>
+          <div class="phone-video-wrap">
+            <video autoplay loop muted playsinline>
+              <source src="../../assets/helikon/IMG_7826.MP4" type="video/mp4">
+            </video>
           </div>
         </div>
       </div>
