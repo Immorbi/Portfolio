@@ -436,10 +436,9 @@
     }
     .phone-time { font-family:var(--mono); font-size:11px; font-weight:700; color:#111; }
     .phone-icons { font-family:var(--mono); font-size:9px; color:#111; letter-spacing:1px; }
-    .phone-content { height:420px; overflow:hidden; background:#fff; }
-    .phone-scroll-track { animation:phoneScroll 15s linear infinite; }
-    .phone-scroll-track img {
-      width:100%; height:420px; display:block;
+    .phone-content { height:420px; overflow:hidden; background:#000; }
+    .phone-content video {
+      width:100%; height:100%; display:block;
       object-fit:cover; object-position:top center;
     }
     @keyframes phoneScroll {
@@ -899,10 +898,9 @@
                 <span class="phone-icons">▲◼▐</span>
               </div>
               <div class="phone-content">
-                <div class="phone-scroll-track">
-                  <img src="../../assets/helikon/screencapture-helikon-art-org-2026-04-30-01_20_20.jpg" alt="Homepage">
-                  <img src="../../assets/helikon/screencapture-helikon-art-org-residence-2026-04-30-01_20_57.jpg" alt="Residence">
-                </div>
+                <video autoplay loop muted playsinline>
+                  <source src="../../assets/helikon/IMG_7826.MP4" type="video/mp4">
+                </video>
               </div>
             </div>
           </div>
