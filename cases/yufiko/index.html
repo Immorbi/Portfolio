@@ -34,12 +34,12 @@
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
     :root {
-      --bg:      #faf3eb;
-      --bg2:     #f2e8d8;
-      --text:    #1c1209;
-      --dim:     rgba(28,18,9,.58);
-      --muted:   rgba(28,18,9,.4);
-      --border:  rgba(28,18,9,.1);
+      --bg:      #ffffff;
+      --bg2:     #f5f5f5;
+      --text:    #111111;
+      --dim:     rgba(17,17,17,.58);
+      --muted:   rgba(17,17,17,.4);
+      --border:  rgba(17,17,17,.1);
       --accent:  #d63a1a;
       --font:    'DeFonte', -apple-system, sans-serif;
       --mono:    'Manrope', sans-serif;
@@ -148,12 +148,12 @@
       color:var(--muted); margin-bottom:40px;
     }
     .options-grid {
-      display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+      display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;
     }
     .option-item { display:flex; flex-direction:column; gap:10px; }
     .option-item img {
-      width:100%; aspect-ratio:9/16; object-fit:cover;
-      border-radius:8px;
+      height:320px; width:auto;
+      border-radius:8px; display:block;
     }
     .option-tag {
       font-family:var(--mono); font-size:9px; font-weight:600;
@@ -173,11 +173,11 @@
       margin-bottom:48px; max-width:24ch;
     }
     .chosen-grid {
-      display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+      display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;
     }
     .chosen-grid img {
-      width:100%; aspect-ratio:9/16; object-fit:cover;
-      border-radius:8px;
+      height:400px; width:auto;
+      border-radius:8px; display:block;
     }
 
     /* ─── FINAL ANIMATIONS ─── */
@@ -193,10 +193,11 @@
       margin-bottom:48px; max-width:24ch;
     }
     .final-grid {
-      display:grid; grid-template-columns:1fr 1fr; gap:12px;
+      display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;
     }
     .final-grid video {
-      width:100%; border-radius:8px;
+      height:480px; width:auto;
+      border-radius:8px; display:block;
     }
 
     /* ─── FOOTER ─── */
