@@ -428,13 +428,46 @@
       letter-spacing:.16em; text-transform:uppercase;
       color:rgba(15,15,15,.28);
     }
-    .phone-video-wrap {
-      border-radius:24px; overflow:hidden;
-      box-shadow:0 24px 64px rgba(0,0,0,.18);
-      width:100%;
+
+    /* iPhone frame */
+    .iphone {
+      position:relative; width:100%;
+      background:#111; border-radius:48px;
+      padding:14px;
+      box-shadow:
+        0 0 0 1.5px #3a3a3a,
+        0 32px 80px rgba(0,0,0,.32),
+        inset 0 0 0 1px #2a2a2a;
     }
-    .phone-video-wrap video {
-      width:100%; display:block; line-height:0;
+    /* side buttons */
+    .iphone::before {
+      content:'';
+      position:absolute; left:-3px; top:96px;
+      width:3px; height:36px;
+      background:#2e2e2e; border-radius:2px 0 0 2px;
+      box-shadow: 0 52px 0 #2e2e2e, 0 92px 0 #2e2e2e;
+    }
+    .iphone::after {
+      content:'';
+      position:absolute; right:-3px; top:130px;
+      width:3px; height:60px;
+      background:#2e2e2e; border-radius:0 2px 2px 0;
+    }
+    .iphone-screen {
+      background:#000; border-radius:36px;
+      overflow:hidden; position:relative;
+    }
+    /* Dynamic Island */
+    .iphone-island {
+      position:absolute; top:12px; left:50%;
+      transform:translateX(-50%);
+      width:88px; height:28px;
+      background:#000; border-radius:20px;
+      z-index:10;
+    }
+    .iphone-video {
+      width:100%; display:block;
+      border-radius:36px;
     }
     @keyframes phoneScroll {
       0%,43%   { transform:translateY(0); }
@@ -888,10 +921,13 @@
         </div>
         <div class="phone-col">
           <div class="phone-col-label">Mobile</div>
-          <div class="phone-video-wrap">
-            <video autoplay loop muted playsinline>
-              <source src="../../assets/helikon/IMG_7826.MP4" type="video/mp4">
-            </video>
+          <div class="iphone">
+            <div class="iphone-screen">
+              <div class="iphone-island"></div>
+              <video class="iphone-video" autoplay loop muted playsinline>
+                <source src="../../assets/helikon/IMG_7826.MP4" type="video/mp4">
+              </video>
+            </div>
           </div>
         </div>
       </div>
