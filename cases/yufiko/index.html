@@ -140,72 +140,42 @@
       padding-top:32px;
     }
 
-    /* ─── OPTIONS GRID ─── */
-    .options-section { padding:80px 0; border-bottom:1px solid var(--border); }
-    .options-label {
+    /* ─── POSTER GRID ─── */
+    .posters-section { padding:80px 0; }
+    .posters-label {
       font-family:var(--mono); font-size:9px; font-weight:700;
       letter-spacing:.18em; text-transform:uppercase;
       color:var(--muted); margin-bottom:40px;
     }
-    .options-grid {
-      display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;
+    .poster-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
-    .option-item { display:flex; flex-direction:column; gap:10px; }
-    .option-item img {
-      height:320px; width:auto;
-      border-radius:8px; display:block;
-      outline:1px solid transparent;
-      transform:translateZ(0);
-      box-shadow:inset 0 0 0 4px #ffffff;
+    .poster-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      display: block;
+      cursor: url('../../cursor2.svg') 16 18, pointer;
     }
-    .option-tag {
-      font-family:var(--mono); font-size:9px; font-weight:600;
-      letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
-    }
-
-    /* ─── CHOSEN ─── */
-    .chosen-section { padding:80px 0; border-bottom:1px solid var(--border); }
-    .chosen-label {
-      font-family:var(--mono); font-size:9px; font-weight:700;
-      letter-spacing:.18em; text-transform:uppercase;
-      color:var(--accent); margin-bottom:16px;
-    }
-    .chosen-title {
-      font-size:clamp(28px,3.2vw,46px);
-      font-weight:400; letter-spacing:-.025em; line-height:1.1;
-      margin-bottom:48px; max-width:24ch;
-    }
-    .chosen-grid {
-      display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;
-    }
-    .chosen-grid img {
-      height:400px; width:auto;
-      border-radius:8px; display:block;
-      outline:1px solid transparent;
-      transform:translateZ(0);
-      box-shadow:inset 0 0 0 4px #ffffff;
+    .poster-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: filter 0.5s ease, transform 0.5s ease;
+      filter: blur(14px) saturate(1.8) hue-rotate(-12deg) brightness(1.05);
+      transform: scale(1.04);
     }
 
-    /* ─── FINAL ANIMATIONS ─── */
-    .final-section { padding:80px 0; }
-    .final-label {
-      font-family:var(--mono); font-size:9px; font-weight:700;
-      letter-spacing:.18em; text-transform:uppercase;
-      color:var(--muted); margin-bottom:16px;
+    .poster-card:hover img {
+      filter: blur(0px) saturate(1.0) hue-rotate(0deg) brightness(1);
+      transform: scale(1);
     }
-    .final-title {
-      font-size:clamp(28px,3.2vw,46px);
-      font-weight:400; letter-spacing:-.025em; line-height:1.1;
-      margin-bottom:48px; max-width:24ch;
-    }
-    .final-grid {
-      display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;
-    }
-    .final-grid video {
-      height:480px; width:auto;
-      border-radius:8px; display:block;
-      outline:1px solid transparent;
-      transform:translateZ(0);
+
+
+    @media(max-width:768px) {
+      .poster-grid { columns: 2; }
     }
 
     /* ─── FOOTER ─── */
@@ -238,15 +208,46 @@
 
     /* ─── MOBILE ─── */
     @media(max-width:768px) {
-      :root { --pad:24px; }
-      .case-meta { grid-template-columns:1fr 1fr; }
-      .sec-head-inner { grid-template-columns:1fr; gap:24px; }
-      .options-grid { grid-template-columns:1fr 1fr; }
-      .chosen-grid { grid-template-columns:1fr; }
-      .final-grid { grid-template-columns:1fr; }
-      .case-footer { grid-template-columns:1fr; }
-      .next-case { text-align:left; }
+      :root { --pad:20px; }
+      body { padding-top: 52px; }
+
+      .topbar-inner { padding: 14px var(--pad); }
+
+      .intro { padding: 48px 0 40px; }
+      .intro h1 { font-size: clamp(40px, 13vw, 64px); margin-bottom: 20px; }
+      .eyebrow { font-size: 9px; margin-bottom: 20px; }
+      .intro-lede { font-size: 14px; line-height: 1.65; }
+
+      .case-meta {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        padding: 32px 0 48px;
+      }
+
+      .sec-head-inner { grid-template-columns: 1fr; gap: 20px; padding: 40px var(--pad); }
+      .sec-title { font-size: clamp(24px, 7vw, 36px); }
+      .sec-body { padding-top: 0; font-size: 13px; }
+
+      .posters-section { padding: 48px 0; }
+      .poster-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .poster-card { margin-bottom: 8px; border-radius: 6px; }
+
+      /* На телефоне — блюр меньше */
+      .poster-card img {
+        filter: blur(8px) saturate(1.5) hue-rotate(-8deg) brightness(1.05);
+      }
+      .poster-card::before { filter: blur(10px); }
+      .poster-card::after  { filter: blur(10px); }
+
+      .case-footer {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 56px var(--pad) 48px;
+      }
+      .next-case { text-align: left; }
+      .next-link { font-size: clamp(20px, 6vw, 28px); }
     }
+
   </style>
 </head>
 <body>
@@ -303,55 +304,34 @@
     </div>
   </div>
 
-  <!-- OPTIONS -->
+  <!-- POSTER GRID -->
   <main>
-    <div class="options-section reveal">
-      <div class="options-label">02 — Five directions explored</div>
-      <div class="options-grid">
-        <div class="option-item">
-          <img src="2 option.png" alt="Option 2 — flat illustration">
-          <span class="option-tag">Option 2 — Flat objects</span>
+    <div class="posters-section reveal">
+      <div class="posters-label">02 — Poster work</div>
+      <div class="poster-grid">
+        <div class="poster-card" style="--img: url('preparty-1.png')">
+          <img src="preparty-1.png" alt="Preparty Kanye West">
         </div>
-        <div class="option-item">
-          <img src="3 option.png" alt="Option 3 — blue gradient">
-          <span class="option-tag">Option 3 — Blue neon</span>
+        <div class="poster-card" style="--img: url('2%20option.png')">
+          <img src="2 option.png" alt="Yufiko Market — flat objects">
         </div>
-        <div class="option-item">
-          <img src="4 option.png" alt="Option 4 — red photo">
-          <span class="option-tag">Option 4 — Red duotone</span>
+        <div class="poster-card" style="--img: url('frame1.png')">
+          <img src="frame1.png" alt="Artists DJ Sets">
         </div>
-        <div class="option-item">
-          <img src="5 option.png" alt="Option 5 — blue duotone">
-          <span class="option-tag">Option 5 — Blue duotone</span>
+        <div class="poster-card" style="--img: url('3%20option.png')">
+          <img src="3 option.png" alt="Yufiko Market — blue neon">
+        </div>
+        <div class="poster-card" style="--img: url('frame2.png')">
+          <img src="frame2.png" alt="Artists DJ Sets — variant">
+        </div>
+        <div class="poster-card" style="--img: url('4%20option.png')">
+          <img src="4 option.png" alt="Yufiko Market — red duotone">
+        </div>
+        <div class="poster-card" style="--img: url('5%20option.png')">
+          <img src="5 option.png" alt="Yufiko Market — blue duotone">
         </div>
       </div>
     </div>
-
-    <!-- CHOSEN -->
-    <div class="chosen-section reveal">
-      <div class="chosen-label">→ Chosen direction</div>
-      <div class="chosen-title">Option 1 — warm illustration, beige, hand-drawn character.</div>
-      <div class="chosen-grid">
-        <img src="1 option.png" alt="Chosen — vendor call">
-        <img src="1 option-1.png" alt="Chosen — market announcement">
-        <img src="1 option-2.png" alt="Chosen — market scene">
-      </div>
-    </div>
-
-    <!-- FINAL -->
-    <div class="final-section reveal">
-      <div class="final-label">03 — Final result</div>
-      <div class="final-title">Animated for Instagram Stories.</div>
-      <div class="final-grid">
-        <video autoplay loop muted playsinline>
-          <source src="Comp 1_10.mp4" type="video/mp4">
-        </video>
-        <video autoplay loop muted playsinline>
-          <source src="Comp 1_11.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-
   </main>
 
   <!-- FOOTER -->
