@@ -762,14 +762,15 @@
 
     .brief {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0 48px;
+      grid-template-columns: 1fr;
+      gap: 32px 0;
       padding: 44px 0 60px;
     }
     .brief-col {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      max-width: 720px;
     }
     .brief-label {
       font-family: 'Manrope', sans-serif;
