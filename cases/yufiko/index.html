@@ -168,7 +168,8 @@
       transform: scale(1.04);
     }
 
-    .poster-card:hover img {
+    .poster-card:hover img,
+    .poster-card.active img {
       filter: blur(0px) saturate(1.0) hue-rotate(0deg) brightness(1);
       transform: scale(1);
     }
@@ -353,6 +354,25 @@
       entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
     }, { threshold:.12 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Poster blur cycle: one card at a time comes into focus, then the next
+    const posterCards = document.querySelectorAll('.poster-card');
+    let posterIndex = 0;
+    let posterPaused = false;
+    setInterval(() => {
+      if (posterPaused || !posterCards.length) return;
+      posterCards.forEach(c => c.classList.remove('active'));
+      posterCards[posterIndex].classList.add('active');
+      posterIndex = (posterIndex + 1) % posterCards.length;
+    }, 2000);
+    const posterGrid = document.querySelector('.poster-grid');
+    if (posterGrid) {
+      posterGrid.addEventListener('mouseenter', () => {
+        posterPaused = true;
+        posterCards.forEach(c => c.classList.remove('active'));
+      });
+      posterGrid.addEventListener('mouseleave', () => { posterPaused = false; });
+    }
   </script>
 </body>
 </html>
