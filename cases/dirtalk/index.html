@@ -4,1262 +4,552 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-  <title>DIRTALK Brandbook — Maria</title>
+  <title>DIRTALK — Maria</title>
+  <meta name="description" content="DIRTALK — brand identity and editorial system for a media project and podcast about the women shaping the industry.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    @font-face {
-      font-family: 'DeFonte';
-      src: url('../../DeFonte reduced Leger.ttf') format('truetype');
-      font-weight: 300;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'DeFonte';
-      src: url('../../DeFonte reduced Normale.ttf') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'DeFonte';
-      src: url('../../DeFonte reduced DemiGras.ttf') format('truetype');
-      font-weight: 600;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'DeFonte';
-      src: url('../../DeFonte reduced Gros.ttf') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-    }
-
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --text: #222222;
-      --text-light: #7e7e7e;
-      --text-muted: #bdbdbd;
+      --ink: #111114;
       --bg: #ffffff;
-      --border: #e7e7e7;
-      --panel: #f4f4f4;
-      --font: 'DeFonte', -apple-system, sans-serif;
-      --serif: 'DeFonte', Georgia, serif;
-      --max: 1280px;
-      --pad: 48px;
+      --mut: #86868c;
+      --line: #e7e7ea;
+      --blue: #0E38ED;
+      --navy: #021132;
+      --pink: #FF8DE1;
+
+      --sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+      --edge: 20px;               /* screen border, mobile */
+      --gutter: 12px;             /* grid gutter */
+      --z-nav: 100;
+
+      --e-out: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    html, body {
+    html { -webkit-text-size-adjust: 100%; }
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+    body {
       background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 400;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
       overflow-x: hidden;
+      padding-top: 56px;
       cursor: url('../../cursor.svg') 16 18, auto;
     }
 
-    body {
-      padding-top: 60px;
-    }
+    ::selection { background: var(--blue); color: #fff; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
-    ::selection {
-      background: var(--text);
-      color: var(--bg);
-    }
-
-    a {
-      color: inherit;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 10;
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .topbar-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 18px var(--pad);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .back-link,
-    .topbar-title {
-      font-family: 'Manrope', sans-serif;
+    .mono {
+      font-family: var(--mono);
       font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .back-link {
-      text-decoration: none;
-      transition: opacity 0.3s;
-    }
-
-    .back-link:hover,
-    .next-case a:hover {
-      opacity: 0.5;
-      cursor: url('../../cursor2.svg') 16 18, pointer;
-    }
-
-    .topbar-title {
-      color: var(--text-muted);
-    }
-
-    .topbar-next {
-      display: none;
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      text-decoration: none;
-      transition: opacity 0.3s;
-    }
-    .topbar-next:hover { opacity: 0.5; }
-
-    main {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 var(--pad);
-    }
-
-    .intro {
-      padding: 96px 0 72px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .eyebrow,
-    .section-label,
-    .meta-label,
-    .next-case-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-    }
-
-    .eyebrow {
-      margin-bottom: 32px;
-    }
-
-    .intro h1 {
-      font-size: clamp(44px, 7vw, 104px);
       font-weight: 400;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      max-width: 14ch;
-      margin-bottom: 40px;
-    }
-
-    .intro h1 em,
-    .section h2 em,
-    .quote blockquote em {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-    }
-
-    .intro-lede,
-    .section-text,
-    .quote blockquote,
-    .footer-copy {
-      font-family: var(--serif);
-      line-height: 1.7;
-    }
-
-    .intro-lede {
-      font-size: clamp(18px, 1.5vw, 22px);
-      max-width: 640px;
-    }
-
-    .meta {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      padding: 48px 0 72px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .meta-value {
-      font-family: 'Manrope', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    .hero {
-      padding: 72px var(--pad);
-      margin: 0 calc(var(--pad) * -1);
-    }
-
-    .hero-card {
-      background: transparent;
-      padding: 0;
-      width: 100vw;
-      margin-left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .hero-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .hero-mobile-pair {
-      display: none;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      align-items: start;
-    }
-
-    .hero-mobile-pair img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .hero-sheet {
-      width: 100%;
-      background:
-        linear-gradient(180deg, #f6f6f3 0 47%, #0e38ed 47% 100%);
-      border: 1px solid rgba(34, 34, 34, 0.08);
-      padding: clamp(18px, 2vw, 28px);
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 28px;
-      min-height: 720px;
-    }
-
-    .hero-top {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .hero-mark {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 18px;
-    }
-
-    .hero-logo {
-      font-family: 'Manrope', sans-serif;
-      font-size: clamp(34px, 4vw, 62px);
-      line-height: 0.82;
-      font-weight: 800;
-      letter-spacing: -0.08em;
-      color: #0e38ed;
-      text-transform: lowercase;
-    }
-
-    .hero-symbol {
-      width: clamp(84px, 10vw, 160px);
-      aspect-ratio: 1;
-      background: #0e38ed;
-      clip-path: polygon(50% 0%, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0% 50%, 42% 42%);
-      filter: drop-shadow(0 0 20px rgba(14, 56, 237, 0.18));
-      flex-shrink: 0;
-    }
-
-    .hero-type {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .type-sample strong {
-      display: block;
-      font-size: clamp(24px, 2.4vw, 38px);
-      line-height: 1.05;
-      margin-bottom: 8px;
-    }
-
-    .type-sample span,
-    .hero-caption,
-    .palette-meta,
-    .rule-card,
-    .brand-guidelines li {
-      font-family: 'Manrope', sans-serif;
-    }
-
-    .type-sample span {
-      font-size: 12px;
-      color: #0e38ed;
-      font-weight: 600;
-    }
-
-    .hero-caption {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: #a0a0a0;
+      color: var(--mut);
     }
 
-    .hero-side {
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 20px;
-    }
-
-    .palette-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      align-content: start;
-    }
-
-    .palette-item {
-      background: rgba(255, 255, 255, 0.72);
-      padding: 12px;
-      border: 1px solid rgba(34, 34, 34, 0.08);
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 12px;
-      align-items: center;
-      min-width: 0;
-    }
-
-    .palette-chip {
-      width: 56px;
-      height: 56px;
-    }
-
-    .palette-meta {
-      font-size: 11px;
-      line-height: 1.45;
-      color: #787878;
-      text-transform: uppercase;
-    }
-
-    .palette-meta strong {
-      display: block;
-      color: #111111;
-      font-size: 12px;
-      margin-bottom: 2px;
-    }
-
-    .rule-card {
-      align-self: end;
-      background: rgba(14, 56, 237, 0.96);
-      color: #ffffff;
-      padding: 22px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-
-    .rule-card strong {
-      display: block;
-      font-size: 24px;
-      line-height: 1.12;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-
-    .rule-card p {
-      font-size: 12px;
-      line-height: 1.7;
-      color: rgba(255, 255, 255, 0.82);
-    }
-
-    .brand-guidelines {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .guideline-card {
-      background: transparent;
-      padding: 24px;
-    }
-
-    .guideline-card h3 {
-      font-size: 26px;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-
-    .brand-guidelines ul {
-      list-style: none;
-      display: grid;
-      gap: 10px;
-    }
-
-    .brand-guidelines li {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--text-light);
-    }
-
-    .logo-focus {
-      background: #0e38ed;
-      color: #ffffff;
-      margin: 0 calc(var(--pad) * -1);
-      padding: 88px var(--pad);
-    }
-
-    .logo-focus-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(320px, 0.9fr) minmax(520px, 1.1fr);
-      gap: 64px;
-      align-items: center;
-    }
-
-    .logo-focus-mark {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-focus-mark img {
-      width: min(100%, 360px);
-      height: auto;
-      display: block;
-    }
-
-    .logo-focus-copy {
-      max-width: none;
-    }
-
-    .logo-focus-text {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 28px;
-      align-items: start;
-    }
-
-    .logo-focus-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.58);
-      margin-bottom: 18px;
-    }
-
-    .logo-focus-copy p {
-      font-family: 'Manrope', sans-serif;
-      font-size: clamp(18px, 1.35vw, 24px);
-      line-height: 1.38;
-      color: rgba(255, 255, 255, 0.96);
-      margin: 0;
-    }
-
-    .logo-focus-text p + p {
-      margin-top: 0;
-    }
-
-    .quote {
-      background: #0e38ed;
-    }
-
-    .quote-caption {
-      color: rgba(255, 255, 255, 0.62);
-    }
-
-    .section {
-      padding: 72px 0;
-      
-    }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 48px;
-      margin-bottom: 56px;
-    }
-
-    .section h2 {
-      font-size: clamp(28px, 3.4vw, 44px);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.08;
-      max-width: 14ch;
-      margin-top: 16px;
-    }
-
-    .section-text {
-      font-size: 17px;
-      max-width: 640px;
-      margin-left: auto;
-      line-height: 1.75;
-    }
-
-    .section-text p + p {
-      margin-top: 18px;
-    }
-
-    .mosaic {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 24px;
-    }
-
-    .mosaic-stack {
-      display: grid;
-      gap: 24px;
-    }
-
-    .mosaic-card,
-    .gallery-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    .mosaic-card img,
-    .gallery-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .mosaic-card.tall {
-      min-height: 680px;
-    }
-
-    .mosaic-card.small {
-      min-height: 328px;
-    }
-
-    .quote {
-      background: #0e38ed;
-      color: var(--bg);
-      margin: 0 calc(var(--pad) * -1);
-      padding: 96px var(--pad);
-    }
-
-    .quote-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .quote blockquote {
-      font-size: clamp(24px, 3vw, 40px);
-      line-height: 1.35;
-    }
-
-    .quote-caption {
-      margin-top: 24px;
-      font-family: 'Manrope', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    .gallery-card {
-      aspect-ratio: 4 / 3;
-    }
-
-    .cover-stories {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .cover-story {
-      display: grid;
-      gap: 10px;
-      align-content: start;
-    }
-
-    .cover-story-visual {
-      background: transparent;
-      overflow: visible;
-    }
-
-    .cover-story-visual img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: contain;
-      object-position: center;
+    /* ── Header ── */
+    .nav {
+      position: fixed; inset: 0 0 auto 0;
+      z-index: var(--z-nav);
       background: transparent;
     }
-
-    .cover-story-title {
-      font-size: 24px;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.08;
-      margin-top: 20px;
-      margin-bottom: 2px;
+    .nav-in {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 17px var(--edge);
     }
-
-    .cover-story-text {
-      font-family: var(--serif);
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--text-light);
+    .nav-group { display: flex; gap: 18px; }
+    .nav-group.right { flex-direction: column; align-items: flex-end; gap: 2px; }
+    .nav a, .nav .mono {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--ink); transition: opacity .3s var(--e-out);
     }
+    .nav a:hover { opacity: 0.42; cursor: url('../../cursor2.svg') 16 18, pointer; }
 
-    .post-system {
+    /* ── Shell / grid ── */
+    .shell { padding: 0 var(--edge); }
+    .grid {
       display: grid;
-      gap: 28px;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gutter);
     }
 
-    .post-system-section {
-      background: #000;
-      color: #fff;
-      margin: 0 calc(var(--pad) * -1);
-      padding: 72px var(--pad);
+    /* ── Masthead ── */
+    .mast { padding-top: 40px; padding-bottom: 24px; }
+    .mast .credits {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter);
+      row-gap: 20px;
+      padding-bottom: 40px;
+    }
+    .credits .cell { grid-column: span 3; }
+    .credits dt { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mut); margin-bottom: 7px; }
+    .credits dd { font-size: 15px; line-height: 1.35; letter-spacing: -0.01em; }
+
+    .mast .sub {
+      grid-column: 7 / -1;
+      font-size: clamp(17px, 1.7vw, 22px);
+      line-height: 1.4; letter-spacing: -0.015em;
+      max-width: 34ch; justify-self: end; text-align: left;
+      color: #34343a; padding-top: 10px;
     }
 
-    .post-system-section .section {
-      border-top: none;
-      padding: 0;
+    /* ── Figures ── */
+    figure { position: relative; overflow: hidden; background: #f2f2f4; }
+    figure img, figure video { width: 100%; height: auto; display: block; }
+    .zoom img { transition: transform 1.2s var(--e-out); }
+    .zoom:hover img { transform: scale(1.035); }
+
+    .full { margin: 0; }                                /* sit inside the thin screen border */
+    .bleed { margin-top: 12px; margin-bottom: 12px; }
+
+    .cap {
+      display: flex; justify-content: space-between; gap: 16px;
+      margin-top: 12px;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+      text-transform: uppercase; color: var(--mut);
+    }
+    .cap .idx { color: var(--blue); }
+
+    /* ── Section scaffolding ── */
+    section { position: relative; }
+    .sec { padding-top: clamp(64px, 9vw, 130px); padding-bottom: clamp(40px, 5vw, 72px); }
+    .sec-label { grid-column: 1 / 4; }
+    .sec-label .mono { display: block; }
+    .lede-2 {
+      grid-column: 4 / -1;
+      font-size: clamp(26px, 3.4vw, 46px);
+      font-weight: 500; line-height: 1.06; letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+    .lede-2 em { font-style: normal; color: var(--blue); }
+    .body-cols {
+      grid-column: 4 / -1;
+      margin-top: 40px;
+      display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 40px 56px;
+    }
+    .body-cols p { font-size: 16.5px; line-height: 1.62; letter-spacing: -0.006em; color: #3a3a40; max-width: 60ch; }
+    .body-cols p strong { font-weight: 600; color: var(--ink); }
+
+    /* ── Brand system ── */
+    .tf-meta {
+      grid-column: 1 / -1;
+      display: flex; gap: 40px 56px; flex-wrap: wrap; align-items: baseline;
+      border-top: 1px solid var(--line); margin-top: 28px; padding-top: 22px;
+    }
+    .tf-name { font-size: clamp(19px, 1.9vw, 26px); letter-spacing: -0.02em; }
+    .tf-item .mono { margin-top: 7px; display: block; }
+    .tf-glyphs { margin-left: auto; align-self: baseline; }
+
+    /* Mark & mascot */
+    .marks { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); row-gap: 12px; }
+    .mark-tile { position: relative; height: clamp(240px, 30vw, 430px); background: #f0f0f3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .mark-tile img { width: 52%; height: auto; }
+    .mark-tile.on-blue { background: var(--blue); }
+    .mark-tile.mascot { align-items: flex-end; }
+    .mark-tile.mascot img { width: auto; height: 88%; transform: translateY(6%); }
+    .m-a { grid-column: 1 / 5; } .m-b { grid-column: 5 / 9; } .m-c { grid-column: 9 / -1; }
+    .mark-cap { margin-top: 10px; }
+
+    /* Palette */
+    .pal-label { grid-column: 1 / -1; margin-bottom: 14px; }
+    .pal-img { background: none; }
+
+    .ph-txt { grid-column: 1 / 5; align-self: start; }
+    .ph-txt h3 { font-size: clamp(24px, 2.7vw, 36px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.06; margin: 14px 0 16px; text-wrap: balance; }
+    .ph-txt p { font-size: 16px; line-height: 1.6; letter-spacing: -0.006em; color: #3a3a40; max-width: 40ch; }
+    .ph-imgs { grid-column: 6 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
+
+    /* ── Identity split ── */
+    .split { align-items: stretch; }
+    .split .fig { grid-column: 1 / 7; }
+    .split .txt { grid-column: 8 / -1; align-self: center; }
+    .split .txt h2 {
+      font-size: clamp(30px, 4vw, 56px); font-weight: 500; line-height: 1.02;
+      letter-spacing: -0.04em; margin-bottom: 22px; text-wrap: balance;
+    }
+    .split .txt p { font-size: 16.5px; line-height: 1.6; letter-spacing: -0.006em; color: #3a3a40; max-width: 46ch; }
+    .split .txt p + p { margin-top: 16px; }
+    .split .txt p strong { font-weight: 600; color: var(--ink); }
+
+    /* ── Campaign ── */
+    .feature { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12,1fr); column-gap: var(--gutter); row-gap: 12px; align-items: start; }
+    .feature .big { grid-column: 1 / 8; }
+    .feature .small { grid-column: 8 / -1; align-self: end; }
+    .posters { grid-column: 1 / -1; margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .posters figure { aspect-ratio: 4 / 5; }
+    .posters img, .posters video { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── Statement (drenched) ── */
+    .statement {
+      margin: clamp(20px,3vw,40px) 0;
+      background: var(--blue); color: #fff;
+      padding: clamp(90px, 15vw, 220px) clamp(24px, 5vw, 80px);
+      display: grid; grid-template-columns: repeat(12,1fr); column-gap: var(--gutter);
+    }
+    .statement blockquote {
+      grid-column: 1 / -1;
+      font-size: clamp(40px, 8.5vw, 132px); font-weight: 500;
+      line-height: 0.94; letter-spacing: -0.05em; text-wrap: balance;
+    }
+    .statement .em { color: var(--pink); }
+    .statement .attrib { grid-column: 1 / -1; margin-top: 40px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.72); }
+
+    /* ── Merch ── */
+    .merch { grid-column: 1/-1; display: grid; grid-template-columns: repeat(12,1fr); column-gap: var(--gutter); row-gap: 12px; }
+    .merch .m1 { grid-column: 1 / 5; }
+    .merch .m2 { grid-column: 5 / 9; align-self: end; }
+    .merch .m3 { grid-column: 9 / -1; }
+
+    /* ── Digital ── */
+    .digital { align-items: center; }
+    .digital .fig { grid-column: 1 / 6; background: var(--blue); }
+    .digital .txt { grid-column: 7 / 12; }
+    .digital .txt h2 { font-size: clamp(28px, 3.6vw, 50px); font-weight: 500; line-height: 1.03; letter-spacing: -0.04em; margin-bottom: 20px; text-wrap: balance; }
+    .digital .txt p { font-size: 16.5px; line-height: 1.6; letter-spacing: -0.006em; color: #3a3a40; max-width: 42ch; }
+
+    /* ── Next ── */
+    .next { margin: 0; border-top: 1px solid var(--line); }
+    .next a { display: grid; grid-template-columns: repeat(12,1fr); column-gap: var(--gutter); align-items: center; padding: clamp(44px,6vw,84px) 0; transition: background .4s var(--e-out); }
+    .next a:hover { background: #fafafb; cursor: url('../../cursor2.svg') 16 18, pointer; }
+    .next .lbl { grid-column: 1 / 4; }
+    .next .ttl { grid-column: 4 / 11; font-size: clamp(34px, 6vw, 88px); font-weight: 500; letter-spacing: -0.045em; line-height: 0.98; }
+    .next a:hover .ttl { color: var(--blue); }
+    .next .arw { grid-column: 12 / -1; justify-self: end; font-size: clamp(28px,3vw,44px); transition: transform .4s var(--e-out); }
+    .next a:hover .arw { transform: translateX(8px); }
+
+    /* ── Reveal motion (progressive, visible by default) ── */
+    .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--e-out), transform .9s var(--e-out); }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    /* ── Screen borders: narrow on desktop only ── */
+    @media (min-width: 1025px) {
+      :root { --edge: 14px; --gutter: 14px; }
+      .mast { padding-top: 34px; }
     }
 
-    .post-system-section .section-label {
-      color: rgba(255, 255, 255, 0.38);
+    /* ── Tablet ── */
+    @media (max-width: 1024px) {
+      .credits .cell { grid-column: span 6; }
+      .mast .sub { grid-column: 1 / -1; justify-self: start; max-width: 46ch; }
+      .split .fig, .split .txt,
+      .feature .big, .feature .small,
+      .digital .fig, .digital .txt { grid-column: 1 / -1; }
+      .split .txt { margin-top: 20px; }
+      .merch .m1 { grid-column: 1 / 7; }
+      .merch .m2 { grid-column: 7 / -1; align-self: start; }
+      .merch .m3 { grid-column: 1 / -1; }
+      .sec-label { grid-column: 1 / -1; margin-bottom: 16px; }
+      .lede-2, .body-cols { grid-column: 1 / -1; }
+      .ph-txt, .ph-imgs { grid-column: 1 / -1; }
+      .ph-imgs { margin-top: 22px; }
+      .tf-glyphs { margin-left: 0; flex-basis: 100%; }
+      .m-a { grid-column: 1 / 7; } .m-b { grid-column: 7 / -1; } .m-c { grid-column: 1 / -1; }
+      .mark-tile { height: clamp(220px, 34vw, 340px); }
     }
 
-    .post-system-section .section-text {
-      color: rgba(255, 255, 255, 0.72);
+    @media (max-width: 640px) {
+      body { padding-top: 50px; }
+      .body-cols { grid-template-columns: 1fr; gap: 22px; }
+      .posters { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .feature { row-gap: 8px; }
+      .next .ttl { grid-column: 1 / -1; }
+      .next .lbl, .next .arw { display: none; }
+      .credits .cell { grid-column: span 6; }
+      .m-a, .m-b, .m-c { grid-column: 1 / -1; }
+      .ph-imgs { grid-template-columns: 1fr 1fr; }
     }
 
-    .post-system-section h2 {
-      color: #fff;
-    }
-
-    .post-carousel {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-      align-items: start;
-    }
-
-    .post-stage {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-      background: transparent;
-    }
-
-    .post-stage img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      opacity: 0;
-      transition: opacity 0.45s ease;
-    }
-
-    .post-stage img.is-active {
-      opacity: 1;
-    }
-
-    .footer {
-      padding: 96px 0 64px;
-      
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: end;
-    }
-
-    .footer-copy {
-      font-size: 15px;
-      color: var(--text-light);
-    }
-
-    .next-case {
-      text-align: right;
-    }
-
-    .next-case-label {
-      margin-bottom: 12px;
-    }
-
-    .next-case a {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      font-size: clamp(28px, 3vw, 40px);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      transition: opacity 0.3s;
-    }
-
-    .next-case a span.arrow {
-      position: relative;
-      width: 32px;
-      height: 18px;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    .next-case a span.arrow::before,
-    .next-case a span.arrow::after {
-      content: "";
-      position: absolute;
-      display: block;
-    }
-
-    .next-case a span.arrow::before {
-      top: 8px;
-      left: 0;
-      width: 26px;
-      height: 1px;
-      background: currentColor;
-    }
-
-    .next-case a span.arrow::after {
-      top: 4px;
-      right: 1px;
-      width: 10px;
-      height: 10px;
-      border-top: 1px solid currentColor;
-      border-right: 1px solid currentColor;
-      transform: rotate(45deg);
-    }
-
-    .brief {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px 0;
-      padding: 44px 0 60px;
-    }
-    .brief-col {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 720px;
-    }
-    .brief-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .brief-text {
-      font-family: var(--font);
-      font-size: 16px;
-      line-height: 1.65;
-      color: var(--text);
-    }
-
-    @media (max-width: 900px) {
-      :root {
-        --pad: 24px;
-      }
-
-      .intro {
-        padding: 56px 0 48px;
-      }
-
-      .meta,
-      .section-head,
-      .hero-sheet,
-      .hero-type,
-      .brand-guidelines,
-      .logo-focus-inner,
-      .mosaic,
-      .cover-stories,
-      .post-carousel,
-      .gallery-grid,
-      .footer {
-        grid-template-columns: 1fr;
-      }
-
-      .meta {
-        gap: 24px;
-        padding: 32px 0 48px;
-      }
-
-      .hero,
-      .section {
-        padding: 56px 0;
-      }
-
-      .hero {
-        margin: 0;
-      }
-
-      .hero-card {
-        width: auto;
-        margin-left: 0;
-        transform: none;
-      }
-
-      .section-head {
-        gap: 24px;
-      }
-
-      .section-text {
-        margin-left: 0;
-      }
-
-      .mosaic-card.tall,
-      .mosaic-card.small {
-        min-height: auto;
-      }
-
-      .next-case {
-        text-align: left;
-      }
-
-      .quote {
-        margin: 0;
-        padding: 72px 24px;
-      }
-
-      .hero-sheet {
-        min-height: auto;
-      }
-
-      .logo-focus {
-        margin: 0;
-        padding: 72px 30px;
-      }
-
-      .post-system-section {
-        margin: 0;
-        padding: 56px 24px;
-      }
-
-    }
-
-    @media (max-width: 520px) {
-      .topbar-inner {
-        padding: calc(env(safe-area-inset-top) + 14px) var(--pad) 14px;
-        justify-content: space-between;
-      }
-
-      .topbar-title { display: none; }
-      .topbar-next { display: inline-flex; }
-
-      .intro h1 {
-        font-size: clamp(34px, 12vw, 54px);
-        max-width: 10ch;
-        margin-bottom: 24px;
-      }
-
-      .intro-lede,
-      .section-text {
-        font-size: 16px;
-        line-height: 1.65;
-      }
-
-      .meta {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px 16px;
-      }
-
-      .meta-value {
-        font-size: 14px;
-        line-height: 1.45;
-      }
-
-      .hero-card {
-        width: 100vw;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        padding: 0;
-      }
-
-      .hero-card > img {
-        display: none;
-      }
-
-      .hero-mobile-pair {
-        display: grid;
-        gap: 0;
-      }
-
-      .cover-story-visual img {
-        object-fit: contain;
-      }
-
-      .hero-sheet {
-        padding: 14px;
-        gap: 16px;
-      }
-
-      .hero-logo {
-        font-size: 42px;
-      }
-
-      .hero-symbol {
-        width: 74px;
-      }
-
-      .palette-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .palette-item {
-        grid-template-columns: 44px 1fr;
-        padding: 10px;
-      }
-
-      .palette-chip {
-        width: 44px;
-        height: 44px;
-      }
-
-      .rule-card {
-        padding: 18px;
-      }
-
-      .rule-card strong {
-        font-size: 20px;
-      }
-
-      .guideline-card {
-        padding: 18px;
-      }
-
-      .guideline-card h3 {
-        font-size: 22px;
-      }
-
-      .logo-focus-inner {
-        gap: 28px;
-      }
-
-      .logo-focus-mark img {
-        width: min(100%, 260px);
-      }
-
-      .logo-focus-copy p {
-        font-size: 13px;
-        line-height: 1.45;
-      }
-
-      .logo-focus-text {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .gallery-grid {
-        gap: 16px;
-      }
-
-      .cover-story {
-        gap: 12px;
-      }
-
-      .cover-story-title {
-        font-size: 22px;
-      }
-
-      .cover-story-text {
-        font-size: 14px;
-        line-height: 1.6;
-      }
-
-      .gallery-card {
-        aspect-ratio: auto;
-      }
-
-      .next-case a {
-        font-size: 28px;
-      }
-
-      .post-carousel {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .brief {
-        grid-template-columns: 1fr;
-        gap: 24px 0;
-        padding: 32px 0 40px;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .zoom img { transition: none; }
     }
   </style>
 </head>
 <body>
+  <script>document.documentElement.classList.add('js');</script>
 
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a href="../../index.html" class="back-link">← Back to&nbsp;start</a>
-      <span class="topbar-title">Case 02 / DIRTALK</span>
-      <a href="../helikon-art/" class="topbar-next">Next →</a>
+  <!-- Header -->
+  <header class="nav">
+    <div class="nav-in">
+      <nav class="nav-group">
+        <a href="/">Home</a>
+        <a href="/profile/">Profile</a>
+      </nav>
+      <nav class="nav-group right">
+        <a href="https://www.linkedin.com/in/mariia-danilova-3341a6236/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:damilova.danmar@gmail.com">Email</a>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section class="intro">
-      <div class="eyebrow">Brand Identity · Editorial System · 2025</div>
-      <h1>DIRTALK <em>Brandbook</em></h1>
-      <p class="intro-lede">
-        A&nbsp;visual identity system for DIRTALK, a&nbsp;media project centered on&nbsp;women in&nbsp;the industry. The brandbook brings together logo, color, type and post formats into one clear system that can stretch across covers, quotes and everyday content without losing its voice.
-      </p>
-    </section>
+    <!-- Masthead -->
+    <section class="shell mast">
+      <div class="grid">
+        <dl class="credits reveal">
+          <div class="cell"><dt>Client</dt><dd>DIRTALK — media &amp; podcast</dd></div>
+          <div class="cell"><dt>Role</dt><dd>Brand Identity, Art Direction</dd></div>
+          <div class="cell"><dt>Year</dt><dd>2025</dd></div>
+          <div class="cell"><dt>Scope</dt><dd>Logo, Editorial, Social, Merch, OOH</dd></div>
+        </dl>
 
-    <section class="meta">
-      <div class="meta-item">
-        <span class="meta-label">Type</span>
-        <span class="meta-value">Brandbook<br>Identity system</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Role</span>
-        <span class="meta-value">Design &amp; art direction<br>Maria Danilova</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Scope</span>
-        <span class="meta-value">Logo, typography<br>Social &amp; editorial</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Year</span>
-        <span class="meta-value">2025</span>
+        <p class="sub reveal">A media project and podcast for the women shaping the industry, and the honest stories behind the success.</p>
       </div>
     </section>
 
-    <section class="brief">
-      <div class="brief-col">
-        <div class="brief-label">Goal</div>
-        <p class="brief-text">A&nbsp;lot of&nbsp;media projects aimed at&nbsp;younger audiences end up looking similar. DIRTALK needed more character: an&nbsp;identity that reads as&nbsp;specific and confident whether it&nbsp;shows up small on&nbsp;a&nbsp;phone screen or&nbsp;large on&nbsp;a&nbsp;printed cover.</p>
-      </div>
-      <div class="brief-col">
-        <div class="brief-label">Task</div>
-        <p class="brief-text">Full identity: logo, color, typography, and post formats, packaged as&nbsp;a&nbsp;brandbook. The system needed to&nbsp;be&nbsp;flexible enough for daily social content and strong enough for editorial use without looking like two different brands.</p>
-      </div>
-      <div class="brief-col">
-        <div class="brief-label">Solution</div>
-        <p class="brief-text">The identity is&nbsp;built around typography and how language sits on&nbsp;the page. Strong display type, a&nbsp;mark that functions almost like punctuation, a&nbsp;color system with clear hierarchy. The point was to&nbsp;give the team something they could run with independently without it&nbsp;losing its character.</p>
-      </div>
-    </section>
-
-    <section class="hero">
-      <div class="hero-card">
-        <div class="hero-mobile-pair">
-          <img src="../../Group 373.png" alt="DIRTALK brandbook page one">
-          <img src="../../Group 374.png" alt="DIRTALK brandbook page two">
-        </div>
-        <img src="../../cover_brending.png" alt="DIRTALK branding cover">
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="section-label">01 — Premise</div>
-          <h2>A&nbsp;media identity built around voice, presence and recognition.</h2>
-        </div>
-        <div class="section-text">
-          <p>DIRTALK needed a&nbsp;system that could hold interviews, announcements, quotes and community-led content without slipping into generic media branding. The identity had to&nbsp;feel direct, contemporary and easy to&nbsp;recognise at&nbsp;a&nbsp;glance.</p>
-          <p>The solution was to&nbsp;build the brand around language itself: bold headlines, isolated phrases, monospaced typography and a&nbsp;symbol system that enters the layout the way a&nbsp;strong quote enters a&nbsp;conversation.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <section class="logo-focus">
-      <div class="logo-focus-inner">
-      <div class="logo-focus-mark">
-        <img src="../../dirtalklogo.png" alt="DIRTALK logo">
-      </div>
-      <div class="logo-focus-copy">
-        <div class="logo-focus-label">04 — Logo</div>
-        <div class="logo-focus-text">
-          <p>The logotype feels friendly, but still has character. The upper part is&nbsp;strict and geometric, while the lower half softens into rounder forms, as&nbsp;if&nbsp;the mark is&nbsp;inviting the viewer into conversation.</p>
-          <p>The small star at&nbsp;the end works like a&nbsp;light accent, a&nbsp;signal that there is&nbsp;something special here. Together, the mark feels clear, confident and slightly ironic, without becoming too polished or&nbsp;distant.</p>
-        </div>
+    <!-- Hero -->
+    <div class="shell">
+      <div class="full bleed reveal">
+        <figure class="zoom">
+          <img src="hero-bed-star.png" alt="DIRTALK podcast — two hosts recording, with the signature star mark" loading="eager">
+        </figure>
       </div>
     </div>
-  </section>
 
-  <section class="quote">
-    <div class="quote-inner">
-      <blockquote>
-        The brand should feel like a&nbsp;statement on&nbsp;the page: unmistakable, emotionally legible and easy to&nbsp;reuse without losing its edge.
-      </blockquote>
-      <div class="quote-caption">Brand direction note</div>
-    </div>
-  </section>
-
-  <main>
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="section-label">04 — Covers</div>
-          <h2>Two cover directions built from the same system.</h2>
+    <!-- Intro / concept -->
+    <section class="shell sec">
+      <div class="grid">
+        <div class="sec-label reveal"><span class="mono">The idea</span></div>
+        <p class="lede-2 reveal">An identity as direct as the conversations it carries. One wordmark, one star, <em>one unmistakable voice.</em></p>
+        <div class="body-cols reveal">
+          <p>DIRTALK talks to founders about what success actually costs. The brand had to match that register: confident, plain-spoken, never decorative. The logo compresses the name into a single tight block, <strong>DIR / talk</strong>, closed by a four-point star that became the signature, a spark, a highlight, a moment worth hearing.</p>
+          <p>Electric blue carries the whole system. Loud enough to own a feed, disciplined enough to stay editorial across posters, merchandise and out-of-home. Space Grotesk sets the headlines; a monospace handles the fine print, borrowed straight from the way the show captions its own stories.</p>
         </div>
-        <div class="section-text">
-          <p>Alongside the core identity, I explored how the system behaves on&nbsp;covers. Each direction leans on&nbsp;a&nbsp;different visual metaphor, but both stay inside the same language of&nbsp;color, spacing and statement-led composition.</p>
-        </div>
-      </div>
-
-      <div class="cover-stories">
-        <article class="cover-story">
-          <div class="cover-story-visual">
-            <img src="../../cover1_case2.png" alt="DIRTALK cover with layered silhouettes">
-          </div>
-          <div class="cover-story-title">Collective voice</div>
-          <p class="cover-story-text">Several silhouettes overlap into one shared presence. Different figures remain visible, but together they read as&nbsp;one strong image about solidarity, visibility and collective voice.</p>
-        </article>
-
-        <article class="cover-story">
-          <div class="cover-story-visual">
-            <img src="../../cover2_case2.png" alt="DIRTALK cover with illustrated host">
-          </div>
-          <div class="cover-story-title">Speaker as&nbsp;image</div>
-          <p class="cover-story-text">Here the focus shifts to&nbsp;a&nbsp;host-like figure, making the visual feel more personal and media-facing. The contrast between green, pink and black keeps the tone playful, but still sharp and recognisable.</p>
-        </article>
-
       </div>
     </section>
 
-    <section class="post-system-section">
-      <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="section-label">05 — Post design</div>
-          <h2>Several post formats were developed inside the same branding system.</h2>
-        </div>
-        <div class="section-text">
-          <p>The system also includes a&nbsp;set of&nbsp;post layouts for different tones and content types. Each one uses the same visual grammar, while shifting the balance between typography, character imagery and abstract form.</p>
+    <!-- Brand system: type / color / photography -->
+    <section class="shell sec system">
+      <div class="grid">
+        <div class="sec-label reveal"><span class="mono">The system</span></div>
+        <p class="lede-2 reveal">A kit of parts anyone can publish with: <em>one type pairing, four colors, one character, one photographic look.</em></p>
+      </div>
+
+      <!-- Typeface -->
+      <div class="grid reveal" style="margin-top:clamp(48px,6vw,80px);">
+        <div class="tf-meta">
+          <div class="tf-item">
+            <div class="tf-name">Space Grotesk</div>
+            <div class="mono">Display · Headlines · 500 / 700</div>
+          </div>
+          <div class="tf-item">
+            <div class="tf-name" style="font-family:var(--mono);font-weight:700;">Space Mono</div>
+            <div class="mono">Labels · Captions · 400 / 700</div>
+          </div>
+          <div class="tf-glyphs mono">ABCDEFGHIJKLMNOPQRSTUVWXYZ&nbsp;·&nbsp;1234567890&nbsp;·&nbsp;✦</div>
         </div>
       </div>
 
-      <div class="post-system">
-        <div class="post-carousel" id="postCarousel">
-          <article class="post-card">
-            <div class="post-stage">
-              <img class="is-active" src="../../case2/Telegram/393.png" alt="DIRTALK post variation one">
-              <img src="../../case2/Telegram/397.png" alt="DIRTALK post variation two">
-              <img src="../../case2/Telegram/400.png" alt="DIRTALK post variation three">
-            </div>
-          </article>
-
-          <article class="post-card">
-            <div class="post-stage">
-              <img src="../../case2/Telegram/403.png" alt="DIRTALK post variation one">
-              <img class="is-active" src="../../case2/Telegram/407.png" alt="DIRTALK post variation two">
-              <img src="../../case2/Telegram/409.png" alt="DIRTALK post variation three">
-            </div>
-          </article>
-
-          <article class="post-card">
-            <div class="post-stage">
-              <img src="../../case2/Telegram/410.png" alt="DIRTALK post variation one">
-              <img src="../../case2/Telegram/411.png" alt="DIRTALK post variation two">
-              <img class="is-active" src="../../case2/Telegram/412.png" alt="DIRTALK post variation three">
-            </div>
-          </article>
+      <!-- Mark & mascot -->
+      <div class="grid reveal" style="margin-top:clamp(56px,7vw,96px);">
+        <div class="mono pal-label">Mark &amp; character</div>
+        <div class="marks">
+          <div class="m-a">
+            <div class="mark-tile"><img src="Group 7.png" alt="DIRTALK logo — primary blue version"></div>
+            <div class="mono mark-cap">Primary mark</div>
+          </div>
+          <div class="m-b">
+            <div class="mark-tile on-blue"><img src="Group 379.png" alt="DIRTALK logo — reversed white version"></div>
+            <div class="mono mark-cap">Reversed</div>
+          </div>
+          <div class="m-c">
+            <div class="mark-tile mascot"><img src="Layer_1.png" alt="DIRTALK brand character — the listener"></div>
+            <div class="mono mark-cap">The listener — brand character</div>
+          </div>
         </div>
       </div>
+
+      <!-- Palette -->
+      <div class="grid reveal" style="margin-top:clamp(56px,7vw,96px);">
+        <div class="mono pal-label">Palette</div>
+        <figure class="pal-img" style="grid-column:1/-1;">
+          <img src="colors.png" alt="DIRTALK palette — Signal Pink #FF8DE1, Midnight Studio #021132, Studio White #FFFFFF, DIRtalk Blue #0E38ED" loading="lazy">
+        </figure>
+      </div>
+
+      <!-- Photography -->
+      <div class="grid reveal" style="margin-top:clamp(56px,7vw,96px);">
+        <div class="ph-txt">
+          <div class="mono">Photography</div>
+          <h3>Studio-lit, tailored, a little cinematic.</h3>
+          <p>Editorial portraits of women in sharp black-and-white tailoring, real podcast mics in frame, cool daylight or a wash of brand blue. Graphics stay minimal: the star, the wordmark, nothing that competes with the face.</p>
+        </div>
+        <div class="ph-imgs">
+          <figure class="zoom" style="grid-column:1/-1;"><img src="editorial-bed.png" alt="DIRTALK photography — candid editorial portrait" loading="lazy"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Identity -->
+    <section class="shell sec">
+      <div class="grid split">
+        <div class="fig reveal">
+          <figure class="zoom"><img src="mic.png" alt="DIRTALK branded studio microphone" loading="lazy"></figure>
+          <div class="cap"><span class="idx">Fig. 02</span><span>The mark, applied</span></div>
+        </div>
+        <div class="txt reveal">
+          <h2>The star does the talking.</h2>
+          <p>Pulled from the logo, the four-point star works as a standalone mark, a bullet, a cursor, a spark of emphasis. It scales from a favicon to a billboard without losing its edge.</p>
+          <p><strong>Blue and near-black</strong> hold the system together; a soft pink star appears only where a line deserves a highlight.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand strip -->
+    <div class="shell">
+      <div class="full bleed reveal">
+        <figure><img src="banner-mic.png" alt="DIRTALK wordmark on electric blue with a studio microphone" loading="lazy"></figure>
+      </div>
+    </div>
+
+    <!-- Campaign -->
+    <section class="shell sec">
+      <div class="grid">
+        <div class="sec-label reveal"><span class="mono">Editorial &amp; social</span></div>
+        <p class="lede-2 reveal">A publishing system built for rhythm, from headline campaigns to long-form founder stories.</p>
+      </div>
+
+      <div class="grid" style="margin-top:48px;">
+        <div class="feature">
+          <div class="big reveal">
+            <figure class="zoom"><img src="397.png" alt="DIRTALK key visual — Women who shape the future" loading="lazy"></figure>
+            <div class="cap"><span class="idx">Key visual</span><span>Women who shape the future</span></div>
+          </div>
+          <div class="small reveal">
+            <figure class="zoom"><img src="401.png" alt="DIRTALK character post — I was in control, until I stopped feeling myself" loading="lazy"></figure>
+            <div class="cap"><span class="idx">Character post</span><span>Founder stories</span></div>
+          </div>
+        </div>
+
+        <div class="posters reveal">
+          <figure>
+            <video autoplay loop muted playsinline webkit-playsinline preload="metadata" aria-label="DIRTALK reels post — on the way to record">
+              <source src="Comp 1_1.mp4" type="video/mp4">
+            </video>
+          </figure>
+          <figure class="zoom"><img src="394.png" alt="DIRTALK poster — pink silhouettes" loading="lazy"></figure>
+          <figure class="zoom"><img src="399.png" alt="DIRTALK founder story post" loading="lazy"></figure>
+          <figure class="zoom"><img src="421.png" alt="DIRTALK slogans — women in business" loading="lazy"></figure>
+          <figure class="zoom"><img src="403.png" alt="DIRTALK social post" loading="lazy"></figure>
+          <figure class="zoom"><img src="408.png" alt="DIRTALK social post" loading="lazy"></figure>
+          <figure class="zoom"><img src="422.png" alt="DIRTALK social post" loading="lazy"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statement -->
+    <div class="shell">
+      <section class="statement reveal">
+        <blockquote>We lead. We build. <span class="em">We change.</span></blockquote>
+        <div class="attrib">DIRTALK — brand voice, 2025</div>
       </section>
+    </div>
+
+    <!-- OOH -->
+    <section class="shell sec" style="padding-top:clamp(40px,5vw,64px);">
+      <div class="grid">
+        <div class="sec-label reveal"><span class="mono">Out of home</span></div>
+        <p class="lede-2 reveal">Loud on the street. The wordmark repeats, the star cuts through.</p>
+      </div>
+      <div class="full bleed reveal" style="margin-top:40px;">
+        <figure class="zoom"><img src="billboard.png" alt="DIRTALK campaign on a city billboard" loading="lazy"></figure>
+      </div>
     </section>
 
-    <section class="footer">
-      <div class="footer-copy">
-        Concept &amp; graphic design — Maria Danilova<br>
-        DIRTALK<br>
-        Brand identity / brandbook / content system<br>
-        2025
+    <!-- Merch -->
+    <section class="shell sec">
+      <div class="grid">
+        <div class="sec-label reveal"><span class="mono">Objects</span></div>
+        <p class="lede-2 reveal">The mark, off screen, and into everyday carry.</p>
       </div>
-      <div class="next-case">
-        <div class="next-case-label">Next case</div>
-        <a href="../helikon-art/">Helikon Art Center <span class="arrow" aria-hidden="true"></span></a>
+      <div class="grid" style="margin-top:40px;">
+        <div class="merch">
+          <div class="m1 reveal"><figure class="zoom"><img src="tote.png" alt="DIRTALK tote bag" loading="lazy"></figure></div>
+          <div class="m2 reveal"><figure class="zoom"><img src="keychain.png" alt="DIRTALK keychain with logo charm and star tag" loading="lazy"></figure></div>
+          <div class="m3 reveal"><figure class="zoom"><img src="cups.png" alt="DIRTALK branded cups in blue and white" loading="lazy"></figure></div>
+        </div>
       </div>
     </section>
+
+    <!-- Digital -->
+    <section class="shell sec">
+      <div class="grid digital">
+        <div class="fig reveal">
+          <figure><img src="phone-player.png" alt="DIRTALK podcast player — Women in the Industry, Episode 12" loading="lazy"></figure>
+        </div>
+        <div class="txt reveal">
+          <div class="sec-label" style="grid-column:auto;"><span class="mono">Made to be heard</span></div>
+          <h2 style="margin-top:18px;">From the feed to the phone in your hand.</h2>
+          <p>Cover art, episode artwork and a player skin keep DIRTALK recognizable everywhere it plays. The system was designed to hold up at album-cover scale as easily as it does on a billboard.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next -->
+    <div class="shell">
+      <nav class="next reveal">
+        <a href="../helikon-art/">
+          <span class="lbl"><span class="mono">Next project</span></span>
+          <span class="ttl">Helikon Art Center</span>
+          <span class="arw">→</span>
+        </a>
+      </nav>
+    </div>
   </main>
 
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
-    const lenis = new Lenis({
-      duration: 1.6,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.2,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      lenis.destroy();
-    }
-
     (function () {
-      const carousel = document.getElementById('postCarousel');
-      if (!carousel) return;
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const stages = Array.from(carousel.querySelectorAll('.post-stage'));
-      const state = stages.map((stage, idx) => {
-        const slides = Array.from(stage.querySelectorAll('img'));
-        return {
-          slides,
-          index: idx % slides.length,
-        };
+      // Ensure inline videos play
+      function playVideos() {
+        document.querySelectorAll('video').forEach(function (v) {
+          v.muted = true; var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        });
+      }
+      window.addEventListener('load', playVideos);
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) playVideos(); });
+
+      // Smooth scroll
+      if (!reduce && window.Lenis) {
+        var lenis = new Lenis({ duration: 1.1, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+        function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+      }
+
+      // Reveal on scroll — content is visible by default; this only enhances
+      var els = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      els.forEach(function (el) { io.observe(el); });
+      // Safety: reveal everything after load in case observer never fires
+      window.addEventListener('load', function () {
+        setTimeout(function () { els.forEach(function (el) { el.classList.add('in'); }); }, 1600);
       });
-
-      function render() {
-        state.forEach((entry) => {
-          entry.slides.forEach((slide, slideIndex) => {
-            slide.classList.toggle('is-active', slideIndex === entry.index);
-          });
-        });
-      }
-
-      function tick() {
-        state.forEach((entry) => {
-          entry.index = (entry.index + 1) % entry.slides.length;
-        });
-        render();
-      }
-
-      render();
-      setInterval(tick, 2000);
     })();
   </script>
-
 </body>
 </html>

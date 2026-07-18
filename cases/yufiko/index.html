@@ -7,7 +7,7 @@
   <title>Yufiko Market — Maria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
   <style>
     @font-face {
@@ -41,7 +41,7 @@
       --muted:   rgba(17,17,17,.4);
       --border:  rgba(17,17,17,.1);
       --accent:  #d63a1a;
-      --font:    'DeFonte', -apple-system, sans-serif;
+      --font:    'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --mono:    'Manrope', sans-serif;
       --max:     1440px;
       --pad:     72px;
@@ -117,6 +117,9 @@
     }
     .case-meta-value {
       font-family:var(--mono); font-size:15px; font-weight:500; line-height:1.5;
+    }
+    .case-meta-item.case-meta-result {
+      grid-column:1 / -1; border-top:1px solid var(--border); padding-top:24px;
     }
 
     /* ─── SECTION HEADER ─── */
@@ -248,6 +251,21 @@
       .next-case { text-align: left; }
       .next-link { font-size: clamp(20px, 6vw, 28px); }
     }
+    .topbar-inner { align-items: flex-start; }
+    .tb-nav { display: flex; gap: 20px; }
+    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .tb-nav a, .tb-contact a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.3s;
+    }
+    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.4; }
+
 
   </style>
 </head>
@@ -255,8 +273,14 @@
 
   <header class="topbar">
     <div class="topbar-inner">
-      <a href="../../" class="back-link">← Back to start</a>
-      <span class="topbar-title">Yufiko Market</span>
+      <nav class="tb-nav">
+        <a href="/">Home</a>
+        <a href="/profile/">Profile</a>
+      </nav>
+      <nav class="tb-contact">
+        <a href="https://www.linkedin.com/in/mariia-danilova-3341a6236/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:damilova.danmar@gmail.com">Email</a>
+      </nav>
     </div>
   </header>
 
@@ -286,6 +310,10 @@
       <div class="case-meta-item">
         <span class="case-meta-label">Year</span>
         <span class="case-meta-value">2025–2026</span>
+      </div>
+      <div class="case-meta-item case-meta-result">
+        <span class="case-meta-label">Result</span>
+        <span class="case-meta-value">Campaign visuals shifted the audience toward a younger, higher-spending crowd; vendor spots now fill ahead of each market</span>
       </div>
     </div>
 
@@ -341,7 +369,7 @@
     </div>
     <div class="next-case reveal reveal-d1">
       <div class="next-label">Next case</div>
-      <a class="next-link" href="../helikon-art/">Helikon Art Center <span class="arrow">→</span></a>
+      <a class="next-link" href="../the-gallery/">The Gallery <span class="arrow">→</span></a>
     </div>
   </footer>
 

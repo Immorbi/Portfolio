@@ -7,7 +7,7 @@
   <title>Archive — Maria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'DeFonte';
@@ -45,7 +45,7 @@
       height: 100%;
       overflow: hidden;
       background: #fff;
-      font-family: 'DeFonte', -apple-system, sans-serif;
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
       cursor: url('../cursor.svg') 16 18, auto;
     }
 
@@ -146,13 +146,58 @@
       .page-title {
         right: 16px;
       }
+
+      .topbar-inner {
+        padding: 16px;
+      }
     }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .topbar-inner {
+      padding: 18px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .tb-nav { display: flex; gap: 20px; }
+    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .tb-nav a, .tb-contact a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: #222;
+      transition: opacity 0.3s;
+    }
+    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.4; }
   </style>
 </head>
 <body>
 
-  <a href="../" class="back">← Back</a>
-  <span class="page-title">Archive</span>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <nav class="tb-nav">
+        <a href="/">Home</a>
+        <a href="/profile/">Profile</a>
+      </nav>
+      <nav class="tb-contact">
+        <a href="https://www.linkedin.com/in/mariia-danilova-3341a6236/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:damilova.danmar@gmail.com">Email</a>
+      </nav>
+    </div>
+  </header>
 
   <div class="canvas" id="canvas"></div>
 

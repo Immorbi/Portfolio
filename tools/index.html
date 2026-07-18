@@ -7,7 +7,7 @@
   <title>Tools — morbimixel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'DeFonte';
@@ -46,7 +46,7 @@
       --text-muted: #c0c0c0;
       --bg: #ffffff;
       --border: #e0e0e0;
-      --font: 'DeFonte', -apple-system, sans-serif;
+      --font: 'Space Grotesk', -apple-system, sans-serif;
       --sidebar-width: 25%;
     }
 
@@ -215,7 +215,7 @@
     }
 
     .hero-title {
-      font-family: 'DeFonte', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-synthesis: none;
       font-size: clamp(42px, 5vw, 72px);
       font-weight: 300;
@@ -225,7 +225,7 @@
     }
 
     .hero-title em {
-      font-family: 'DeFonte', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-synthesis: none;
       font-style: normal;
       font-weight: 400;
@@ -544,6 +544,21 @@
       }
       .topbar-inner { padding: 18px 20px; }
     }
+    .topbar-inner { align-items: flex-start; }
+    .tb-nav { display: flex; gap: 20px; }
+    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .tb-nav a, .tb-contact a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--text, #222);
+      transition: opacity 0.3s;
+    }
+    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.4; }
+
   </style>
 </head>
 <body>
@@ -587,8 +602,14 @@
 
     <header class="topbar">
       <div class="topbar-inner">
-        <a href="../" class="back-link">← Back to start</a>
-        <span class="topbar-title">My Tools</span>
+        <nav class="tb-nav">
+          <a href="/">Home</a>
+          <a href="/profile/">Profile</a>
+        </nav>
+        <nav class="tb-contact">
+          <a href="https://www.linkedin.com/in/mariia-danilova-3341a6236/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="mailto:damilova.danmar@gmail.com">Email</a>
+        </nav>
       </div>
     </header>
 

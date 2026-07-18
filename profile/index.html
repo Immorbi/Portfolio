@@ -7,7 +7,7 @@
   <title>Profile — Maria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'DeFonte';
@@ -46,7 +46,7 @@
       --text-muted: #c8c8c8;
       --bg: #ffffff;
       --border: #e0e0e0;
-      --font: 'DeFonte', -apple-system, sans-serif;
+      --font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --max: 1280px;
       --pad: 48px;
     }
@@ -62,6 +62,39 @@
     ::selection {
       background: var(--text);
       color: var(--bg);
+    }
+
+    .back {
+      position: fixed;
+      top: 24px;
+      left: 28px;
+      z-index: 100;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      color: #222;
+      transition: opacity 0.3s;
+    }
+
+    .back:hover {
+      opacity: 0.4;
+      cursor: url('../cursor2.svg') 16 18, pointer;
+    }
+
+    .page-title {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      z-index: 100;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #c8c8c8;
     }
 
     .layout {
@@ -174,21 +207,35 @@
     }
 
     .topbar {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      z-index: 10;
+      z-index: 100;
       background: #ffffff;
       border-bottom: 1px solid var(--border);
-      display: none;
     }
 
     .topbar-inner {
-      padding: 18px var(--pad);
+      padding: 18px 28px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
     }
+
+    .tb-nav { display: flex; gap: 20px; }
+    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .tb-nav a, .tb-contact a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.3s;
+    }
+    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.4; }
 
     .back-link,
     .topbar-title {
@@ -254,6 +301,14 @@
       object-position: center top;
       transform: translateY(-30px) scale(1.2);
       transform-origin: center top;
+    }
+
+    .info-photo video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: transparent;
     }
 
     .info-photo-cursor {
@@ -418,8 +473,21 @@
         width: 100%;
       }
 
+      .back,
+      .page-title {
+        top: 16px;
+      }
+
+      .back {
+        left: 16px;
+      }
+
+      .page-title {
+        right: 16px;
+      }
+
       main {
-        padding: 150px 20px 28px 24px;
+        padding: 88px 20px 28px 24px;
       }
 
       .profile-page {
@@ -470,52 +538,28 @@
   </style>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <a class="sidebar-logo" href="../" aria-label="Go to start page">
-        <img src="../logo.svg" alt="Maria Danilova">
-      </a>
-
-      <div class="sidebar-video">
-        <video autoplay loop muted playsinline preload="auto">
-          <source src="../Comp 1_4_1.slow.clean.mp4" type="video/mp4">
-          <source src="../Comp 1_4_1.mov" type="video/quicktime">
-        </video>
-      </div>
-
-      <nav class="menu-list">
-        <a class="menu-item" href="../">
-          <span class="menu-item-title">Work</span>
-          <span class="menu-item-desc">VIEW MY WORK<br>IN MOTION</span>
-        </a>
-        <a class="menu-item" href="../archive/">
-          <span class="menu-item-title">Archive</span>
-          <span class="menu-item-desc">EVERY PROJECT<br>IN ONE SPACE</span>
-        </a>
-        <a class="menu-item active" href="./">
-          <span class="menu-item-title">Profile</span>
-          <span class="menu-item-desc">ABOUT ME &<br>MY PRACTICE</span>
-        </a>
-        <a class="menu-item" href="../tools/">
-          <span class="menu-item-title">Tools</span>
-          <span class="menu-item-desc">MY<br>TOOLS</span>
-        </a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <nav class="tb-nav">
+        <a href="/">Home</a>
+        <a href="/profile/">Profile</a>
       </nav>
-    </aside>
+      <nav class="tb-contact">
+        <a href="https://www.linkedin.com/in/mariia-danilova-3341a6236/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:damilova.danmar@gmail.com">Email</a>
+      </nav>
+    </div>
+  </header>
 
-    <div class="profile-main">
-      <header class="topbar">
-        <div class="topbar-inner">
-          <a href="../" class="back-link">← Back to start</a>
-          <span class="topbar-title">Profile / Maria Danilova</span>
-        </div>
-      </header>
-
+  <div class="profile-main">
       <main>
         <section class="profile-page">
           <div class="info-photo">
             <div class="info-photo-main">
-              <img src="../image 32.png" alt="Maria Danilova">
+              <video autoplay loop muted playsinline webkit-playsinline preload="auto" aria-label="Maria Danilova">
+                <source src="../Comp 1_4_1.slow.clean.mp4" type="video/mp4">
+                <source src="../Comp 1_4_1.mov" type="video/quicktime">
+              </video>
             </div>
             <span class="info-photo-cursor" aria-hidden="true">
               <img src="../cursor2.svg" alt="">
@@ -542,7 +586,6 @@
           </div>
         </section>
       </main>
-    </div>
   </div>
 </body>
 </html>

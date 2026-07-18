@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-  <title>Poster Collection for The Gallery — Maria</title>
+  <title>The Gallery — Maria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
   <style>
     @font-face {
@@ -48,10 +48,12 @@
       --bg: #ffffff;
       --border: #e0e0e0;
       --muted-bg: #f4f4f4;
-      --font: 'DeFonte', -apple-system, sans-serif;
-      --serif: 'DeFonte', Georgia, serif;
+      --font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --serif: 'Space Grotesk', Georgia, serif;
       --max: 1280px;
       --pad: 48px;
+      --post-w: 272px;
+      --post-gap: 12px;
     }
 
     html, body {
@@ -210,6 +212,79 @@
       line-height: 1.5;
     }
 
+    .meta-item.meta-result {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    /* --- Editorial marquee strips --- */
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+
+    .artist-strip { margin-bottom: 40px; }
+    .artist-strip:last-child { margin-bottom: 0; }
+
+    .artist-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      padding: 0 var(--pad);
+      max-width: var(--max);
+      margin-left: auto; margin-right: auto;
+      display: block;
+    }
+
+    .marquee-wrap {
+      overflow: hidden;
+      width: 100%;
+      cursor: url('../../cursor2.svg') 16 18, pointer;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: var(--post-gap);
+      width: max-content;
+      animation: scroll-left var(--dur, 40s) linear infinite;
+    }
+
+    .marquee-wrap:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - var(--post-gap) / 2)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
+
+    .post-item {
+      width: var(--post-w);
+      aspect-ratio: 1080 / 1350;
+      overflow: hidden;
+      background: var(--muted-bg);
+      flex-shrink: 0;
+    }
+
+    .post-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    .marquee-wrap:hover .post-item img {
+      transform: scale(1.03);
+    }
+
     /* --- Hero image --- */
     .hero {
       padding: 72px 0;
@@ -262,6 +337,9 @@
       object-fit: cover;
     }
 
+    /* labels-on-me is a wider format (0.8) — give it its native ratio so the title isn't cropped */
+    .stack-card.sc-4 { width: 320px; }
+
     .stack-card img.is-tight-fill,
     .poster-stage img.is-tight-fill {
       transform: scale(1.14);
@@ -296,6 +374,7 @@
     @media (max-width: 900px) {
       .poster-stack { width: 600px; height: 360px; }
       .stack-card { width: 200px; height: 290px; left: 200px; }
+      .stack-card.sc-4 { width: 232px; }
       .poster-stack.is-spread .sc-1 { left: -20px; }
       .poster-stack.is-spread .sc-2 { left: 50px; }
       .poster-stack.is-spread .sc-3 { left: 120px; }
@@ -642,7 +721,7 @@
 
     /* --- Responsive --- */
     @media (max-width: 900px) {
-      :root { --pad: 24px; }
+      :root { --pad: 24px; --post-w: 200px; }
 
       .intro { padding: 56px 0 48px; }
       .meta { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 32px 0 48px; }
@@ -656,6 +735,8 @@
     }
 
     @media (max-width: 520px) {
+      :root { --post-w: 160px; }
+
       .topbar-inner {
         padding: calc(env(safe-area-inset-top) + 14px) var(--pad) 14px;
         justify-content: space-between;
@@ -702,6 +783,8 @@
         top: 22px;
         left: 97px;
       }
+
+      .stack-card.sc-4 { width: 128px; }
 
       .poster-stack.is-spread .sc-1 { top: 30px; left: 2px; }
       .poster-stack.is-spread .sc-2 { top: 20px; left: 30px; }
@@ -766,6 +849,21 @@
         padding: 32px 0 40px;
       }
     }
+    .topbar-inner { align-items: flex-start; }
+    .tb-nav { display: flex; gap: 20px; }
+    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .tb-nav a, .tb-contact a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.3s;
+    }
+    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.4; }
+
   </style>
 
 </head>
@@ -773,9 +871,14 @@
 
   <header class="topbar">
     <div class="topbar-inner">
-      <a href="../../index.html" class="back-link">← Back to&nbsp;start</a>
-      <span class="topbar-title">Case 01 / The Gallery</span>
-      <a href="../dirtalk/" class="topbar-next">Next →</a>
+      <nav class="tb-nav">
+        <a href="/">Home</a>
+        <a href="/profile/">Profile</a>
+      </nav>
+      <nav class="tb-contact">
+        <a href="https://www.linkedin.com/in/mariia-danilova-3341a6236/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:damilova.danmar@gmail.com">Email</a>
+      </nav>
     </div>
   </header>
 
@@ -783,10 +886,10 @@
 
     <!-- Intro -->
     <section class="intro">
-      <div class="eyebrow">Graphic Design · Print · 2025–2026</div>
-      <h1>Poster collection <em>for</em> The Gallery</h1>
+      <div class="eyebrow">Graphic Design · Print · Social Media · 2025–2026</div>
+      <h1>Posters &amp;&nbsp;editorial <em>for</em> The Gallery</h1>
       <p class="intro-lede">
-        A&nbsp;series of&nbsp;posters designed for The Gallery — an&nbsp;independent contemporary art space in&nbsp;Tbilisi. Each poster accompanies an&nbsp;exhibition, lecture, or&nbsp;pop-up event, held together by&nbsp;a&nbsp;flexible visual system that lets every show speak in&nbsp;its own voice.
+        The visual voice of&nbsp;The Gallery — an&nbsp;independent contemporary art space in&nbsp;Tbilisi. A&nbsp;series of&nbsp;event posters where every show speaks in&nbsp;its own voice, and a&nbsp;recurring editorial system for the gallery's social presence, built inside one coherent identity.
       </p>
     </section>
 
@@ -802,11 +905,15 @@
       </div>
       <div class="meta-item">
         <span class="meta-label">Scope</span>
-        <span class="meta-value">9 event posters<br>Print &amp; digital</span>
+        <span class="meta-value">9 event posters<br>Editorial system</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Year</span>
         <span class="meta-value">2025 — 2026</span>
+      </div>
+      <div class="meta-item meta-result">
+        <span class="meta-label">Result</span>
+        <span class="meta-value">300+ visitors per event across 6&nbsp;promoted exhibitions · community grew to&nbsp;10,000+ followers</span>
       </div>
     </section>
 
@@ -817,7 +924,7 @@
       </div>
       <div class="brief-col">
         <div class="brief-label">Task</div>
-        <p class="brief-text">Nine posters for an&nbsp;independent art space in&nbsp;Tbilisi, each for a&nbsp;different kind of&nbsp;event. The interesting constraint: make them feel like a&nbsp;series without forcing them into a&nbsp;template.</p>
+        <p class="brief-text">Nine posters for an&nbsp;independent art space in&nbsp;Tbilisi, each for a&nbsp;different kind of&nbsp;event, plus two recurring editorial formats for social media: a&nbsp;structured interview series and an&nbsp;artist spotlight. The interesting constraint: make it&nbsp;all feel like one identity without forcing anything into a&nbsp;template.</p>
       </div>
       <div class="brief-col">
         <div class="brief-label">Solution</div>
@@ -924,7 +1031,163 @@
         </div>
       </div>
     </section>
+  </main>
 
+  <!-- Interview series (full width) -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-label">04 — Interview series</div>
+          <h2>5 Questions for the Artist.</h2>
+        </div>
+        <div class="section-text">
+          <p>A recurring interview format built around five questions per artist. Each series opens with a cover card — the artist's portrait with their name as the dominant element — and continues with question/answer cards interspersed with artwork photography.</p>
+          <p>Two colour registers: charcoal for Polina Orlova, navy for Tasia&nbsp;K.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="artist-strip">
+      <span class="artist-label">Polina Orlova</span>
+      <div class="marquee-wrap">
+        <div class="marquee-track" style="--dur:48s">
+          <!-- set 1 -->
+          <div class="post-item"><img src="../../publications/100.png" alt="Polina Orlova cover"></div>
+          <div class="post-item"><img src="../../publications/101.png" alt="Evenings Q"></div>
+          <div class="post-item"><img src="../../publications/8.png" alt="Reference System artwork"></div>
+          <div class="post-item"><img src="../../publications/102.png" alt="Depth of the Inner World artwork"></div>
+          <div class="post-item"><img src="../../publications/106.png" alt="Recently felt deeply Q"></div>
+          <div class="post-item"><img src="../../publications/103.png" alt="The Kiss artwork"></div>
+          <div class="post-item"><img src="../../publications/107.png" alt="Place inside your art Q"></div>
+          <div class="post-item"><img src="../../publications/104.png" alt="Meditation artwork"></div>
+          <div class="post-item"><img src="../../publications/7.png" alt="Quiet ritual Q"></div>
+          <div class="post-item"><img src="../../publications/105.png" alt="Choir artwork"></div>
+          <div class="post-item"><img src="../../publications/9.png" alt="Hope people notice Q"></div>
+          <div class="post-item"><img src="../../publications/20.png" alt="Place imaginary Q"></div>
+          <!-- set 2 (duplicate for loop) -->
+          <div class="post-item"><img src="../../publications/100.png" alt="Polina Orlova cover"></div>
+          <div class="post-item"><img src="../../publications/101.png" alt="Evenings Q"></div>
+          <div class="post-item"><img src="../../publications/8.png" alt="Reference System artwork"></div>
+          <div class="post-item"><img src="../../publications/102.png" alt="Depth of the Inner World artwork"></div>
+          <div class="post-item"><img src="../../publications/106.png" alt="Recently felt deeply Q"></div>
+          <div class="post-item"><img src="../../publications/103.png" alt="The Kiss artwork"></div>
+          <div class="post-item"><img src="../../publications/107.png" alt="Place inside your art Q"></div>
+          <div class="post-item"><img src="../../publications/104.png" alt="Meditation artwork"></div>
+          <div class="post-item"><img src="../../publications/7.png" alt="Quiet ritual Q"></div>
+          <div class="post-item"><img src="../../publications/105.png" alt="Choir artwork"></div>
+          <div class="post-item"><img src="../../publications/9.png" alt="Hope people notice Q"></div>
+          <div class="post-item"><img src="../../publications/20.png" alt="Place imaginary Q"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="artist-strip">
+      <span class="artist-label">Tasia K</span>
+      <div class="marquee-wrap">
+        <div class="marquee-track" style="--dur:44s; animation-direction: reverse;">
+          <!-- set 1 -->
+          <div class="post-item"><img src="../../publications/416.png" alt="Tasia K cover"></div>
+          <div class="post-item"><img src="../../publications/420.png" alt="Evenings Q navy"></div>
+          <div class="post-item"><img src="../../publications/22.png" alt="Tasia photo"></div>
+          <div class="post-item"><img src="../../publications/21.png" alt="Quiet ritual Q navy"></div>
+          <div class="post-item"><img src="../../publications/14.png" alt="After performing artwork"></div>
+          <div class="post-item"><img src="../../publications/110.png" alt="Hope people notice Q navy"></div>
+          <div class="post-item"><img src="../../publications/16.png" alt="Portrait photo"></div>
+          <div class="post-item"><img src="../../publications/109.png" alt="Evenings Q navy 2"></div>
+          <div class="post-item"><img src="../../publications/18.png" alt="Tent of Wonders"></div>
+          <div class="post-item"><img src="../../publications/19.png" alt="Recently felt deeply Q navy"></div>
+          <!-- set 2 -->
+          <div class="post-item"><img src="../../publications/416.png" alt="Tasia K cover"></div>
+          <div class="post-item"><img src="../../publications/420.png" alt="Evenings Q navy"></div>
+          <div class="post-item"><img src="../../publications/22.png" alt="Tasia photo"></div>
+          <div class="post-item"><img src="../../publications/21.png" alt="Quiet ritual Q navy"></div>
+          <div class="post-item"><img src="../../publications/14.png" alt="After performing artwork"></div>
+          <div class="post-item"><img src="../../publications/110.png" alt="Hope people notice Q navy"></div>
+          <div class="post-item"><img src="../../publications/16.png" alt="Portrait photo"></div>
+          <div class="post-item"><img src="../../publications/109.png" alt="Evenings Q navy 2"></div>
+          <div class="post-item"><img src="../../publications/18.png" alt="Tent of Wonders"></div>
+          <div class="post-item"><img src="../../publications/19.png" alt="Recently felt deeply Q navy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artist spotlight (full width) -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-label">05 — Artist spotlight</div>
+          <h2>What's Your Inspiration.</h2>
+        </div>
+        <div class="section-text">
+          <p>A lighter series focused on individual artists connected to the gallery. Each post gets a distinct colour accent applied to the artist's name set in&nbsp;a custom display treatment.</p>
+          <p>The palette shifts per subject — pink for Nino Gogolidze, purple for Mako Lomadze — while the layout logic stays constant across the&nbsp;series.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="artist-strip">
+      <span class="artist-label">Nino Gogolidze</span>
+      <div class="marquee-wrap">
+        <div class="marquee-track" style="--dur:30s">
+          <!-- set 1 -->
+          <div class="post-item"><img src="../../publications/88.png" alt="Nino Gogolidze cover"></div>
+          <div class="post-item"><img src="../../publications/89.png" alt="Nino — introduction"></div>
+          <div class="post-item"><img src="../../publications/90.png" alt="Nino — top 3 movies"></div>
+          <div class="post-item"><img src="../../publications/91.png" alt="Nino — top 3 books"></div>
+          <div class="post-item"><img src="../../publications/92.png" alt="Nino — top 3 songs"></div>
+          <div class="post-item"><img src="../../publications/93.png" alt="Nino — art style"></div>
+          <!-- set 2 -->
+          <div class="post-item"><img src="../../publications/88.png" alt="Nino Gogolidze cover"></div>
+          <div class="post-item"><img src="../../publications/89.png" alt="Nino — introduction"></div>
+          <div class="post-item"><img src="../../publications/90.png" alt="Nino — top 3 movies"></div>
+          <div class="post-item"><img src="../../publications/91.png" alt="Nino — top 3 books"></div>
+          <div class="post-item"><img src="../../publications/92.png" alt="Nino — top 3 songs"></div>
+          <div class="post-item"><img src="../../publications/93.png" alt="Nino — art style"></div>
+          <!-- set 3 (more items needed so gap doesn't show) -->
+          <div class="post-item"><img src="../../publications/88.png" alt="Nino Gogolidze cover"></div>
+          <div class="post-item"><img src="../../publications/89.png" alt="Nino — introduction"></div>
+          <div class="post-item"><img src="../../publications/90.png" alt="Nino — top 3 movies"></div>
+          <div class="post-item"><img src="../../publications/91.png" alt="Nino — top 3 books"></div>
+          <div class="post-item"><img src="../../publications/92.png" alt="Nino — top 3 songs"></div>
+          <div class="post-item"><img src="../../publications/93.png" alt="Nino — art style"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="artist-strip">
+      <span class="artist-label">Mako Lomadze</span>
+      <div class="marquee-wrap">
+        <div class="marquee-track" style="--dur:32s; animation-direction: reverse;">
+          <!-- set 1 -->
+          <div class="post-item"><img src="../../publications/94.png" alt="Mako Lomadze cover"></div>
+          <div class="post-item"><img src="../../publications/95.png" alt="Mako — introduction"></div>
+          <div class="post-item"><img src="../../publications/96.png" alt="Mako — top 3 movies"></div>
+          <div class="post-item"><img src="../../publications/97.png" alt="Mako — top 3 books"></div>
+          <div class="post-item"><img src="../../publications/98.png" alt="Mako — top 3 songs"></div>
+          <div class="post-item"><img src="../../publications/99.png" alt="Mako — art style"></div>
+          <!-- set 2 -->
+          <div class="post-item"><img src="../../publications/94.png" alt="Mako Lomadze cover"></div>
+          <div class="post-item"><img src="../../publications/95.png" alt="Mako — introduction"></div>
+          <div class="post-item"><img src="../../publications/96.png" alt="Mako — top 3 movies"></div>
+          <div class="post-item"><img src="../../publications/97.png" alt="Mako — top 3 books"></div>
+          <div class="post-item"><img src="../../publications/98.png" alt="Mako — top 3 songs"></div>
+          <div class="post-item"><img src="../../publications/99.png" alt="Mako — art style"></div>
+          <!-- set 3 -->
+          <div class="post-item"><img src="../../publications/94.png" alt="Mako Lomadze cover"></div>
+          <div class="post-item"><img src="../../publications/95.png" alt="Mako — introduction"></div>
+          <div class="post-item"><img src="../../publications/96.png" alt="Mako — top 3 movies"></div>
+          <div class="post-item"><img src="../../publications/97.png" alt="Mako — top 3 books"></div>
+          <div class="post-item"><img src="../../publications/98.png" alt="Mako — top 3 songs"></div>
+          <div class="post-item"><img src="../../publications/99.png" alt="Mako — art style"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
     <!-- Footer -->
     <section class="footer">
       <div class="credits">
