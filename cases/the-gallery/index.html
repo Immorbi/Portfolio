@@ -5,867 +5,260 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
   <title>The Gallery — Maria</title>
+  <meta name="description" content="The Gallery — a collection of event posters and a recurring editorial system for an independent contemporary art space in Tbilisi.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    @font-face {
-      font-family: 'DeFonte';
-      src: url('../../DeFonte reduced Leger.ttf') format('truetype');
-      font-weight: 300;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'DeFonte';
-      src: url('../../DeFonte reduced Normale.ttf') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'DeFonte';
-      src: url('../../DeFonte reduced DemiGras.ttf') format('truetype');
-      font-weight: 600;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'DeFonte';
-      src: url('../../DeFonte reduced Gros.ttf') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-    }
-
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --text: #222222;
-      --text-light: #888888;
-      --text-muted: #c8c8c8;
-      --bg: #ffffff;
-      --border: #e0e0e0;
-      --muted-bg: #f4f4f4;
-      --font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --serif: 'Space Grotesk', Georgia, serif;
-      --max: 1280px;
-      --pad: 48px;
-      --post-w: 272px;
+      --text: #f4f4f4;
+      --muted: #8a8a8a;
+      --bg: #0a0a0a;
+      --line: #242424;
+      --card: #161616;
+      --edge: clamp(18px, 2.2vw, 32px);   /* wide, near-full-bleed like dirtalk */
+      --gap: clamp(18px, 3vw, 56px);
+      --post-w: clamp(150px, 20vw, 232px);
       --post-gap: 12px;
+      --mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      --sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --e: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    html, body {
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--font);
+      font-family: var(--sans);
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
       overflow-x: hidden;
       cursor: url('../../cursor.svg') 16 18, auto;
     }
 
-    body {
-      padding-top: 60px;
-    }
-
-    ::selection {
-      background: var(--text);
-      color: var(--bg);
-    }
-
-    a { color: inherit; }
-
+    ::selection { background: var(--text); color: var(--bg); }
+    a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
-    /* --- Top bar --- */
+    /* ── Menu (shared across cases) ── */
     .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 10;
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
+      position: fixed; top: 0; left: 0; width: 100%;
+      z-index: 100; background: transparent;
     }
-
     .topbar-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 18px var(--pad);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 18px var(--edge);
+      display: flex; justify-content: space-between; align-items: flex-start;
     }
-
-    .back-link {
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: opacity 0.3s;
+    .tb-nav { display: flex; gap: 20px; }
+    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .tb-nav a, .tb-contact a {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text);
+      transition: opacity 0.3s var(--e);
     }
+    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.45; cursor: url('../../cursor2.svg') 16 18, pointer; }
 
-    .back-link:hover { opacity: 0.5; cursor: url('../../cursor2.svg') 16 18, pointer; }
-
-    .topbar-title {
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
+    /* ── Masthead ── */
+    .mast {
+      padding: clamp(120px, 20vh, 240px) var(--edge) clamp(48px, 7vw, 112px);
     }
-
-    .topbar-next {
-      display: none;
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      text-decoration: none;
-      color: var(--text);
-      transition: opacity 0.3s;
-    }
-    .topbar-next:hover { opacity: 0.5; }
-
-    /* --- Layout --- */
-    main {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 var(--pad);
-    }
-
-    /* --- Intro --- */
-    .intro {
-      padding: 96px 0 72px;
-      border-bottom: 1px solid var(--border);
-    }
-
     .eyebrow {
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 32px;
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: clamp(22px, 4vw, 44px);
     }
-
-    .intro h1 {
-      font-size: clamp(44px, 7vw, 104px);
-      font-weight: 400;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      max-width: 14ch;
-      margin-bottom: 40px;
+    .mast h1 {
+      font-size: clamp(58px, 15vw, 240px);
+      font-weight: 500; line-height: 0.86; letter-spacing: -0.045em;
     }
-
-    .intro h1 em {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
+    .mast .lede {
+      margin-top: clamp(28px, 4vw, 52px);
+      max-width: 32ch;
+      font-size: clamp(17px, 1.9vw, 23px);
+      font-weight: 400; line-height: 1.4; letter-spacing: -0.015em;
+      color: #c9c9c9;
     }
-
-    .intro-lede {
-      font-family: var(--serif);
-      font-size: clamp(18px, 1.5vw, 22px);
-      line-height: 1.6;
-      max-width: 640px;
-      color: var(--text);
+    .mast .meta {
+      margin-top: clamp(26px, 3.5vw, 46px);
+      display: flex; flex-wrap: wrap; gap: 6px 40px;
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 400; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
     }
+    .mast .meta b { color: var(--text); font-weight: 700; }
 
-    /* --- Meta grid --- */
-    .meta {
+    /* ── Poster grid (2 per row) ── */
+    .posters {
+      padding: 0 var(--edge) clamp(72px, 9vw, 140px);
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      padding: 48px 0 72px;
-      border-bottom: 1px solid var(--border);
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      align-items: start;
     }
+    .poster {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.9s var(--e), transform 0.9s var(--e);
+    }
+    .poster.in { opacity: 1; transform: none; }
+    .poster img { width: 100%; height: auto; background: var(--card); }
+    .poster figcaption {
+      margin-top: 14px;
+      display: flex; justify-content: space-between; gap: 16px;
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 400; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .poster figcaption .idx { color: var(--text); }
 
-    .meta-item {
+    /* ── Animated poster hero (fan-in) ── */
+    .poster-hero {
+      overflow: hidden;
+      padding: clamp(6px, 2vw, 20px) 0 clamp(56px, 8vw, 120px);
+    }
+    .fan {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
+      gap: clamp(16px, 2vw, 40px);
+      padding: 48px var(--edge);
+      width: max-content;
+      align-items: center;
+    }
+    .fan-card {
+      flex: 0 0 auto;
+      width: clamp(168px, 23vw, 360px);
+      opacity: 0;
+      transform: translateY(96px) rotate(0deg) scale(0.95);
+      transition: opacity 0.85s var(--e), transform 1.1s var(--e);
+      transition-delay: var(--d, 0s);
+      will-change: transform, opacity;
+    }
+    .fan-card img {
+      width: 100%; height: auto; display: block;
+      box-shadow: 0 26px 64px rgba(0, 0, 0, 0.55);
+    }
+    .poster-hero.in .fan-card {
+      opacity: 1;
+      transform: translateY(var(--y, 0px)) rotate(var(--r, 0deg)) scale(1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fan-card {
+        opacity: 1;
+        transform: translateY(var(--y, 0px)) rotate(var(--r, 0deg));
+        transition: none;
+      }
     }
 
-    .meta-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
+    /* ── Editorial / social sections ── */
+    .section { padding: clamp(56px, 8vw, 112px) 0; border-top: 1px solid var(--line); }
+    .section-inner { padding: 0 var(--edge); }
+    .section-head {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 48px;
+      margin-bottom: clamp(36px, 5vw, 60px);
     }
-
-    .meta-value {
-      font-family: 'Manrope', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 1.5;
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
     }
-
-    .meta-item.meta-result {
-      grid-column: 1 / -1;
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
+    .section h2 {
+      font-size: clamp(30px, 4vw, 52px);
+      font-weight: 500; letter-spacing: -0.03em; line-height: 1.02;
+      max-width: 16ch;
     }
-
-    /* --- Editorial marquee strips --- */
-    .section-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 var(--pad);
+    .section-text {
+      font-family: var(--body);
+      font-size: 16px; line-height: 1.7; color: #b9b9b9;
+      max-width: 640px; margin-left: auto;
     }
+    .section-text p + p { margin-top: 16px; }
 
-    .artist-strip { margin-bottom: 40px; }
-    .artist-strip:last-child { margin-bottom: 0; }
-
+    .artist-strip { margin-top: clamp(28px, 4vw, 44px); }
     .artist-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px; font-weight: 600;
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      padding: 0 var(--pad);
-      max-width: var(--max);
-      margin-left: auto; margin-right: auto;
+      color: var(--muted);
+      margin-bottom: 14px; padding: 0 var(--edge);
       display: block;
     }
-
     .marquee-wrap {
-      overflow: hidden;
-      width: 100%;
+      overflow: hidden; width: 100%;
       cursor: url('../../cursor2.svg') 16 18, pointer;
     }
-
     .marquee-track {
-      display: flex;
-      gap: var(--post-gap);
+      display: flex; gap: var(--post-gap);
       width: max-content;
       animation: scroll-left var(--dur, 40s) linear infinite;
     }
-
-    .marquee-wrap:hover .marquee-track {
-      animation-play-state: paused;
-    }
-
+    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
     @keyframes scroll-left {
       0%   { transform: translateX(0); }
       100% { transform: translateX(calc(-50% - var(--post-gap) / 2)); }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      .marquee-track { animation: none; }
-    }
-
     .post-item {
       width: var(--post-w);
       aspect-ratio: 1080 / 1350;
-      overflow: hidden;
-      background: var(--muted-bg);
+      overflow: hidden; background: var(--card);
       flex-shrink: 0;
     }
-
     .post-item img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: top center;
-      display: block;
-      transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+      transition: transform 0.5s var(--e);
     }
+    .marquee-wrap:hover .post-item img { transform: scale(1.03); }
 
-    .marquee-wrap:hover .post-item img {
-      transform: scale(1.03);
-    }
-
-    /* --- Hero image --- */
-    .hero {
-      padding: 72px 0;
-    }
-
-    .hero-img {
-      width: 100%;
-      background: var(--muted-bg);
-      overflow: hidden;
-    }
-
-    .hero-img img {
-      width: 100%;
-      height: auto;
-    }
-
-    /* --- Poster stack (full-bleed) --- */
-    .poster-stack-section {
-      width: 100%;
-      background: #000;
-      padding: 80px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .poster-stack {
-      position: relative;
-      width: 900px;
-      height: 440px;
-    }
-
-    .stack-card {
-      position: absolute;
-      width: 280px;
-      height: 400px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-      /* Start stacked in center */
-      top: 20px;
-      left: 310px;
-      transform: rotate(0deg) scale(0.95);
-      transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1);
-    }
-
-    .stack-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* labels-on-me is a wider format (0.8) — give it its native ratio so the title isn't cropped */
-    .stack-card.sc-4 { width: 320px; }
-
-    .stack-card img.is-tight-fill,
-    .poster-stage img.is-tight-fill {
-      transform: scale(1.14);
-      transform-origin: center center;
-    }
-
-    /* Spread positions — centered fan */
-    .poster-stack.is-spread .sc-1 { top: 20px; left: -50px; transform: rotate(-14deg); z-index: 1; }
-    .poster-stack.is-spread .sc-2 { top: 5px; left: 50px; transform: rotate(-9deg); z-index: 2; }
-    .poster-stack.is-spread .sc-3 { top: 0; left: 150px; transform: rotate(-4deg); z-index: 3; }
-    .poster-stack.is-spread .sc-4 { top: 0; left: 250px; transform: rotate(1deg); z-index: 4; }
-    .poster-stack.is-spread .sc-5 { top: 0; left: 350px; transform: rotate(5deg); z-index: 5; }
-    .poster-stack.is-spread .sc-6 { top: 5px; left: 450px; transform: rotate(9deg); z-index: 4; }
-    .poster-stack.is-spread .sc-7 { top: 15px; left: 550px; transform: rotate(13deg); z-index: 3; }
-    .poster-stack.is-spread .sc-8 { top: 30px; left: 640px; transform: rotate(17deg); z-index: 2; }
-
-    /* Stagger the animation */
-    .sc-1 { transition-delay: 0s; z-index: 8; }
-    .sc-2 { transition-delay: 0.06s; z-index: 7; }
-    .sc-3 { transition-delay: 0.12s; z-index: 6; }
-    .sc-4 { transition-delay: 0.18s; z-index: 5; }
-    .sc-5 { transition-delay: 0.24s; z-index: 4; }
-    .sc-6 { transition-delay: 0.30s; z-index: 3; }
-    .sc-7 { transition-delay: 0.36s; z-index: 2; }
-    .sc-8 { transition-delay: 0.42s; z-index: 1; }
-
-    .poster-stack.is-spread .stack-card:hover {
-      z-index: 10 !important;
-      transform: scale(1.08) !important;
-    }
-
-    @media (max-width: 900px) {
-      .poster-stack { width: 600px; height: 360px; }
-      .stack-card { width: 200px; height: 290px; left: 200px; }
-      .stack-card.sc-4 { width: 232px; }
-      .poster-stack.is-spread .sc-1 { left: -20px; }
-      .poster-stack.is-spread .sc-2 { left: 50px; }
-      .poster-stack.is-spread .sc-3 { left: 120px; }
-      .poster-stack.is-spread .sc-4 { left: 190px; }
-      .poster-stack.is-spread .sc-5 { left: 260px; }
-      .poster-stack.is-spread .sc-6 { left: 330px; }
-      .poster-stack.is-spread .sc-7 { left: 400px; }
-      .poster-stack.is-spread .sc-8 { left: 460px; }
-    }
-
-    /* --- Section --- */
-    .section {
-      padding: 72px 0;
-      
-    }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 48px;
-      margin-bottom: 56px;
-    }
-
-    .section-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-    }
-
-    .section h2 {
-      font-size: clamp(28px, 3.5vw, 44px);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      max-width: 16ch;
-    }
-
-    .section-text {
-      font-family: var(--serif);
-      font-size: 17px;
-      line-height: 1.75;
-      max-width: 640px;
-      margin-left: auto;
-    }
-
-    .section-text p + p { margin-top: 18px; }
-
-    /* --- Lettering highlight block --- */
-    .lettering-block {
-      background: var(--text);
-      color: var(--bg);
-      padding: 100px 0;
-      position: relative;
-      overflow: hidden;
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .lettering-inner {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 480px;
-      padding: 0 var(--pad);
-    }
-
-    .lettering-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 24px;
-    }
-
-    .lettering-title {
-      font-size: clamp(28px, 4vw, 48px);
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-    }
-
-    .lettering-text {
-      font-family: var(--serif);
-      font-size: 16px;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.6);
-    }
-
-    .lettering-text p + p { margin-top: 14px; }
-
-    /* Floating lettering images around text */
-    .lettering-float {
-      position: absolute;
-      z-index: 1;
-      opacity: 0.85;
-      transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
-    }
-
-    .lettering-float:hover {
-      transform: scale(1.1);
-      opacity: 1;
-      z-index: 3;
-    }
-
-    .lettering-float img {
-      display: block;
-      height: 100%;
-      width: 100%;
-      object-fit: contain;
-    }
-
-    .lf-1 { top: 3%; left: 2%; width: 260px; height: 180px; transform: rotate(-8deg); }
-    .lf-2 { top: 5%; right: 3%; width: 240px; height: 160px; transform: rotate(6deg); }
-    .lf-3 { top: 40%; left: 0; width: 220px; height: 150px; transform: rotate(-4deg); }
-    .lf-4 { top: 42%; right: 1%; width: 250px; height: 170px; transform: rotate(10deg); }
-    .lf-5 { bottom: 5%; left: 5%; width: 230px; height: 140px; transform: rotate(5deg); }
-    .lf-6 { bottom: 8%; right: 5%; width: 200px; height: 140px; transform: rotate(-6deg); }
-    .lf-7 { bottom: 2%; left: 38%; width: 180px; height: 120px; transform: rotate(3deg); }
-
-    @media (max-width: 600px) {
-      .lettering-float { opacity: 0.4; }
-      .lettering-block { min-height: auto; padding: 72px 0; }
-    }
-
-    /* --- Poster viewer (split: poster left, info right) --- */
-    .poster-viewer {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-      align-items: center;
-    }
-
-    .poster-stage {
-      position: relative;
-      aspect-ratio: 3 / 4;
-      background: var(--muted-bg);
-      overflow: hidden;
-    }
-
-    .poster-stage img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .poster-stage img.is-active {
-      opacity: 1;
-    }
-
-
-    /* Right panel: info */
-    .poster-info-panel {
-      display: grid;
-      grid-template-rows: minmax(84px, auto) minmax(18px, auto) minmax(170px, auto);
-      align-content: start;
-      min-height: 300px;
-    }
-
-
-    .poster-info-name {
-      font-size: clamp(24px, 2.5vw, 36px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin-bottom: 8px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    .poster-info-name.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .poster-info-name em {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-    }
-
-    .poster-info-kind {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
-    }
-
-    .poster-info-kind.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .poster-info-desc {
-      font-family: var(--serif);
-      font-size: 16px;
-      line-height: 1.65;
-      color: var(--text-light);
-      max-width: 36ch;
-      min-height: 170px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
-    }
-
-    .poster-info-desc.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-
-    @media (max-width: 900px) {
-      .poster-viewer {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        max-width: 480px;
-        margin: 0 auto;
-      }
-
-      .poster-info-panel {
-        min-height: 0;
-      }
-    }
-
-    /* --- Credits / next --- */
-    .footer {
-      padding: 96px 0 64px;
-      
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: end;
-    }
-
-    .credits {
-      font-family: var(--serif);
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--text-light);
-    }
-
+    /* ── Next case ── */
     .next-case {
-      text-align: right;
+      padding: clamp(56px, 8vw, 104px) var(--edge) clamp(26px, 4vw, 44px);
+      border-top: 1px solid var(--line);
     }
-
-    .next-case-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 12px;
+    .next-case .lbl {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 20px;
     }
-
     .next-case a {
-      font-size: clamp(28px, 3vw, 40px);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      transition: opacity 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      font-size: clamp(42px, 10vw, 148px);
+      font-weight: 500; letter-spacing: -0.045em; line-height: 0.98;
+      transition: opacity 0.3s var(--e);
+    }
+    .next-case a:hover { opacity: 0.55; cursor: url('../../cursor2.svg') 16 18, pointer; }
+    .next-case a .arw { font-size: clamp(30px, 5vw, 72px); transition: transform 0.4s var(--e); }
+    .next-case a:hover .arw { transform: translateX(12px); }
+
+    /* ── Footer ── */
+    .foot {
+      padding: 0 var(--edge) clamp(40px, 6vw, 72px);
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 400; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
+      line-height: 1.8;
     }
 
-    .next-case a:hover { opacity: 0.5; cursor: url('../../cursor2.svg') 16 18, pointer; }
-
-    .next-case a span.arrow {
-      position: relative;
-      width: 32px;
-      height: 18px;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    .next-case a span.arrow::before,
-    .next-case a span.arrow::after {
-      content: "";
-      position: absolute;
-      display: block;
-    }
-
-    .next-case a span.arrow::before {
-      top: 8px;
-      left: 0;
-      width: 26px;
-      height: 1px;
-      background: currentColor;
-    }
-
-    .next-case a span.arrow::after {
-      top: 4px;
-      right: 1px;
-      width: 10px;
-      height: 10px;
-      border-top: 1px solid currentColor;
-      border-right: 1px solid currentColor;
-      transform: rotate(45deg);
-    }
-
-    .brief {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0 48px;
-      padding: 44px 0 60px;
-    }
-    .brief-col {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .brief-label {
-      font-family: 'Manrope', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .brief-text {
-      font-family: var(--font);
-      font-size: 16px;
-      line-height: 1.65;
-      color: var(--text);
-    }
-
-    /* --- Responsive --- */
-    @media (max-width: 900px) {
-      :root { --pad: 24px; --post-w: 200px; }
-
-      .intro { padding: 56px 0 48px; }
-      .meta { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 32px 0 48px; }
-      .hero { padding: 48px 0; }
-      .section { padding: 56px 0; }
-      .section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
+    @media (max-width: 760px) {
+      .section-head { grid-template-columns: 1fr; gap: 22px; }
       .section-text { margin-left: 0; }
-      .footer { grid-template-columns: 1fr; gap: 32px; padding: 64px 0 48px; }
-      .next-case { text-align: left; }
-      .brief { grid-template-columns: 1fr; gap: 24px 0; padding: 32px 0 40px; }
+    }
+    @media (max-width: 560px) {
+      .posters { gap: 14px; }
+      .poster figcaption { flex-direction: column; gap: 2px; }
+      .next-case a .arw { font-size: 30px; }
     }
 
-    @media (max-width: 520px) {
-      :root { --post-w: 160px; }
-
-      .topbar-inner {
-        padding: calc(env(safe-area-inset-top) + 14px) var(--pad) 14px;
-        justify-content: space-between;
-      }
-
-      .topbar-title { display: none; }
-      .topbar-next { display: inline-flex; }
-
-      .intro h1 {
-        font-size: clamp(34px, 12vw, 54px);
-        max-width: 11ch;
-        margin-bottom: 24px;
-      }
-
-      .intro-lede,
-      .section-text {
-        font-size: 16px;
-        line-height: 1.65;
-      }
-
-      .meta {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px 16px;
-      }
-
-      .meta-value {
-        font-size: 14px;
-        line-height: 1.45;
-      }
-
-      .poster-stack-section {
-        padding: 28px 0 20px;
-        background: #000;
-      }
-
-      .poster-stack {
-        width: 331px;
-        height: 220px;
-      }
-
-      .stack-card {
-        width: 110px;
-        height: 160px;
-        top: 22px;
-        left: 97px;
-      }
-
-      .stack-card.sc-4 { width: 128px; }
-
-      .poster-stack.is-spread .sc-1 { top: 30px; left: 2px; }
-      .poster-stack.is-spread .sc-2 { top: 20px; left: 30px; }
-      .poster-stack.is-spread .sc-3 { top: 12px; left: 62px; }
-      .poster-stack.is-spread .sc-4 { top: 6px; left: 94px; }
-      .poster-stack.is-spread .sc-5 { top: 6px; left: 128px; }
-      .poster-stack.is-spread .sc-6 { top: 14px; left: 160px; }
-      .poster-stack.is-spread .sc-7 { top: 24px; left: 190px; }
-      .poster-stack.is-spread .sc-8 { top: 36px; left: 212px; }
-
-      .lettering-block {
-        padding: 56px 0;
-      }
-
-      .lettering-inner {
-        max-width: 100%;
-      }
-
-      .lettering-title {
-        font-size: 32px;
-      }
-
-      .lettering-text {
-        font-size: 15px;
-        line-height: 1.65;
-      }
-
-      .poster-viewer {
-        gap: 20px;
-      }
-
-      .poster-info-name {
-        font-size: 28px;
-      }
-
-      .poster-info-panel {
-        grid-template-rows: minmax(68px, auto) minmax(16px, auto) minmax(160px, auto);
-      }
-
-      .poster-stage {
-        aspect-ratio: 731 / 1033;
-        background: transparent;
-      }
-
-      .poster-stage img {
-        object-fit: contain;
-      }
-
-      .poster-info-desc {
-        font-size: 15px;
-        max-width: none;
-        min-height: 160px;
-      }
-
-      .next-case a {
-        font-size: 28px;
-      }
-
-      .brief {
-        grid-template-columns: 1fr;
-        gap: 28px 0;
-        padding: 32px 0 40px;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      .poster { opacity: 1; transform: none; transition: none; }
+      .marquee-track { animation: none; }
+      .next-case a .arw, .next-case a:hover .arw { transition: none; transform: none; }
     }
-    .topbar-inner { align-items: flex-start; }
-    .tb-nav { display: flex; gap: 20px; }
-    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
-    .tb-nav a, .tb-contact a {
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      text-decoration: none;
-      color: var(--text);
-      transition: opacity 0.3s;
-    }
-    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.4; }
-
   </style>
-
 </head>
 <body>
 
@@ -883,414 +276,255 @@
   </header>
 
   <main>
+    <!-- Masthead -->
+    <header class="mast">
+      <div class="eyebrow">Poster Collection · 2025–2026</div>
+      <h1>The Gallery</h1>
+      <p class="lede">Event posters and a recurring editorial system for an independent contemporary art space in Tbilisi.</p>
+      <div class="meta">
+        <span>Client — <b>The Gallery, Tbilisi</b></span>
+        <span>Role — <b>Art direction, Graphic design</b></span>
+        <span>Year — <b>2025–2026</b></span>
+      </div>
+    </header>
 
-    <!-- Intro -->
-    <section class="intro">
-      <div class="eyebrow">Graphic Design · Print · Social Media · 2025–2026</div>
-      <h1>Posters &amp;&nbsp;editorial <em>for</em> The Gallery</h1>
-      <p class="intro-lede">
-        The visual voice of&nbsp;The Gallery — an&nbsp;independent contemporary art space in&nbsp;Tbilisi. A&nbsp;series of&nbsp;event posters where every show speaks in&nbsp;its own voice, and a&nbsp;recurring editorial system for the gallery's social presence, built inside one coherent identity.
-      </p>
-    </section>
-
-    <!-- Meta -->
-    <section class="meta">
-      <div class="meta-item">
-        <span class="meta-label">Client</span>
-        <span class="meta-value">The Gallery<br>Tbilisi, Georgia</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Role</span>
-        <span class="meta-value">Art direction<br>Graphic design</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Scope</span>
-        <span class="meta-value">9 event posters<br>Editorial system</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Year</span>
-        <span class="meta-value">2025 — 2026</span>
-      </div>
-      <div class="meta-item meta-result">
-        <span class="meta-label">Result</span>
-        <span class="meta-value">300+ visitors per event across 6&nbsp;promoted exhibitions · community grew to&nbsp;10,000+ followers</span>
+    <!-- Animated poster hero -->
+    <section class="poster-hero" aria-hidden="true">
+      <div class="fan">
+        <div class="fan-card" style="--r:-4deg; --y:30px;  --d:.05s"><img src="../../assets/the-gallery/was-i-ever-more.png" alt="" loading="eager"></div>
+        <div class="fan-card" style="--r:3deg;  --y:-16px; --d:.13s"><img src="../../assets/the-gallery/labels-on-me.png" alt="" loading="eager"></div>
+        <div class="fan-card" style="--r:-2deg; --y:22px;  --d:.21s"><img src="../../assets/the-gallery/burning-house.png" alt="" loading="eager"></div>
+        <div class="fan-card" style="--r:4deg;  --y:-22px; --d:.29s"><img src="../../assets/the-gallery/not-a-mirror.png" alt="" loading="lazy"></div>
+        <div class="fan-card" style="--r:-3deg; --y:14px;  --d:.37s"><img src="../../assets/the-gallery/when-asleep.png" alt="" loading="lazy"></div>
+        <div class="fan-card" style="--r:3deg;  --y:-14px; --d:.45s"><img src="../../assets/the-gallery/in-good-hands.png" alt="" loading="lazy"></div>
+        <div class="fan-card" style="--r:-2deg; --y:26px;  --d:.53s"><img src="../../assets/the-gallery/sun-line.png" alt="" loading="lazy"></div>
+        <div class="fan-card" style="--r:5deg;  --y:-8px;  --d:.61s"><img src="../../assets/the-gallery/circles.png" alt="" loading="lazy"></div>
       </div>
     </section>
 
-    <section class="brief">
-      <div class="brief-col">
-        <div class="brief-label">Goal</div>
-        <p class="brief-text">The Gallery wanted each event to&nbsp;have its own visual character. Youthful, direct, a&nbsp;bit irreverent. The challenge wasn't consistency in&nbsp;style but consistency in&nbsp;attitude: every poster should feel like it&nbsp;belongs to&nbsp;the same space even when it&nbsp;looks completely different from the last one.</p>
-      </div>
-      <div class="brief-col">
-        <div class="brief-label">Task</div>
-        <p class="brief-text">Nine posters for an&nbsp;independent art space in&nbsp;Tbilisi, each for a&nbsp;different kind of&nbsp;event, plus two recurring editorial formats for social media: a&nbsp;structured interview series and an&nbsp;artist spotlight. The interesting constraint: make it&nbsp;all feel like one identity without forcing anything into a&nbsp;template.</p>
-      </div>
-      <div class="brief-col">
-        <div class="brief-label">Solution</div>
-        <p class="brief-text">I kept the system minimal: a&nbsp;corner logo, a&nbsp;consistent info block, a&nbsp;fixed typographic approach to&nbsp;dates and names. Within that, everything was made from scratch for each event. Every background and every piece of&nbsp;lettering was created specifically for the show it&nbsp;announces, not pulled from a&nbsp;shared library.</p>
-      </div>
+    <!-- Posters, two per row -->
+    <section class="posters" aria-label="Poster collection">
+      <figure class="poster">
+        <img src="../../assets/the-gallery/was-i-ever-more.png" alt="Was I Ever More? — event poster" loading="eager">
+        <figcaption><span class="idx">01</span><span>Was I Ever More?</span></figcaption>
+      </figure>
+      <figure class="poster">
+        <img src="../../assets/the-gallery/labels-on-me.png" alt="They Put Labels On Me — event poster" loading="eager">
+        <figcaption><span class="idx">02</span><span>They Put Labels On Me</span></figcaption>
+      </figure>
+      <figure class="poster">
+        <img src="../../assets/the-gallery/burning-house.png" alt="Art in a Burning House — event poster" loading="lazy">
+        <figcaption><span class="idx">03</span><span>Art in a Burning House</span></figcaption>
+      </figure>
+      <figure class="poster">
+        <img src="../../assets/the-gallery/not-a-mirror.png" alt="Not a Mirror, but a Hammer — event poster" loading="lazy">
+        <figcaption><span class="idx">04</span><span>Not a Mirror, but a Hammer</span></figcaption>
+      </figure>
+      <figure class="poster">
+        <img src="../../assets/the-gallery/when-asleep.png" alt="When Asleep and Dreaming — event poster" loading="lazy">
+        <figcaption><span class="idx">05</span><span>When Asleep and Dreaming</span></figcaption>
+      </figure>
+      <figure class="poster">
+        <img src="../../assets/the-gallery/in-good-hands.png" alt="In Good Hands — group textile show poster" loading="lazy">
+        <figcaption><span class="idx">06</span><span>In Good Hands</span></figcaption>
+      </figure>
+      <figure class="poster">
+        <img src="../../assets/the-gallery/sun-line.png" alt="Sun Line — event poster" loading="lazy">
+        <figcaption><span class="idx">07</span><span>Sun Line</span></figcaption>
+      </figure>
+      <figure class="poster">
+        <img src="../../assets/the-gallery/circles.png" alt="Circles — event poster" loading="lazy">
+        <figcaption><span class="idx">08</span><span>Circles</span></figcaption>
+      </figure>
     </section>
 
-  </main>
-
-  <!-- Poster stack (full-bleed) -->
-  <section class="poster-stack-section">
-    <div class="poster-stack">
-      <div class="stack-card sc-1"><img src="../../assets/the-gallery/circles.png" alt="Circles"></div>
-      <div class="stack-card sc-2"><img src="../../assets/the-gallery/sun-line.png" alt="Sun Line"></div>
-      <div class="stack-card sc-3"><img src="../../assets/the-gallery/was-i-ever-more.png" alt="Was I Ever More?"></div>
-      <div class="stack-card sc-4"><img src="../../assets/the-gallery/labels-on-me.png" alt="They Put Labels On Me"></div>
-      <div class="stack-card sc-5"><img src="../../assets/the-gallery/burning-house.png" alt="Art in a Burning House"></div>
-      <div class="stack-card sc-6"><img src="../../assets/the-gallery/not-a-mirror.png" alt="Not a Mirror"></div>
-      <div class="stack-card sc-7"><img src="../../assets/the-gallery/when-asleep.png" alt="When Asleep"></div>
-      <div class="stack-card sc-8"><img src="../../assets/the-gallery/in-good-hands.png" alt="In Good Hands"></div>
-    </div>
-  </section>
-
-  <main>
-    <!-- About -->
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="section-label">01 — Context</div>
-          <h2>A&nbsp;gallery that changes its voice every month.</h2>
-        </div>
-        <div class="section-text">
-          <p>The Gallery runs a&nbsp;dense program of&nbsp;exhibitions, lectures and pop-ups. Each event has its own tone — a&nbsp;textile group show, a&nbsp;philosophy lecture series, a&nbsp;fashion showcase — and a&nbsp;single locked-down identity would flatten everything that makes the program interesting.</p>
-          <p>Instead, the system is&nbsp;held together by&nbsp;small, consistent anchors: a&nbsp;tiny corner logo, a&nbsp;recurring information block, and a&nbsp;shared way of&nbsp;framing dates and names. Inside that frame, every poster is&nbsp;free to&nbsp;look like the show it&nbsp;announces.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Approach -->
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="section-label">02 — Approach</div>
-          <h2>One system, eight voices.</h2>
-        </div>
-        <div class="section-text">
-          <p>Each poster starts from the subject: a&nbsp;textile exhibition leans on&nbsp;hands and sky; a&nbsp;lecture on&nbsp;anarchism in&nbsp;art borrows the aesthetic of&nbsp;a&nbsp;printed pamphlet; a&nbsp;glass-sculpture show breathes through motion blur and chroma.</p>
-          <p>Typography does the heavy lifting — contrasting display treatments carry the mood, while a&nbsp;quiet sans-serif keeps the factual information legible and consistent across the series.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <main>
-    <!-- Posters -->
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="section-label">03 — The posters</div>
-          <h2>Nine events, nine covers.</h2>
-        </div>
-      </div>
-
-      <div class="poster-viewer" id="posterViewer">
-        <!-- Left: poster frame -->
-        <div>
-          <div class="poster-stage">
-            <img class="is-active" src="../../assets/the-gallery/in-good-hands.png" alt="In Good Hands"
-                 data-name="In Good Hands" data-kind="Group textile show"
-                 data-desc="Six artists working with textile as language — soft sculpture, weaving, embroidery and fibre objects gathered into a single room where everything is held, literally, by hand.">
-            <img src="../../assets/the-gallery/sun-line.png" alt="Sun Line"
-                 data-name="Sun Line" data-kind="Theatre / Vyrypaev"
-                 data-desc="A one-night staging of Ivan Vyrypaev's play about a couple picking a fight that never quite ends — done inside the gallery, with the audience close enough to hear the breath.">
-            <img src="../../assets/the-gallery/was-i-ever-more.png" alt="Was I Ever More?"
-                 data-name="Was I Ever More?" data-kind="Solo exhibition"
-                 data-desc="Polina Filatova's solo show — sculptural reliefs and cast objects that keep asking the same quiet question the title asks, without expecting an answer.">
-            <img src="../../assets/the-gallery/labels-on-me.png" alt="They Put Labels On Me"
-                 data-name="They Put Labels On Me" data-kind="Pop-up / fashion"
-                 data-desc="A two-day pop-up with eight artists and fourteen independent brands — a fashion show, a design showcase and a live set, held together for one weekend only.">
-            <img src="../../assets/the-gallery/burning-house.png" alt="Art in a Burning House"
-                 data-name="Art in a Burning House" data-kind="Group show"
-                 data-desc="Eight artists asking what you make, and for whom, when the world is on fire — a group show about doing the work anyway, with names pinned to the walls in red tape.">
-            <img src="../../assets/the-gallery/not-a-mirror.png" alt="Not a Mirror, but a Hammer"
-                 class="is-tight-fill"
-                 data-name="Not a Mirror, but a Hammer" data-kind="Lecture series"
-                 data-desc="Two evenings of talks: Alexandr Migurskii on anarchist economies and self-organisation in art, Ivan Grigoriev on the medium in the age of postmediality.">
-            <img src="../../assets/the-gallery/when-asleep.png" alt="When Asleep and Dreaming"
-                 data-name="When Asleep and Dreaming" data-kind="Group exhibition"
-                 data-desc="A group show about the part of the mind that only speaks at night — glass, video and soft-focus photography gathered around the edge of sleep.">
-
-            <img src="../../assets/the-gallery/circles.png" alt="Circles"
-                 class="is-tight-fill"
-                 data-name="Circles" data-kind="Group exhibition"
-                 data-desc="Nine artists, nine circles — stone, glass, wood, flowers, pigment. A group show about the oldest shape we have, and the many things it can still mean.">
+    <!-- Social: interview series -->
+    <section class="section" aria-label="Interview series">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <div class="section-label">Interview series</div>
+            <h2>5 Questions for the Artist.</h2>
+          </div>
+          <div class="section-text">
+            <p>A recurring interview format built around five questions per artist. Each series opens with a cover card, the artist's portrait with their name as the dominant element, and continues with question and answer cards interspersed with artwork photography.</p>
+            <p>Two colour registers: charcoal for Polina Orlova, navy for Tasia&nbsp;K.</p>
           </div>
         </div>
+      </div>
 
-        <!-- Right: info panel -->
-        <div class="poster-info-panel">
-          <div class="poster-info-name is-visible"><em>In&nbsp;Good Hands</em></div>
-          <div class="poster-info-kind is-visible">Group textile show</div>
-          <p class="poster-info-desc is-visible">Six artists working with textile as&nbsp;language — soft sculpture, weaving, embroidery and fibre objects gathered into a&nbsp;single room where everything is&nbsp;held, literally, by&nbsp;hand.</p>
+      <div class="artist-strip">
+        <span class="artist-label">Polina Orlova</span>
+        <div class="marquee-wrap">
+          <div class="marquee-track" style="--dur:48s">
+            <div class="post-item"><img src="../../publications/the-gallery-social-100.png" alt="Polina Orlova cover" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-101.png" alt="Evenings Q" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-8.png" alt="Reference System artwork" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-102.png" alt="Depth of the Inner World artwork" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-106.png" alt="Recently felt deeply Q" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-103.png" alt="The Kiss artwork" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-107.png" alt="Place inside your art Q" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-104.png" alt="Meditation artwork" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-7.png" alt="Quiet ritual Q" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-105.png" alt="Choir artwork" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-9.png" alt="Hope people notice Q" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-20.png" alt="Place imaginary Q" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-100.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-101.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-8.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-102.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-106.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-103.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-107.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-104.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-7.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-105.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-9.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-20.png" alt="" aria-hidden="true" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="artist-strip">
+        <span class="artist-label">Tasia K</span>
+        <div class="marquee-wrap">
+          <div class="marquee-track" style="--dur:44s; animation-direction: reverse;">
+            <div class="post-item"><img src="../../publications/the-gallery-social-416.png" alt="Tasia K cover" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-420.png" alt="Evenings Q navy" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-22.png" alt="Tasia photo" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-21.png" alt="Quiet ritual Q navy" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-14.png" alt="After performing artwork" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-110.png" alt="Hope people notice Q navy" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-16.png" alt="Portrait photo" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-109.png" alt="Evenings Q navy 2" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-18.png" alt="Tent of Wonders" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-19.png" alt="Recently felt deeply Q navy" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-416.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-420.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-22.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-21.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-14.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-110.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-16.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-109.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-18.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-19.png" alt="" aria-hidden="true" loading="lazy"></div>
+          </div>
         </div>
       </div>
     </section>
-  </main>
 
-  <!-- Interview series (full width) -->
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-head">
-        <div>
-          <div class="section-label">04 — Interview series</div>
-          <h2>5 Questions for the Artist.</h2>
-        </div>
-        <div class="section-text">
-          <p>A recurring interview format built around five questions per artist. Each series opens with a cover card — the artist's portrait with their name as the dominant element — and continues with question/answer cards interspersed with artwork photography.</p>
-          <p>Two colour registers: charcoal for Polina Orlova, navy for Tasia&nbsp;K.</p>
+    <!-- Social: artist spotlight -->
+    <section class="section" aria-label="Artist spotlight">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <div class="section-label">Artist spotlight</div>
+            <h2>What's Your Inspiration.</h2>
+          </div>
+          <div class="section-text">
+            <p>A lighter series focused on individual artists connected to the gallery. Each post gets a distinct colour accent applied to the artist's name set in a custom display treatment.</p>
+            <p>The palette shifts per subject, pink for Nino Gogolidze, purple for Mako Lomadze, while the layout logic stays constant across the&nbsp;series.</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="artist-strip">
-      <span class="artist-label">Polina Orlova</span>
-      <div class="marquee-wrap">
-        <div class="marquee-track" style="--dur:48s">
-          <!-- set 1 -->
-          <div class="post-item"><img src="../../publications/100.png" alt="Polina Orlova cover"></div>
-          <div class="post-item"><img src="../../publications/101.png" alt="Evenings Q"></div>
-          <div class="post-item"><img src="../../publications/8.png" alt="Reference System artwork"></div>
-          <div class="post-item"><img src="../../publications/102.png" alt="Depth of the Inner World artwork"></div>
-          <div class="post-item"><img src="../../publications/106.png" alt="Recently felt deeply Q"></div>
-          <div class="post-item"><img src="../../publications/103.png" alt="The Kiss artwork"></div>
-          <div class="post-item"><img src="../../publications/107.png" alt="Place inside your art Q"></div>
-          <div class="post-item"><img src="../../publications/104.png" alt="Meditation artwork"></div>
-          <div class="post-item"><img src="../../publications/7.png" alt="Quiet ritual Q"></div>
-          <div class="post-item"><img src="../../publications/105.png" alt="Choir artwork"></div>
-          <div class="post-item"><img src="../../publications/9.png" alt="Hope people notice Q"></div>
-          <div class="post-item"><img src="../../publications/20.png" alt="Place imaginary Q"></div>
-          <!-- set 2 (duplicate for loop) -->
-          <div class="post-item"><img src="../../publications/100.png" alt="Polina Orlova cover"></div>
-          <div class="post-item"><img src="../../publications/101.png" alt="Evenings Q"></div>
-          <div class="post-item"><img src="../../publications/8.png" alt="Reference System artwork"></div>
-          <div class="post-item"><img src="../../publications/102.png" alt="Depth of the Inner World artwork"></div>
-          <div class="post-item"><img src="../../publications/106.png" alt="Recently felt deeply Q"></div>
-          <div class="post-item"><img src="../../publications/103.png" alt="The Kiss artwork"></div>
-          <div class="post-item"><img src="../../publications/107.png" alt="Place inside your art Q"></div>
-          <div class="post-item"><img src="../../publications/104.png" alt="Meditation artwork"></div>
-          <div class="post-item"><img src="../../publications/7.png" alt="Quiet ritual Q"></div>
-          <div class="post-item"><img src="../../publications/105.png" alt="Choir artwork"></div>
-          <div class="post-item"><img src="../../publications/9.png" alt="Hope people notice Q"></div>
-          <div class="post-item"><img src="../../publications/20.png" alt="Place imaginary Q"></div>
+      <div class="artist-strip">
+        <span class="artist-label">Nino Gogolidze</span>
+        <div class="marquee-wrap">
+          <div class="marquee-track" style="--dur:30s">
+            <div class="post-item"><img src="../../publications/the-gallery-social-88.png" alt="Nino Gogolidze cover" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-89.png" alt="Nino, introduction" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-90.png" alt="Nino, top 3 movies" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-91.png" alt="Nino, top 3 books" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-92.png" alt="Nino, top 3 songs" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-93.png" alt="Nino, art style" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-88.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-89.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-90.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-91.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-92.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-93.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-88.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-89.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-90.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-91.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-92.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-93.png" alt="" aria-hidden="true" loading="lazy"></div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="artist-strip">
-      <span class="artist-label">Tasia K</span>
-      <div class="marquee-wrap">
-        <div class="marquee-track" style="--dur:44s; animation-direction: reverse;">
-          <!-- set 1 -->
-          <div class="post-item"><img src="../../publications/416.png" alt="Tasia K cover"></div>
-          <div class="post-item"><img src="../../publications/420.png" alt="Evenings Q navy"></div>
-          <div class="post-item"><img src="../../publications/22.png" alt="Tasia photo"></div>
-          <div class="post-item"><img src="../../publications/21.png" alt="Quiet ritual Q navy"></div>
-          <div class="post-item"><img src="../../publications/14.png" alt="After performing artwork"></div>
-          <div class="post-item"><img src="../../publications/110.png" alt="Hope people notice Q navy"></div>
-          <div class="post-item"><img src="../../publications/16.png" alt="Portrait photo"></div>
-          <div class="post-item"><img src="../../publications/109.png" alt="Evenings Q navy 2"></div>
-          <div class="post-item"><img src="../../publications/18.png" alt="Tent of Wonders"></div>
-          <div class="post-item"><img src="../../publications/19.png" alt="Recently felt deeply Q navy"></div>
-          <!-- set 2 -->
-          <div class="post-item"><img src="../../publications/416.png" alt="Tasia K cover"></div>
-          <div class="post-item"><img src="../../publications/420.png" alt="Evenings Q navy"></div>
-          <div class="post-item"><img src="../../publications/22.png" alt="Tasia photo"></div>
-          <div class="post-item"><img src="../../publications/21.png" alt="Quiet ritual Q navy"></div>
-          <div class="post-item"><img src="../../publications/14.png" alt="After performing artwork"></div>
-          <div class="post-item"><img src="../../publications/110.png" alt="Hope people notice Q navy"></div>
-          <div class="post-item"><img src="../../publications/16.png" alt="Portrait photo"></div>
-          <div class="post-item"><img src="../../publications/109.png" alt="Evenings Q navy 2"></div>
-          <div class="post-item"><img src="../../publications/18.png" alt="Tent of Wonders"></div>
-          <div class="post-item"><img src="../../publications/19.png" alt="Recently felt deeply Q navy"></div>
+      <div class="artist-strip">
+        <span class="artist-label">Mako Lomadze</span>
+        <div class="marquee-wrap">
+          <div class="marquee-track" style="--dur:32s; animation-direction: reverse;">
+            <div class="post-item"><img src="../../publications/the-gallery-social-94.png" alt="Mako Lomadze cover" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-95.png" alt="Mako, introduction" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-96.png" alt="Mako, top 3 movies" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-97.png" alt="Mako, top 3 books" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-98.png" alt="Mako, top 3 songs" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-99.png" alt="Mako, art style" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-94.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-95.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-96.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-97.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-98.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-99.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-94.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-95.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-96.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-97.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-98.png" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="post-item"><img src="../../publications/the-gallery-social-99.png" alt="" aria-hidden="true" loading="lazy"></div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Artist spotlight (full width) -->
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-head">
-        <div>
-          <div class="section-label">05 — Artist spotlight</div>
-          <h2>What's Your Inspiration.</h2>
-        </div>
-        <div class="section-text">
-          <p>A lighter series focused on individual artists connected to the gallery. Each post gets a distinct colour accent applied to the artist's name set in&nbsp;a custom display treatment.</p>
-          <p>The palette shifts per subject — pink for Nino Gogolidze, purple for Mako Lomadze — while the layout logic stays constant across the&nbsp;series.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="artist-strip">
-      <span class="artist-label">Nino Gogolidze</span>
-      <div class="marquee-wrap">
-        <div class="marquee-track" style="--dur:30s">
-          <!-- set 1 -->
-          <div class="post-item"><img src="../../publications/88.png" alt="Nino Gogolidze cover"></div>
-          <div class="post-item"><img src="../../publications/89.png" alt="Nino — introduction"></div>
-          <div class="post-item"><img src="../../publications/90.png" alt="Nino — top 3 movies"></div>
-          <div class="post-item"><img src="../../publications/91.png" alt="Nino — top 3 books"></div>
-          <div class="post-item"><img src="../../publications/92.png" alt="Nino — top 3 songs"></div>
-          <div class="post-item"><img src="../../publications/93.png" alt="Nino — art style"></div>
-          <!-- set 2 -->
-          <div class="post-item"><img src="../../publications/88.png" alt="Nino Gogolidze cover"></div>
-          <div class="post-item"><img src="../../publications/89.png" alt="Nino — introduction"></div>
-          <div class="post-item"><img src="../../publications/90.png" alt="Nino — top 3 movies"></div>
-          <div class="post-item"><img src="../../publications/91.png" alt="Nino — top 3 books"></div>
-          <div class="post-item"><img src="../../publications/92.png" alt="Nino — top 3 songs"></div>
-          <div class="post-item"><img src="../../publications/93.png" alt="Nino — art style"></div>
-          <!-- set 3 (more items needed so gap doesn't show) -->
-          <div class="post-item"><img src="../../publications/88.png" alt="Nino Gogolidze cover"></div>
-          <div class="post-item"><img src="../../publications/89.png" alt="Nino — introduction"></div>
-          <div class="post-item"><img src="../../publications/90.png" alt="Nino — top 3 movies"></div>
-          <div class="post-item"><img src="../../publications/91.png" alt="Nino — top 3 books"></div>
-          <div class="post-item"><img src="../../publications/92.png" alt="Nino — top 3 songs"></div>
-          <div class="post-item"><img src="../../publications/93.png" alt="Nino — art style"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="artist-strip">
-      <span class="artist-label">Mako Lomadze</span>
-      <div class="marquee-wrap">
-        <div class="marquee-track" style="--dur:32s; animation-direction: reverse;">
-          <!-- set 1 -->
-          <div class="post-item"><img src="../../publications/94.png" alt="Mako Lomadze cover"></div>
-          <div class="post-item"><img src="../../publications/95.png" alt="Mako — introduction"></div>
-          <div class="post-item"><img src="../../publications/96.png" alt="Mako — top 3 movies"></div>
-          <div class="post-item"><img src="../../publications/97.png" alt="Mako — top 3 books"></div>
-          <div class="post-item"><img src="../../publications/98.png" alt="Mako — top 3 songs"></div>
-          <div class="post-item"><img src="../../publications/99.png" alt="Mako — art style"></div>
-          <!-- set 2 -->
-          <div class="post-item"><img src="../../publications/94.png" alt="Mako Lomadze cover"></div>
-          <div class="post-item"><img src="../../publications/95.png" alt="Mako — introduction"></div>
-          <div class="post-item"><img src="../../publications/96.png" alt="Mako — top 3 movies"></div>
-          <div class="post-item"><img src="../../publications/97.png" alt="Mako — top 3 books"></div>
-          <div class="post-item"><img src="../../publications/98.png" alt="Mako — top 3 songs"></div>
-          <div class="post-item"><img src="../../publications/99.png" alt="Mako — art style"></div>
-          <!-- set 3 -->
-          <div class="post-item"><img src="../../publications/94.png" alt="Mako Lomadze cover"></div>
-          <div class="post-item"><img src="../../publications/95.png" alt="Mako — introduction"></div>
-          <div class="post-item"><img src="../../publications/96.png" alt="Mako — top 3 movies"></div>
-          <div class="post-item"><img src="../../publications/97.png" alt="Mako — top 3 books"></div>
-          <div class="post-item"><img src="../../publications/98.png" alt="Mako — top 3 songs"></div>
-          <div class="post-item"><img src="../../publications/99.png" alt="Mako — art style"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <main>
-    <!-- Footer -->
-    <section class="footer">
-      <div class="credits">
-        Design &amp; art direction — Maria Danilova<br>
-        Client — The Gallery, Tbilisi<br>
-        2025 — 2026
-      </div>
-      <div class="next-case">
-        <div class="next-case-label">Next case</div>
-        <a href="../dirtalk/">DIRTALK <span class="arrow" aria-hidden="true"></span></a>
       </div>
     </section>
 
+    <!-- Next case -->
+    <nav class="next-case">
+      <div class="lbl">Next case</div>
+      <a href="../dirtalk/">DIRTALK <span class="arw" aria-hidden="true">→</span></a>
+    </nav>
+
+    <footer class="foot">
+      Design &amp; art direction — Maria Danilova<br>
+      Client — The Gallery, Tbilisi · 2025–2026
+    </footer>
   </main>
 
-  <!-- Poster auto-cycle viewer -->
   <script>
+    // Reveal posters on scroll (progressive enhancement — visible without JS too).
     (function () {
-      var viewer = document.getElementById('posterViewer');
-      var imgs = viewer.querySelectorAll('.poster-stage img');
-      var panel = viewer.querySelector('.poster-info-panel');
-      var pName = panel.querySelector('.poster-info-name');
-      var pKind = panel.querySelector('.poster-info-kind');
-      var pDesc = panel.querySelector('.poster-info-desc');
-      var total = imgs.length;
-      var INTERVAL = 2000;
-      var current = 0;
-      var paused = false;
-
-      function updatePanel(idx) {
-        var img = imgs[idx];
-        pName.innerHTML = '<em>' + img.dataset.name + '</em>';
-        pKind.textContent = img.dataset.kind;
-        pDesc.textContent = img.dataset.desc;
-        pName.classList.add('is-visible');
-        pKind.classList.add('is-visible');
-        pDesc.classList.add('is-visible');
+      var posters = document.querySelectorAll('.poster');
+      if (!('IntersectionObserver' in window)) {
+        posters.forEach(function (p) { p.classList.add('in'); });
+        return;
       }
-
-      function goTo(idx) {
-        pName.classList.remove('is-visible');
-        pKind.classList.remove('is-visible');
-        pDesc.classList.remove('is-visible');
-        imgs[current].classList.remove('is-active');
-        current = idx;
-        imgs[current].classList.add('is-active');
-        setTimeout(function () { updatePanel(current); }, 150);
-      }
-
-      function tick() {
-        if (!paused) {
-          goTo((current + 1) % total);
-        }
-        setTimeout(tick, INTERVAL);
-      }
-
-      // Hover on poster image only: pause/resume
-      var stage = viewer.querySelector('.poster-stage');
-      stage.addEventListener('mouseenter', function () { paused = true; });
-      stage.addEventListener('mouseleave', function () { paused = false; });
-
-      // Init
-      updatePanel(0);
-      setTimeout(tick, INTERVAL);
-    })();
-  </script>
-
-  <!-- Poster stack animation on scroll -->
-  <script>
-    (function () {
-      var stack = document.querySelector('.poster-stack');
-      if (!stack) return;
-      var observer = new IntersectionObserver(function (entries) {
+      var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            stack.classList.add('is-spread');
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.3 });
-      observer.observe(stack);
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
+      posters.forEach(function (p) { io.observe(p); });
     })();
-  </script>
 
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script>
-    const lenis = new Lenis({
-      duration: 1.6,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.2,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // Respect reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      lenis.destroy();
-    }
+    // Fan-in the animated poster hero when it scrolls into view.
+    (function () {
+      var hero = document.querySelector('.poster-hero');
+      if (!hero) return;
+      if (!('IntersectionObserver' in window)) { hero.classList.add('in'); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { hero.classList.add('in'); io.disconnect(); }
+        });
+      }, { threshold: 0.15 });
+      io.observe(hero);
+    })();
   </script>
 
 </body>

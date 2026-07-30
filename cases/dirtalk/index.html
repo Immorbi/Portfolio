@@ -8,7 +8,7 @@
   <meta name="description" content="DIRTALK — brand identity and editorial system for a media project and podcast about the women shaping the industry.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     @media (min-width: 1024px) {
@@ -72,16 +72,16 @@
     }
     .nav-in {
       display: flex; justify-content: space-between; align-items: flex-start;
-      padding: 17px var(--edge);
+      padding: 18px var(--edge);
     }
-    .nav-group { display: flex; gap: 18px; }
-    .nav-group.right { flex-direction: column; align-items: flex-end; gap: 2px; }
+    .nav-group { display: flex; gap: 20px; }
+    .nav-group.right { flex-direction: column; align-items: flex-end; gap: 3px; }
     .nav a, .nav .mono {
-      font-family: var(--mono);
-      font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+      font-family: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--ink); transition: opacity .3s var(--e-out);
     }
-    .nav a:hover { opacity: 0.42; cursor: url('../../cursor2.svg') 16 18, pointer; }
+    .nav a:hover { opacity: 0.4; cursor: url('../../cursor2.svg') 16 18, pointer; }
 
     /* ── Shell / grid ── */
     .shell { padding: 0 var(--edge); }
@@ -172,7 +172,7 @@
     .pal-label { grid-column: 1 / -1; margin-bottom: 14px; }
     .pal-img { background: none; }
 
-    .ph-txt { grid-column: 1 / 5; align-self: start; }
+    .ph-txt { grid-column: 1 / 5; align-self: center; }
     .ph-txt h3 { font-size: clamp(24px, 2.7vw, 36px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.06; margin: 14px 0 16px; text-wrap: balance; }
     .ph-txt p { font-size: 16px; line-height: 1.6; letter-spacing: -0.006em; color: #3a3a40; max-width: 40ch; }
     .ph-imgs { grid-column: 6 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
@@ -319,7 +319,7 @@
     <div class="shell">
       <div class="full bleed reveal">
         <figure class="zoom">
-          <img src="hero-bed-star.png" alt="DIRTALK podcast — two hosts recording, with the signature star mark" loading="eager">
+          <img src="hero-bed-star.jpg" alt="DIRTALK podcast — two hosts recording, with the signature star mark" loading="eager">
         </figure>
       </div>
     </div>
@@ -345,15 +345,15 @@
         <div class="mono pal-label">Mark &amp; character</div>
         <div class="marks" style="transform:translateY(40px);">
           <div class="m-a">
-            <div class="mark-tile" style="background-color:#ffffff;"><img src="Group 7.png" alt="DIRTALK logo — primary blue version"></div>
+            <div class="mark-tile" style="background-color:#ffffff;"><img src="dirtalk-logo-blue.png" alt="DIRTALK logo — primary blue version"></div>
             <div class="mono mark-cap">Primary mark</div>
           </div>
           <div class="m-b">
-            <div class="mark-tile on-blue"><img src="Group 379.png" alt="DIRTALK logo — reversed white version"></div>
+            <div class="mark-tile on-blue"><img src="dirtalk-logo-white.png" alt="DIRTALK logo — reversed white version"></div>
             <div class="mono mark-cap">Reversed</div>
           </div>
           <div class="m-c">
-            <div class="mark-tile mascot" style="background-color:#0E38ED;"><img src="Layer_1.png" alt="DIRTALK brand character — the listener"></div>
+            <div class="mark-tile mascot" style="background-color:#0E38ED;"><img src="dirtalk-character.png" alt="DIRTALK brand character — the listener"></div>
             <div class="mono mark-cap">The listener — brand character</div>
           </div>
         </div>
@@ -363,7 +363,7 @@
       <div class="grid reveal" style="margin-top:clamp(56px,7vw,96px);">
         <div class="mono pal-label">Palette</div>
         <figure class="pal-img" style="grid-column:1/-1;">
-          <img src="colors.png" alt="DIRTALK palette — Signal Pink #FF8DE1, Midnight Studio #021132, Studio White #FFFFFF, DIRtalk Blue #0E38ED" loading="lazy">
+          <img src="colors.jpg" alt="DIRTALK palette — Signal Pink #FF8DE1, Midnight Studio #021132, Studio White #FFFFFF, DIRtalk Blue #0E38ED" loading="lazy">
         </figure>
       </div>
 
@@ -374,9 +374,9 @@
           <h3>Studio-lit, tailored, a little cinematic.</h3>
           <p>Editorial portraits of women in sharp black-and-white tailoring, real podcast mics in frame, cool daylight or a wash of brand blue. Graphics stay minimal: the star, the wordmark, nothing that competes with the face.</p>
         </div>
-        <div class="ph-imgs" style="position:relative;grid-column:1/-1;">
-          <figure class="zoom" style="grid-column:1/-1;position:relative;"><img src="editorial-bed.png" alt="DIRTALK photography — candid editorial portrait" loading="lazy">
-            <img src="sticker.png" alt="DIRTALK sticker" style="position:absolute;bottom:-40px;left:20px;width:250px;height:auto;transform:rotate(-20deg);z-index:10;" loading="lazy">
+        <div class="ph-imgs" style="position:relative;">
+          <figure class="zoom" style="grid-column:1/-1;position:relative;"><img src="editorial-bed.jpg" alt="DIRTALK photography — candid editorial portrait" loading="lazy">
+            <img src="sticker.png" alt="DIRTALK sticker" style="position:absolute;bottom:30px;left:40px;width:clamp(110px,20vw,250px);height:auto;transform:rotate(-20deg);z-index:10;" loading="lazy">
           </figure>
         </div>
       </div>
@@ -386,7 +386,7 @@
     <section class="shell sec">
       <div class="grid split">
         <div class="fig reveal">
-          <figure class="zoom"><img src="mic.png" alt="DIRTALK branded studio microphone" loading="lazy"></figure>
+          <figure class="zoom"><img src="mic.jpg" alt="DIRTALK branded studio microphone" loading="lazy"></figure>
           <div class="cap"><span class="idx">Fig. 02</span><span>The mark, applied</span></div>
         </div>
         <div class="txt reveal">
@@ -400,7 +400,7 @@
     <!-- Brand strip -->
     <div class="shell">
       <div class="full bleed reveal">
-        <figure><img src="banner-mic.png" alt="DIRTALK wordmark on electric blue with a studio microphone" loading="lazy"></figure>
+        <figure><img src="banner-mic.jpg" alt="DIRTALK wordmark on electric blue with a studio microphone" loading="lazy"></figure>
       </div>
     </div>
 
@@ -414,11 +414,11 @@
       <div class="grid" style="margin-top:48px;">
         <div class="feature">
           <div class="big reveal">
-            <figure class="zoom"><img src="397.png" alt="DIRTALK key visual — Women who shape the future" loading="lazy"></figure>
+            <figure class="zoom"><img src="dirtalk-key-visual.jpg" alt="DIRTALK key visual — Women who shape the future" loading="lazy"></figure>
             <div class="cap"><span class="idx">Key visual</span><span>Women who shape the future</span></div>
           </div>
           <div class="small reveal">
-            <figure class="zoom"><img src="401.png" alt="DIRTALK character post — I was in control, until I stopped feeling myself" loading="lazy"></figure>
+            <figure class="zoom"><img src="dirtalk-character-post.jpg" alt="DIRTALK character post — I was in control, until I stopped feeling myself" loading="lazy"></figure>
             <div class="cap"><span class="idx">Character post</span><span>Founder stories</span></div>
           </div>
         </div>
@@ -426,15 +426,15 @@
         <div class="posters reveal">
           <figure>
             <video autoplay loop muted playsinline webkit-playsinline preload="metadata" aria-label="DIRTALK reels post — on the way to record">
-              <source src="Comp 1_1.mp4" type="video/mp4">
+              <source src="dirtalk-social-reel.mp4" type="video/mp4">
             </video>
           </figure>
-          <figure class="zoom"><img src="394.png" alt="DIRTALK poster — pink silhouettes" loading="lazy"></figure>
-          <figure class="zoom"><img src="399.png" alt="DIRTALK founder story post" loading="lazy"></figure>
-          <figure class="zoom"><img src="421.png" alt="DIRTALK slogans — women in business" loading="lazy"></figure>
-          <figure class="zoom"><img src="403.png" alt="DIRTALK social post" loading="lazy"></figure>
-          <figure class="zoom"><img src="408.png" alt="DIRTALK social post" loading="lazy"></figure>
-          <figure class="zoom"><img src="422.png" alt="DIRTALK social post" loading="lazy"></figure>
+          <figure class="zoom"><img src="dirtalk-poster-silhouettes.png" alt="DIRTALK poster — pink silhouettes" loading="lazy"></figure>
+          <figure class="zoom"><img src="dirtalk-founder-story.png" alt="DIRTALK founder story post" loading="lazy"></figure>
+          <figure class="zoom"><img src="dirtalk-slogans.jpg" alt="DIRTALK slogans — women in business" loading="lazy"></figure>
+          <figure class="zoom"><img src="dirtalk-social-01.png" alt="DIRTALK social post" loading="lazy"></figure>
+          <figure class="zoom"><img src="dirtalk-social-02.png" alt="DIRTALK social post" loading="lazy"></figure>
+          <figure class="zoom"><img src="dirtalk-social-03.png" alt="DIRTALK social post" loading="lazy"></figure>
         </div>
       </div>
     </section>
@@ -446,7 +446,7 @@
         <p class="lede-2 reveal">Loud on the street. The wordmark repeats, the star cuts through.</p>
       </div>
       <div class="full bleed reveal" style="margin-top:40px;">
-        <figure class="zoom"><img src="billboard.png" alt="DIRTALK campaign on a city billboard" loading="lazy"></figure>
+        <figure class="zoom"><img src="billboard.jpg" alt="DIRTALK campaign on a city billboard" loading="lazy"></figure>
       </div>
     </section>
 
@@ -458,9 +458,9 @@
       </div>
       <div class="grid" style="margin-top:40px;">
         <div class="merch">
-          <div class="m1 reveal"><figure class="zoom"><img src="tote.png" alt="DIRTALK tote bag" loading="lazy"></figure></div>
-          <div class="m2 reveal"><figure class="zoom"><img src="keychain.png" alt="DIRTALK keychain with logo charm and star tag" loading="lazy"></figure></div>
-          <div class="m3 reveal"><figure class="zoom"><img src="cups.png" alt="DIRTALK branded cups in blue and white" loading="lazy"></figure></div>
+          <div class="m1 reveal"><figure class="zoom"><img src="tote.jpg" alt="DIRTALK tote bag" loading="lazy"></figure></div>
+          <div class="m2 reveal"><figure class="zoom"><img src="keychain.jpg" alt="DIRTALK keychain with logo charm and star tag" loading="lazy"></figure></div>
+          <div class="m3 reveal"><figure class="zoom"><img src="cups.jpg" alt="DIRTALK branded cups in blue and white" loading="lazy"></figure></div>
         </div>
       </div>
     </section>
@@ -469,7 +469,7 @@
     <section class="shell sec">
       <div class="grid digital">
         <div class="fig reveal">
-          <figure><img src="phone-player.png" alt="DIRTALK podcast player — Women in the Industry, Episode 12" loading="lazy"></figure>
+          <figure><img src="phone-player.jpg" alt="DIRTALK podcast player — Women in the Industry, Episode 12" loading="lazy"></figure>
         </div>
         <div class="txt reveal">
           <div class="sec-label" style="grid-column:auto;"><span class="mono">Made to be heard</span></div>

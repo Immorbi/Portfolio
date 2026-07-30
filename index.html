@@ -22,8 +22,7 @@
   <meta name="twitter:title" content="Maria Danilova — Portfolio">
   <meta name="twitter:description" content="Graphic design, brand identity, editorial systems, and digital culture projects.">
   <meta name="twitter:image" content="https://createdbymasha.com/PreviewSite.png">
-  <link rel="preload" href="logotype3D.webm" as="fetch" crossorigin>
-  <link rel="preload" href="logotype3D.mp4" as="fetch" crossorigin>
+  <link rel="preload" href="logotype3D_2.mp4" as="fetch" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -513,8 +512,7 @@
   <div class="site-loader" id="siteLoader" aria-live="polite">
     <div class="site-loader-video" aria-hidden="true">
       <video autoplay loop muted playsinline webkit-playsinline preload="auto">
-        <source src="logotype3D.webm" type="video/webm">
-        <source src="logotype3D.mp4" type="video/mp4">
+        <source src="logotype3D_2.mp4" type="video/mp4">
       </video>
     </div>
     <div class="site-loader-copy">
@@ -578,7 +576,7 @@
         <a class="proj" href="cases/the-gallery/">
           <div class="proj-media">
             <video autoplay loop muted playsinline preload="metadata" aria-label="Posters and editorial for The Gallery">
-              <source src="Case1.mp4" type="video/mp4">
+              <source src="the-gallery-home-preview.mp4" type="video/mp4">
             </video>
           </div>
           <div class="proj-caption">
@@ -591,7 +589,7 @@
         <a class="proj" href="cases/helikon-art/">
           <div class="proj-media">
             <video autoplay loop muted playsinline preload="metadata" aria-label="Helikon Art Center website case preview">
-              <source src="Comp 1_9.mp4" type="video/mp4">
+              <source src="helikon-home-preview.mp4" type="video/mp4">
             </video>
           </div>
           <div class="proj-caption">
@@ -606,7 +604,7 @@
 
         <a class="proj" href="cases/dirtalk/">
           <div class="proj-media">
-            <img src="cases/dirtalk/phone-player.png" alt="DIRTALK podcast brand — player cover" loading="lazy">
+            <img src="cases/dirtalk/phone-player.jpg" alt="DIRTALK podcast brand — player cover" loading="lazy">
           </div>
           <div class="proj-caption">
             <span class="proj-name">DIRTALK Brandbook</span>
@@ -663,11 +661,10 @@
 
     function startSiteLoader() {
       const resourceUrls = new Set([
-        'logotype3D.webm',
-        'logotype3D.mp4',
-        'Case1.mp4',
+        'logotype3D_2.mp4',
+        'the-gallery-home-preview.mp4',
         'Comp 1_8.web.mp4',
-        'Comp 1_9.mp4',
+        'helikon-home-preview.mp4',
         'cases/yufiko/cover.mp4',
         'logo.svg'
       ]);
@@ -683,7 +680,7 @@
       let displayedProgress = 1;
       let targetProgress = 8;
       let finished = false;
-      const minDuration = 1200;
+      const minDuration = 850;
       const startTime = performance.now();
 
       function updateTargetProgress() {
@@ -724,7 +721,9 @@
       const tick = setInterval(() => {
         updateTargetProgress();
         if (displayedProgress < targetProgress) {
-          displayedProgress += 1;
+          // Ease toward the target so the count closes the gap quickly.
+          const step = Math.max(1, Math.ceil((targetProgress - displayedProgress) / 6));
+          displayedProgress = Math.min(targetProgress, displayedProgress + step);
           renderProgress(displayedProgress);
         }
 
@@ -736,19 +735,42 @@
         }
       }, 18);
 
-      window.addEventListener('load', () => {
-        const complete = () => {
-          finished = true;
-          targetProgress = 100;
-        };
+      function completeLoader() {
+        finished = true;
+        targetProgress = 100;
+      }
+
+      // Reveal as soon as the DOM is ready + a short minimum — do NOT wait for
+      // the heavy preview videos to finish downloading (slow on mobile).
+      function scheduleComplete() {
         const remaining = Math.max(0, minDuration - (performance.now() - startTime));
-        setTimeout(complete, remaining);
-      }, { once: true });
+        setTimeout(completeLoader, remaining);
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scheduleComplete, { once: true });
+      } else {
+        scheduleComplete();
+      }
+      // Hard safety cap: never let the loader hang waiting on media.
+      setTimeout(completeLoader, 2600);
 
       renderProgress(displayedProgress);
     }
 
-    startSiteLoader();
+    // Show the intro loader only once per browser session — returning to the
+    // home page (e.g. via "Home" from a case) reveals the feed instantly.
+    let loaderAlreadyShown = false;
+    try {
+      loaderAlreadyShown = sessionStorage.getItem('portfolioLoaderShown') === '1';
+      if (!loaderAlreadyShown) sessionStorage.setItem('portfolioLoaderShown', '1');
+    } catch (e) { /* private mode — fall back to showing the loader */ }
+
+    if (loaderAlreadyShown) {
+      document.body.classList.remove('site-loading');
+      if (siteLoader) siteLoader.remove();
+    } else {
+      startSiteLoader();
+    }
 
     // Live clock
     function updateStatus() {

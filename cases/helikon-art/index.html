@@ -7,7 +7,7 @@
   <title>Helikon Art Center — Maria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700&family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
   <style>
     @font-face {
@@ -731,6 +731,14 @@
     .tb-nav a:hover, .tb-contact a:hover { opacity: 0.4; }
 
   </style>
+  <style id="dirtalk-skin">
+    :root{ --mono:'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace; }
+    .topbar{ background:transparent !important; border-bottom:0 !important; box-shadow:none !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+    @media (min-width:1025px){ :root{ --pad:14px; --max:none; } }
+    .eyebrow,.case-meta-label,.sec-num,.font-label,.font-meta-label,.system-palette-label,.system-section-label,.system-stat-label,.system-swatch-hex,.browser-footer-label,.next-label,.bonus-tag,.tb-nav a,.tb-contact a{
+      font-family:var(--mono) !important; text-transform:uppercase;
+    }
+  </style>
 </head>
 <body>
 
@@ -754,7 +762,7 @@
       <h1>Helikon<br><em>Art Center</em></h1>
       <p class="intro-lede">A website for an artist-run residency on the Aegean coast — shaped around manifesto, archive, and open calls.</p>
       <div class="intro-preview" aria-hidden="true">
-        <img src="../../assets/helikon/Group 16.png" alt="">
+        <img src="../../assets/helikon/helikon-intro-graphic.png" alt="">
       </div>
     </section>
 
@@ -951,7 +959,7 @@
             <div class="iphone-screen">
               <div class="iphone-island"></div>
               <video class="iphone-video" autoplay loop muted playsinline>
-                <source src="../../assets/helikon/IMG_7826.MP4" type="video/mp4">
+                <source src="../../assets/helikon/helikon-space-clip.mp4" type="video/mp4">
               </video>
             </div>
           </div>
@@ -993,7 +1001,7 @@
         <p class="bonus-desc">Alongside the site, I designed an open call poster for MOLT — a seasonal residency programme at Helikon Art Center. Bold display type, neon colour, and a halftone insect image.</p>
       </div>
       <div class="bonus-poster-wrap">
-        <img src="A4 - 4 (2).png" alt="Open Call MOLT — Helikon Art Center poster">
+        <img src="helikon-open-call-poster.png" alt="Open Call MOLT — Helikon Art Center poster">
       </div>
     </div>
   </div>
