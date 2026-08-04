@@ -118,7 +118,7 @@
     .zoom:hover img { transform: scale(1); }
 
     .full { margin: 0; }                                /* sit inside the thin screen border */
-    .bleed { margin-top: 12px; margin-bottom: 12px; }
+    .bleed { margin-top: 8px; margin-bottom: 8px; }
 
     .cap {
       display: flex; justify-content: space-between; gap: 16px;
@@ -130,7 +130,7 @@
 
     /* ── Section scaffolding ── */
     section { position: relative; }
-    .sec { padding-top: clamp(64px, 9vw, 130px); padding-bottom: clamp(40px, 5vw, 72px); }
+    .sec { padding-top: clamp(36px, 5vw, 72px); padding-bottom: clamp(24px, 3vw, 44px); }
     .sec-label { grid-column: 1 / 4; }
     .sec-label .mono { display: block; }
     .lede-2 {
@@ -159,7 +159,7 @@
     .tf-glyphs { margin-left: auto; align-self: baseline; }
 
     /* Mark & mascot */
-    .marks { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); row-gap: 12px; }
+    .marks { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); row-gap: 8px; }
     .mark-tile { position: relative; height: clamp(240px, 30vw, 430px); background: #f0f0f3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .mark-tile img { width: 52%; height: auto; }
     .mark-tile.on-blue { background: var(--blue); }
@@ -175,7 +175,7 @@
     .ph-txt { grid-column: 1 / 5; align-self: center; }
     .ph-txt h3 { font-size: clamp(24px, 2.7vw, 36px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.06; margin: 14px 0 16px; text-wrap: balance; }
     .ph-txt p { font-size: 16px; line-height: 1.6; letter-spacing: -0.006em; color: #3a3a40; max-width: 40ch; }
-    .ph-imgs { grid-column: 6 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
+    .ph-imgs { grid-column: 6 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-content: start; }
 
     /* ── Identity split ── */
     .split { align-items: stretch; }
@@ -190,7 +190,7 @@
     .split .txt p strong { font-weight: 600; color: var(--ink); }
 
     /* ── Campaign ── */
-    .feature { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12,1fr); column-gap: var(--gutter); row-gap: 12px; align-items: start; }
+    .feature { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12,1fr); column-gap: var(--gutter); row-gap: 8px; align-items: start; }
     .feature .big { grid-column: 1 / 8; }
     .feature .small { grid-column: 8 / -1; align-self: end; }
     .posters { grid-column: 1 / -1; margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -213,7 +213,7 @@
     .statement .attrib { grid-column: 1 / -1; margin-top: 40px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.72); }
 
     /* ── Merch ── */
-    .merch { grid-column: 1/-1; display: grid; grid-template-columns: repeat(12,1fr); column-gap: var(--gutter); row-gap: 12px; }
+    .merch { grid-column: 1/-1; display: grid; grid-template-columns: repeat(12,1fr); column-gap: var(--gutter); row-gap: 8px; }
     .merch .m1 { grid-column: 1 / 5; }
     .merch .m2 { grid-column: 5 / 9; align-self: end; }
     .merch .m3 { grid-column: 9 / -1; }
@@ -229,11 +229,16 @@
     .next { margin: 0; border-top: 1px solid var(--line); }
     .next a { display: grid; grid-template-columns: repeat(12,1fr); column-gap: var(--gutter); align-items: center; padding: clamp(44px,6vw,84px) 0; transition: background .4s var(--e-out); }
     .next a:hover { background: #fafafb; cursor: url('../../cursor2.svg') 16 18, pointer; }
-    .next .lbl { grid-column: 1 / 4; }
+    .next .lbl { grid-column: 1 / 4; font-family: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mut); }
     .next .ttl { grid-column: 4 / 11; font-size: clamp(34px, 6vw, 88px); font-weight: 500; letter-spacing: -0.045em; line-height: 0.98; }
     .next a:hover .ttl { color: var(--blue); }
     .next .arw { grid-column: 12 / -1; justify-self: end; font-size: clamp(28px,3vw,44px); transition: transform .4s var(--e-out); }
     .next a:hover .arw { transform: translateX(8px); }
+    .foot {
+      padding: clamp(28px,4vw,44px) var(--edge) clamp(40px,6vw,64px);
+      font-family: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace; font-size: 11px; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--mut); line-height: 1.8;
+    }
 
     /* ── Reveal motion (progressive, visible by default) ── */
     .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--e-out), transform .9s var(--e-out); }
@@ -341,34 +346,36 @@
     <section class="shell sec system">
 
       <!-- Mark & mascot -->
-      <div class="grid reveal" style="margin-top:clamp(56px,7vw,96px);">
-        <div class="mono pal-label">Mark &amp; character</div>
+      <div class="grid reveal" style="margin-top:clamp(28px,3.5vw,52px);">
         <div class="marks" style="transform:translateY(40px);">
           <div class="m-a">
             <div class="mark-tile" style="background-color:#ffffff;"><img src="dirtalk-logo-blue.png" alt="DIRTALK logo — primary blue version"></div>
-            <div class="mono mark-cap">Primary mark</div>
           </div>
           <div class="m-b">
             <div class="mark-tile on-blue"><img src="dirtalk-logo-white.png" alt="DIRTALK logo — reversed white version"></div>
-            <div class="mono mark-cap">Reversed</div>
           </div>
           <div class="m-c">
             <div class="mark-tile mascot" style="background-color:#0E38ED;"><img src="dirtalk-character.png" alt="DIRTALK brand character — the listener"></div>
-            <div class="mono mark-cap">The listener — brand character</div>
           </div>
         </div>
       </div>
 
+      <!-- Logo construction -->
+      <div class="grid reveal" style="margin-top:clamp(28px,3.5vw,52px);">
+        <figure class="pal-img" style="grid-column:1/-1;">
+          <img src="LogoDirtalkPicture.png" alt="DIRTALK wordmark construction — logo geometry on a build grid" loading="lazy">
+        </figure>
+      </div>
+
       <!-- Palette -->
-      <div class="grid reveal" style="margin-top:clamp(56px,7vw,96px);">
-        <div class="mono pal-label">Palette</div>
+      <div class="grid reveal" style="margin-top:clamp(28px,3.5vw,52px);">
         <figure class="pal-img" style="grid-column:1/-1;">
           <img src="colors.jpg" alt="DIRTALK palette — Signal Pink #FF8DE1, Midnight Studio #021132, Studio White #FFFFFF, DIRtalk Blue #0E38ED" loading="lazy">
         </figure>
       </div>
 
       <!-- Photography -->
-      <div class="grid reveal" style="margin-top:clamp(56px,7vw,96px);">
+      <div class="grid reveal" style="margin-top:clamp(28px,3.5vw,52px);">
         <div class="ph-txt">
           <div class="mono">Photography</div>
           <h3>Studio-lit, tailored, a little cinematic.</h3>
@@ -387,7 +394,6 @@
       <div class="grid split">
         <div class="fig reveal">
           <figure class="zoom"><img src="mic.jpg" alt="DIRTALK branded studio microphone" loading="lazy"></figure>
-          <div class="cap"><span class="idx">Fig. 02</span><span>The mark, applied</span></div>
         </div>
         <div class="txt reveal">
           <h2>The star does the talking.</h2>
@@ -411,15 +417,13 @@
         <p class="lede-2 reveal">A publishing system built for rhythm, from headline campaigns to long-form founder stories.</p>
       </div>
 
-      <div class="grid" style="margin-top:48px;">
+      <div class="grid" style="margin-top:24px;">
         <div class="feature">
           <div class="big reveal">
             <figure class="zoom"><img src="dirtalk-key-visual.jpg" alt="DIRTALK key visual — Women who shape the future" loading="lazy"></figure>
-            <div class="cap"><span class="idx">Key visual</span><span>Women who shape the future</span></div>
           </div>
           <div class="small reveal">
             <figure class="zoom"><img src="dirtalk-character-post.jpg" alt="DIRTALK character post — I was in control, until I stopped feeling myself" loading="lazy"></figure>
-            <div class="cap"><span class="idx">Character post</span><span>Founder stories</span></div>
           </div>
         </div>
 
@@ -481,14 +485,18 @@
 
     <!-- Next -->
     <div class="shell">
-      <nav class="next reveal">
+      <nav class="next">
         <a href="../helikon-art/">
-          <span class="lbl"><span class="mono">Next project</span></span>
+          <span class="lbl">Next case</span>
           <span class="ttl">Helikon Art Center</span>
-          <span class="arw">→</span>
+          <span class="arw" aria-hidden="true">→</span>
         </a>
       </nav>
     </div>
+    <footer class="foot">
+      Brand identity &amp; art direction — Maria Danilova<br>
+      DIRTALK · 2025
+    </footer>
   </main>
 
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
