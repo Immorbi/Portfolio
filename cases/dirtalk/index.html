@@ -179,7 +179,8 @@
 
     /* ── Identity split ── */
     .split { align-items: stretch; }
-    .split .fig { grid-column: 1 / 7; }
+    .split .fig { grid-column: 1 / 7; align-self: center; }
+    .split .fig figure { max-width: 50%; margin: 0 auto; }
     .split .txt { grid-column: 8 / -1; align-self: center; }
     .split .txt h2 {
       font-size: clamp(30px, 4vw, 56px); font-weight: 500; line-height: 1.02;

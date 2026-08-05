@@ -156,26 +156,24 @@
       to   { transform: translateX(calc(-50% - var(--hgap) / 2)); }
     }
 
-    /* ── Social marquees ── */
-    .artist-strip { margin-top: clamp(28px, 4vw, 44px); }
+    /* ── Social: author cards (cover + 2 examples) ── */
+    .artist-strip { margin-top: clamp(32px, 4.5vw, 56px); padding: 0 var(--edge); }
     .artist-label {
       display: block; font-family: var(--mono); font-size: 11px; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.12em; color: var(--mut);
-      margin-bottom: 14px; padding: 0 var(--edge);
+      margin-bottom: 16px;
     }
-    .marquee-wrap { overflow: hidden; width: 100%; cursor: url('../../cursor2.svg') 16 18, pointer; }
-    .marquee-track {
-      display: flex; gap: var(--post-gap); width: max-content;
-      animation: scroll-left var(--dur, 40s) linear infinite;
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1.4vw, 20px); }
+    .card { aspect-ratio: 1080 / 1350; overflow: hidden; background: var(--card); }
+    .card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.6s var(--e-out); }
+    .card:hover img { transform: scale(1.03); }
+    @media (max-width: 600px) {
+      .cards {
+        grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 66%;
+        overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      }
+      .card { scroll-snap-align: start; }
     }
-    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
-    @keyframes scroll-left {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(calc(-50% - var(--post-gap) / 2)); }
-    }
-    .post-item { width: var(--post-w); aspect-ratio: 1080 / 1350; overflow: hidden; background: var(--card); flex-shrink: 0; }
-    .post-item img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.5s var(--e-out); }
-    .marquee-wrap:hover .post-item img { transform: scale(1.03); }
 
     /* ── Next ── */
     .next { margin: 0; border-top: 1px solid var(--line); }
@@ -308,61 +306,21 @@
 
     <div class="artist-strip">
       <span class="artist-label">Polina Orlova</span>
-      <div class="marquee-wrap">
-        <div class="marquee-track" style="--dur:48s">
-          <div class="post-item"><img src="../../publications/the-gallery-social-100.png" alt="Polina Orlova cover" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-101.png" alt="Evenings Q" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-8.png" alt="Reference System artwork" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-102.png" alt="Depth of the Inner World artwork" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-106.png" alt="Recently felt deeply Q" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-103.png" alt="The Kiss artwork" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-107.png" alt="Place inside your art Q" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-104.png" alt="Meditation artwork" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-7.png" alt="Quiet ritual Q" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-105.png" alt="Choir artwork" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-9.png" alt="Hope people notice Q" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-20.png" alt="Place imaginary Q" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-100.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-101.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-8.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-102.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-106.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-103.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-107.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-104.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-7.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-105.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-9.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-20.png" alt="" aria-hidden="true" loading="lazy"></div>
-        </div>
+      <div class="cards">
+        <figure class="card"><img src="../../publications/the-gallery-social-100.png" alt="Polina Orlova — cover" loading="lazy"></figure>
+        <figure class="card"><img src="../../publications/the-gallery-social-101.png" alt="Polina Orlova — Evenings" loading="lazy"></figure>
+        <figure class="card"><img src="../../publications/the-gallery-social-106.png" alt="Polina Orlova — Recently felt deeply" loading="lazy"></figure>
+      </div>
       </div>
     </div>
 
     <div class="artist-strip">
       <span class="artist-label">Tasia K</span>
-      <div class="marquee-wrap">
-        <div class="marquee-track" style="--dur:44s; animation-direction: reverse;">
-          <div class="post-item"><img src="../../publications/the-gallery-social-416.png" alt="Tasia K cover" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-420.png" alt="Evenings Q navy" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-22.png" alt="Tasia photo" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-21.png" alt="Quiet ritual Q navy" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-14.png" alt="After performing artwork" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-110.png" alt="Hope people notice Q navy" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-16.png" alt="Portrait photo" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-109.png" alt="Evenings Q navy 2" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-18.png" alt="Tent of Wonders" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-19.png" alt="Recently felt deeply Q navy" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-416.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-420.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-22.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-21.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-14.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-110.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-16.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-109.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-18.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-19.png" alt="" aria-hidden="true" loading="lazy"></div>
-        </div>
+      <div class="cards">
+        <figure class="card"><img src="../../publications/the-gallery-social-416.png" alt="Tasia K — cover" loading="lazy"></figure>
+        <figure class="card"><img src="../../publications/the-gallery-social-420.png" alt="Tasia K — Evenings" loading="lazy"></figure>
+        <figure class="card"><img src="../../publications/the-gallery-social-21.png" alt="Tasia K — Quiet ritual" loading="lazy"></figure>
+      </div>
       </div>
     </div>
 
@@ -380,53 +338,21 @@
 
     <div class="artist-strip">
       <span class="artist-label">Nino Gogolidze</span>
-      <div class="marquee-wrap">
-        <div class="marquee-track" style="--dur:30s">
-          <div class="post-item"><img src="../../publications/the-gallery-social-88.png" alt="Nino Gogolidze cover" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-89.png" alt="Nino, introduction" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-90.png" alt="Nino, top 3 movies" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-91.png" alt="Nino, top 3 books" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-92.png" alt="Nino, top 3 songs" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-93.png" alt="Nino, art style" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-88.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-89.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-90.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-91.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-92.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-93.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-88.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-89.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-90.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-91.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-92.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-93.png" alt="" aria-hidden="true" loading="lazy"></div>
-        </div>
+      <div class="cards">
+        <figure class="card"><img src="../../publications/the-gallery-social-88.png" alt="Nino Gogolidze — cover" loading="lazy"></figure>
+        <figure class="card"><img src="../../publications/the-gallery-social-89.png" alt="Nino Gogolidze — introduction" loading="lazy"></figure>
+        <figure class="card"><img src="../../publications/the-gallery-social-90.png" alt="Nino Gogolidze — top 3 movies" loading="lazy"></figure>
+      </div>
       </div>
     </div>
 
     <div class="artist-strip">
       <span class="artist-label">Mako Lomadze</span>
-      <div class="marquee-wrap">
-        <div class="marquee-track" style="--dur:32s; animation-direction: reverse;">
-          <div class="post-item"><img src="../../publications/the-gallery-social-94.png" alt="Mako Lomadze cover" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-95.png" alt="Mako, introduction" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-96.png" alt="Mako, top 3 movies" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-97.png" alt="Mako, top 3 books" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-98.png" alt="Mako, top 3 songs" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-99.png" alt="Mako, art style" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-94.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-95.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-96.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-97.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-98.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-99.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-94.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-95.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-96.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-97.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-98.png" alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="post-item"><img src="../../publications/the-gallery-social-99.png" alt="" aria-hidden="true" loading="lazy"></div>
-        </div>
+      <div class="cards">
+        <figure class="card"><img src="../../publications/the-gallery-social-94.png" alt="Mako Lomadze — cover" loading="lazy"></figure>
+        <figure class="card"><img src="../../publications/the-gallery-social-95.png" alt="Mako Lomadze — introduction" loading="lazy"></figure>
+        <figure class="card"><img src="../../publications/the-gallery-social-96.png" alt="Mako Lomadze — top 3 movies" loading="lazy"></figure>
+      </div>
       </div>
     </div>
 
