@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <title>Murabex — Maria</title>
+  <meta name="description" content="Murabex — brand site, institutional product interface and original illustration system for a sovereign, Shari'ah-compliant commodity Murabaha platform. Designed by Maria Danilova.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0b0b0d;
+      --panel: #141418;
+      --text: #f2f0e9;
+      --mut: #8d8a83;
+      --dim: #b9b6ad;
+      --line: #26262b;
+      --gold: #d8b56b;
+      --gold-grad: linear-gradient(90deg, #c9a24b 0%, #efd79a 55%, #c9a24b 100%);
+
+      --edge: 20px;
+      --gutter: 14px;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      --e-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 1025px) { :root { --edge: 14px; --gutter: 14px; } }
+
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      padding-top: 56px;
+      cursor: url('../../cursor.svg') 16 18, auto;
+    }
+    @media (max-width: 640px) { body { padding-top: 50px; } }
+
+    ::selection { background: var(--gold); color: #10100c; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Header (shared across cases) ── */
+    .topbar { position: fixed; inset: 0 0 auto 0; z-index: 100; background: transparent; }
+    .topbar-inner {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 18px var(--edge);
+    }
+    .tb-nav { display: flex; gap: 20px; }
+    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .tb-nav a, .tb-contact a {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text);
+      transition: opacity 0.3s var(--e-out);
+    }
+    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.5; cursor: url('../../cursor2.svg') 16 18, pointer; }
+
+    /* ── Shell / grid ── */
+    .shell { padding: 0 var(--edge); }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); }
+
+    /* ── Masthead (credits-led) ── */
+    .mast { padding-top: 40px; padding-bottom: 24px; }
+    @media (min-width: 1025px) { .mast { padding-top: 34px; } }
+    .mast .logo { grid-column: 1 / -1; height: 34px; width: auto; margin-bottom: clamp(30px, 4vw, 52px); opacity: 0.95; }
+    .mast .credits {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter);
+      row-gap: 20px; padding-bottom: 40px;
+    }
+    .credits .cell { grid-column: span 3; }
+    .credits dt {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--mut); margin-bottom: 7px;
+    }
+    .credits dd { font-size: 15px; line-height: 1.35; letter-spacing: -0.01em; }
+    .mast .sub {
+      grid-column: 6 / -1;
+      font-size: clamp(18px, 2vw, 26px);
+      line-height: 1.35; letter-spacing: -0.02em;
+      max-width: 40ch; justify-self: end; padding-top: 10px;
+    }
+    .mast .sub b { color: var(--gold); font-weight: 600; }
+
+    /* ── Hero dune illustration ── */
+    .hero-dune { overflow: hidden; padding: clamp(20px, 4vw, 64px) 0 clamp(24px, 4vw, 56px); }
+    .hero-dune img { width: 100%; height: auto; display: block; }
+
+    /* ── Figures ── */
+    figure { position: relative; overflow: hidden; margin: 0; background: var(--panel); }
+    figure img { width: 100%; height: auto; display: block; }
+    .shot { border: 1px solid var(--line); border-radius: 6px; }
+    .shot-cap {
+      margin-top: 12px; display: flex; justify-content: space-between; gap: 16px;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--mut);
+    }
+    .shot-cap .n { color: var(--gold); }
+
+    /* ── Section scaffolding ── */
+    section { position: relative; }
+    .sec { padding-top: clamp(56px, 8vw, 120px); padding-bottom: clamp(36px, 5vw, 64px); }
+    .sec-label { grid-column: 1 / 4; }
+    .sec-label .mono {
+      display: block; font-family: var(--mono); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+    }
+    .lede-2 {
+      grid-column: 4 / -1;
+      font-size: clamp(26px, 3.6vw, 50px);
+      font-weight: 600; line-height: 1.04; letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+    .lede-2 em { font-style: normal; color: var(--gold); }
+    .body-cols {
+      grid-column: 4 / -1; margin-top: 38px;
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 56px;
+    }
+    .body-cols p { font-size: 16px; line-height: 1.62; letter-spacing: -0.005em; color: var(--dim); max-width: 60ch; }
+    .body-cols p strong { font-weight: 600; color: var(--text); }
+
+    /* ── Product screens (2 per row) ── */
+    .screens { grid-column: 1 / -1; margin-top: clamp(32px, 4vw, 56px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 28px); }
+    @media (max-width: 720px) { .screens { grid-template-columns: 1fr; } }
+
+    /* ── Landing showcase (browser + phone, auto-scrolling like a video) ── */
+    .landing { grid-column: 1 / -1; margin-top: clamp(32px, 4vw, 56px); display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: clamp(16px, 2vw, 28px); align-items: start; }
+    .browser, .phone { border: 1px solid var(--line); overflow: hidden; background: var(--panel); }
+    .browser { border-radius: 8px; }
+    .phone { border-radius: 26px; }
+    .browser-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+    .browser-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: #34343a; }
+    .browser-bar .url { margin-left: 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--mut); }
+    .browser-screen, .phone-screen { --frame-h: clamp(440px, 66vh, 680px); height: var(--frame-h); overflow: hidden; }
+    .browser-screen img, .phone-screen img {
+      width: 100%; height: auto; display: block; will-change: transform;
+      animation: frame-scroll var(--scroll-dur, 45s) linear infinite alternate;
+    }
+    .browser-screen img { --scroll-dur: 45s; }
+    .phone-screen img { --scroll-dur: 85s; }
+    @keyframes frame-scroll {
+      0%, 4%   { transform: translateY(0); }
+      96%, 100% { transform: translateY(calc(-100% + var(--frame-h))); }
+    }
+    .frame-cap { grid-column: 1 / -1; margin-top: 12px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mut); }
+    @media (max-width: 760px) { .landing { grid-template-columns: 1fr; } .phone { max-width: 320px; margin: 0 auto; } }
+    @media (prefers-reduced-motion: reduce) {
+      .browser-screen img, .phone-screen img { animation: none; }
+    }
+
+    /* ── Illustration + icons ── */
+    .band { margin: clamp(32px, 4vw, 56px) 0 0; }
+    .band img { width: 100%; height: auto; display: block; }
+    /* ── Next ── */
+    .next { margin: 0; border-top: 1px solid var(--line); }
+    .next a {
+      display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter);
+      align-items: center; padding: clamp(44px, 6vw, 84px) 0; transition: opacity 0.4s var(--e-out);
+    }
+    .next a:hover { opacity: 0.8; cursor: url('../../cursor2.svg') 16 18, pointer; }
+    .next .lbl { grid-column: 1 / 4; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mut); }
+    .next .ttl { grid-column: 4 / 11; font-size: clamp(34px, 6vw, 88px); font-weight: 700; letter-spacing: -0.045em; line-height: 0.98; }
+    .next a:hover .ttl { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .next .arw { grid-column: 12 / -1; justify-self: end; font-size: clamp(28px, 3vw, 44px); color: var(--gold); transition: transform 0.4s var(--e-out); }
+    .next a:hover .arw { transform: translateX(8px); }
+
+    /* ── Footer ── */
+    .foot {
+      padding: clamp(28px, 4vw, 44px) var(--edge) clamp(40px, 6vw, 72px);
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--mut); line-height: 1.9;
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--e-out), transform 0.9s var(--e-out); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .credits .cell { grid-column: span 6; }
+      .mast .sub { grid-column: 1 / -1; justify-self: start; max-width: 46ch; }
+      .sec-label { grid-column: 1 / -1; margin-bottom: 16px; }
+      .lede-2, .body-cols { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .body-cols { grid-template-columns: 1fr; gap: 22px; }
+      .credits .cell { grid-column: span 6; }
+      .next .ttl { grid-column: 1 / -1; }
+      .next .lbl, .next .arw { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <nav class="tb-nav">
+        <a href="/">Home</a>
+        <a href="/profile/">Profile</a>
+      </nav>
+      <nav class="tb-contact">
+        <a href="https://www.linkedin.com/in/mariia-danilova-3341a6236/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:damilova.danmar@gmail.com">Email</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Masthead -->
+    <div class="shell">
+      <header class="mast grid">
+        <img class="logo" src="../../assets/murabex/logo.svg" alt="Murabex">
+        <dl class="credits">
+          <div class="cell"><dt>Client</dt><dd>Murabex</dd></div>
+          <div class="cell"><dt>Role</dt><dd>Web design,<br>UI/UX, Illustration</dd></div>
+          <div class="cell"><dt>Scope</dt><dd>Brand site, Platform UI,<br>Illustration &amp; icons</dd></div>
+          <div class="cell"><dt>Year</dt><dd>2026</dd></div>
+        </dl>
+        <p class="sub">A sovereign, Shari'ah-compliant commodity Murabaha platform. I designed the <b>brand site</b>, the institutional <b>product interface</b>, and the original <b>illustration and icon system</b>.</p>
+      </header>
+    </div>
+
+    <!-- Hero dune illustration -->
+    <section class="hero-dune shell" aria-label="Murabex dune illustration">
+      <img src="../../assets/murabex/dunes.webp" alt="Original gold contour-line illustration of desert dunes" loading="eager">
+    </section>
+
+    <div class="shell">
+      <!-- The project -->
+      <section class="sec grid">
+        <div class="sec-label reveal"><span class="mono">The project</span></div>
+        <p class="lede-2 reveal">Enterprise Islamic finance, made to feel <em>calm and precise</em>.</p>
+        <div class="body-cols reveal">
+          <p>Murabex is a digital finance platform that lets institutions execute Murabaha agreements and pool liquidity through a shared, sovereign ecosystem, connecting local banks, a national exchange and international investors on one trusted rail.</p>
+          <p>I led the visual design end to end: the public marketing site, the institutional product interface, and every illustration and icon in the system. The brief was to make a dense, regulated, Shari'ah-governed product feel <strong>trustworthy and effortless</strong>, gold on near-black, generous space, and a restrained interface where the data does the talking.</p>
+        </div>
+      </section>
+
+      <!-- Landing page -->
+      <section class="sec grid">
+        <div class="sec-label reveal"><span class="mono">Landing page</span></div>
+        <p class="lede-2 reveal">I designed the full <em>landing page</em>, gold on black.</p>
+        <div class="body-cols reveal">
+          <p>The landing sets the tone: a deep near-black canvas, warm gold gradients and fine contour line-work drawn from the region's dunes and skylines. Inter carries the voice, confident, institutional, unhurried.</p>
+          <p>The page moves from the promise (Shari'ah-compliant, community-driven, reliable) into the ecosystem, the participants and the technology, with clear calls to request a demo or build a sovereign ecosystem.</p>
+        </div>
+        <div class="landing reveal">
+          <div class="browser">
+            <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">murabex.com</span></div>
+            <div class="browser-screen"><img src="../../assets/murabex/landing-desktop.png" alt="Murabex landing page — full desktop design" loading="lazy"></div>
+          </div>
+          <div class="phone">
+            <div class="phone-screen"><img src="../../assets/murabex/landing-mobile.png" alt="Murabex landing page — full mobile design" loading="lazy"></div>
+          </div>
+          <div class="frame-cap">Full landing page, desktop &amp; mobile — auto-scrolling preview</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Skyline band -->
+    <div class="shell">
+      <div class="band reveal">
+        <img src="../../assets/murabex/cta-skyline.webp" alt="Original gold contour-line illustration of a Gulf skyline" loading="lazy">
+      </div>
+    </div>
+
+    <div class="shell">
+      <!-- Product interface -->
+      <section class="sec grid">
+        <div class="sec-label reveal"><span class="mono">Product interface</span></div>
+        <p class="lede-2 reveal">An institutional interface for a <em>regulated market</em>.</p>
+        <div class="body-cols reveal">
+          <p>Four core surfaces carry the platform: an agreements dashboard, the full agreement lifecycle, a competitive asset-trading exchange, and an automated KYC and compliance workflow. Dense tables, status systems and state machines, kept legible through hierarchy, colour-coded states and restraint.</p>
+          <p>A dark operator UI with gold as the single accent. Colour is reserved for meaning, trade sides, agreement states, risk and compliance signals, so a high-throughput system stays calm and scannable.</p>
+        </div>
+
+        <div class="screens">
+          <figure class="shot reveal"><img src="../../assets/murabex/ui-1.jpg" alt="Murabex Agreements dashboard — table of Murabaha agreements with states" loading="lazy"></figure>
+          <figure class="shot reveal"><img src="../../assets/murabex/ui-2.jpg" alt="Murabex agreement lifecycle — workflow state machine from draft to done" loading="lazy"></figure>
+          <figure class="shot reveal"><img src="../../assets/murabex/ui-3.jpg" alt="Murabex Asset Trading — competitive RFQ exchange with quotes and timers" loading="lazy"></figure>
+          <figure class="shot reveal"><img src="../../assets/murabex/ui-4.jpg" alt="Murabex Customer & KYC — automated compliance screening and audit trail" loading="lazy"></figure>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Next -->
+    <div class="shell">
+      <nav class="next">
+        <a href="../the-gallery/">
+          <span class="lbl">Next case</span>
+          <span class="ttl">The Gallery</span>
+          <span class="arw" aria-hidden="true">→</span>
+        </a>
+      </nav>
+    </div>
+
+    <footer class="foot">
+      Web design, UI/UX &amp; illustration — Maria Danilova<br>
+      Client — Murabex · 2026
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
+
+</body>
+</html>
