@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>Art Works — Maria</title>
+  <meta name="description" content="Ceramics and physical art works by Maria Danilova.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --text: #222222;
+      --bg: #ffffff;
+      --mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      --e-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --edge: 20px;
+    }
+    @media (min-width: 1025px) { :root { --edge: 14px; } }
+
+    html { -webkit-text-size-adjust: 100%; }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      -webkit-font-smoothing: antialiased;
+      cursor: url('../cursor.svg') 16 18, auto;
+    }
+    ::selection { background: var(--text); color: var(--bg); }
+    a { color: inherit; text-decoration: none; }
+    video { display: block; max-width: 100%; }
+
+    /* ── Header (matches the case pages) ── */
+    .topbar { position: fixed; inset: 0 0 auto 0; z-index: 100; background: transparent; }
+    .topbar-inner {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 18px var(--edge);
+    }
+    .tb-nav { display: flex; gap: 20px; }
+    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .tb-nav a, .tb-contact a {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text);
+      transition: opacity 0.3s var(--e-out);
+    }
+    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.5; cursor: url('../cursor2.svg') 16 18, pointer; }
+
+    /* ── Stage ── */
+    .stage {
+      min-height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      padding: clamp(80px, 12vh, 140px) clamp(20px, 5vw, 56px) clamp(48px, 8vh, 90px);
+    }
+    .pieces {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: clamp(20px, 3vw, 40px);
+    }
+
+    .piece {
+      position: relative;
+      width: clamp(260px, 42vh, 420px);
+      overflow: hidden;
+      cursor: url('../cursor2.svg') 16 18, ew-resize;
+    }
+    .piece video {
+      width: 100%; height: auto;
+      pointer-events: none;
+    }
+
+    /* scrub progress hairline, only while hovering */
+    .piece .bar {
+      position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
+      background: var(--text); opacity: 0;
+      transition: opacity 0.25s var(--e-out);
+      pointer-events: none;
+    }
+    .piece:hover .bar, .piece:focus-visible .bar { opacity: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .piece .bar { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <nav class="tb-nav">
+        <a href="/">Home</a>
+        <a href="/profile/">Profile</a>
+      </nav>
+      <nav class="tb-contact">
+        <a href="https://www.linkedin.com/in/mariia-danilova-3341a6236/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:damilova.danmar@gmail.com">Email</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="stage">
+    <div class="pieces">
+      <div class="piece" tabindex="0" aria-label="Ceramic octopus candle holder — move the cursor across to scrub through the shot">
+        <video muted playsinline preload="auto" data-scrub-start="0" data-scrub-end="5">
+          <source src="candle-holder.mp4" type="video/mp4">
+        </video>
+        <span class="bar" aria-hidden="true"></span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      document.querySelectorAll('.piece').forEach(function (piece) {
+        var video = piece.querySelector('video');
+        var bar = piece.querySelector('.bar');
+        // note: `|| fallback` would swallow a legitimate 0 here
+        var startAttr = parseFloat(video.dataset.scrubStart);
+        var endAttr = parseFloat(video.dataset.scrubEnd);
+        var start = isFinite(startAttr) ? startAttr : 0;
+        var end = isFinite(endAttr) ? endAttr : Infinity;
+        var target = start;
+        var pending = null;
+
+        // hold on the first frame until hovered
+        function rest() {
+          target = start;
+          seekTo(start);
+          if (bar) bar.style.width = '0%';
+        }
+        if (video.readyState >= 1) rest();
+        else video.addEventListener('loadedmetadata', rest, { once: true });
+
+        // one seek in flight at a time; the newest request wins
+        function seekTo(t) {
+          if (video.seeking) { pending = t; return; }
+          try { video.currentTime = t; } catch (e) {}
+        }
+        video.addEventListener('seeked', function () {
+          if (pending === null) return;
+          var next = pending; pending = null; seekTo(next);
+        });
+        function schedule() { seekTo(target); }
+
+        function scrubTo(clientX) {
+          var box = piece.getBoundingClientRect();
+          var pct = (clientX - box.left) / box.width;
+          pct = pct < 0 ? 0 : pct > 1 ? 1 : pct;
+          var limit = isFinite(video.duration) ? Math.min(end, video.duration) : end;
+          target = start + pct * (limit - start);
+          if (bar) bar.style.width = (pct * 100) + '%';
+          schedule();
+        }
+
+        piece.addEventListener('mouseenter', function (e) { video.pause(); scrubTo(e.clientX); });
+        piece.addEventListener('mousemove', function (e) { scrubTo(e.clientX); });
+        piece.addEventListener('mouseleave', rest);
+
+        // touch: drag across to scrub
+        piece.addEventListener('touchstart', function (e) { video.pause(); scrubTo(e.touches[0].clientX); }, { passive: true });
+        piece.addEventListener('touchmove', function (e) { scrubTo(e.touches[0].clientX); }, { passive: true });
+        piece.addEventListener('touchend', rest);
+
+        // keyboard: arrows step through the same range
+        piece.addEventListener('keydown', function (e) {
+          if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+          e.preventDefault();
+          var limit = isFinite(video.duration) ? Math.min(end, video.duration) : end;
+          var step = (limit - start) / 12;
+          target = Math.max(start, Math.min(limit, (video.currentTime || start) + (e.key === 'ArrowRight' ? step : -step)));
+          if (bar) bar.style.width = (((target - start) / (limit - start)) * 100) + '%';
+          schedule();
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
