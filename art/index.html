@@ -50,6 +50,17 @@
     }
     .tb-nav a:hover, .tb-contact a:hover { opacity: 0.5; cursor: url('../cursor2.svg') 16 18, pointer; }
 
+    /* Touch devices: give the header links a finger-sized hit area without
+       changing how they look. The stacked contact links sit side by side here
+       so both targets can grow without overlapping each other. */
+    @media (pointer: coarse) {
+      .tb-contact { flex-direction: row; gap: 20px; }
+      .tb-nav a, .tb-contact a { position: relative; }
+      .tb-nav a::after, .tb-contact a::after {
+        content: ""; position: absolute; inset: -14px -10px;
+      }
+    }
+
     /* ── Stage ── */
     .stage {
       min-height: 100%;
@@ -67,11 +78,28 @@
       overflow: hidden;
       cursor: url('../cursor2.svg') 16 18, ew-resize;
     }
+    /* Reserve the frame before metadata arrives; an unsized <video> falls back to
+       300x150 and the page jumps ~300px once the real dimensions land. */
     .piece video {
       width: 100%; height: auto;
+      aspect-ratio: 828 / 1108;
       pointer-events: none;
     }
+    /* The piece is a focusable control, so it needs a focus ring of its own —
+       the default UA outline sits tight against the frame and reads as a border. */
+    .piece:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 4px;
+    }
+    .tb-nav a:focus-visible, .tb-contact a:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 4px;
+      border-radius: 1px;
+    }
 
+    @media (prefers-reduced-motion: reduce) {
+      .tb-nav a, .tb-contact a { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -91,7 +119,11 @@
 
   <main class="stage">
     <div class="pieces">
-      <div class="piece" tabindex="0" aria-label="Ceramic octopus candle holder — move the cursor across to scrub through the shot">
+      <div class="piece" tabindex="0"
+           role="slider"
+           aria-label="Ceramic octopus candle holder, turning. Drag across or use arrow keys to move through the shot."
+           aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-valuetext="Start of the turn"
+           aria-orientation="horizontal">
         <video muted playsinline preload="auto" data-scrub-start="0" data-scrub-end="5">
           <source src="candle-holder.mp4" type="video/mp4">
         </video>
@@ -128,7 +160,16 @@
           if (pending === null) return;
           var next = pending; pending = null; seekTo(next);
         });
-        function schedule() { seekTo(target); }
+        function schedule() { seekTo(target); announce(target); }
+
+        // keep the slider's reported value in step with the frame on screen
+        function announce(t) {
+          var limit = isFinite(video.duration) ? Math.min(end, video.duration) : end;
+          piece.setAttribute('aria-valuenow', t.toFixed(1));
+          var pct = limit > start ? (t - start) / (limit - start) : 0;
+          piece.setAttribute('aria-valuetext',
+            pct <= 0.02 ? 'Start of the turn' : pct >= 0.98 ? 'End of the turn' : Math.round(pct * 100) + '% through the turn');
+        }
 
         function scrubTo(clientX) {
           var box = piece.getBoundingClientRect();

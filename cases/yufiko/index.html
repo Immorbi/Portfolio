@@ -270,6 +270,17 @@
     }
     .tb-nav a:hover, .tb-contact a:hover { opacity: 0.4; }
 
+    /* Touch devices: give the header links a finger-sized hit area without
+       changing how they look. The stacked contact links sit side by side here
+       so both targets can grow without overlapping each other. */
+    @media (pointer: coarse) {
+      .tb-contact { flex-direction: row; gap: 20px; }
+      .tb-nav a, .tb-contact a { position: relative; }
+      .tb-nav a::after, .tb-contact a::after {
+        content: ""; position: absolute; inset: -14px -10px;
+      }
+    }
+
 
   </style>
   <style id="dirtalk-skin">
