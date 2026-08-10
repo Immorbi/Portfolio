@@ -72,18 +72,6 @@
       pointer-events: none;
     }
 
-    /* scrub progress hairline, only while hovering */
-    .piece .bar {
-      position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
-      background: var(--text); opacity: 0;
-      transition: opacity 0.25s var(--e-out);
-      pointer-events: none;
-    }
-    .piece:hover .bar, .piece:focus-visible .bar { opacity: 1; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .piece .bar { transition: none; }
-    }
   </style>
 </head>
 <body>
@@ -107,7 +95,6 @@
         <video muted playsinline preload="auto" data-scrub-start="0" data-scrub-end="5">
           <source src="candle-holder.mp4" type="video/mp4">
         </video>
-        <span class="bar" aria-hidden="true"></span>
       </div>
     </div>
   </main>
@@ -116,7 +103,6 @@
     (function () {
       document.querySelectorAll('.piece').forEach(function (piece) {
         var video = piece.querySelector('video');
-        var bar = piece.querySelector('.bar');
         // note: `|| fallback` would swallow a legitimate 0 here
         var startAttr = parseFloat(video.dataset.scrubStart);
         var endAttr = parseFloat(video.dataset.scrubEnd);
@@ -129,7 +115,6 @@
         function rest() {
           target = start;
           seekTo(start);
-          if (bar) bar.style.width = '0%';
         }
         if (video.readyState >= 1) rest();
         else video.addEventListener('loadedmetadata', rest, { once: true });
@@ -151,7 +136,6 @@
           pct = pct < 0 ? 0 : pct > 1 ? 1 : pct;
           var limit = isFinite(video.duration) ? Math.min(end, video.duration) : end;
           target = start + pct * (limit - start);
-          if (bar) bar.style.width = (pct * 100) + '%';
           schedule();
         }
 
@@ -171,7 +155,6 @@
           var limit = isFinite(video.duration) ? Math.min(end, video.duration) : end;
           var step = (limit - start) / 12;
           target = Math.max(start, Math.min(limit, (video.currentTime || start) + (e.key === 'ArrowRight' ? step : -step)));
-          if (bar) bar.style.width = (((target - start) / (limit - start)) * 100) + '%';
           schedule();
         });
       });
