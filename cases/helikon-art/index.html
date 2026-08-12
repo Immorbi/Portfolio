@@ -7,7 +7,7 @@
   <title>Helikon Art Center — Maria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700&family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
   <style>
     @font-face {
@@ -45,7 +45,7 @@
       --border:  rgba(17,17,17,.1);
       --accent:  #e4ff00;
       --font:    'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --mono:    'Manrope', sans-serif;
+      --mono:    'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --xanh:    'Xanh Mono', monospace;
       --menlo:   'Menlo', 'Courier New', monospace;
       --max:     1440px;
@@ -141,7 +141,7 @@
       letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
     }
     .case-meta-value {
-      font-family:var(--mono); font-size:15px; font-weight:500; line-height:1.5;
+      font-family:var(--font); font-size:15px; font-weight:500; line-height:1.5;
     }
     .case-meta-item.case-meta-result {
       grid-column:1 / -1; border-top:1px solid var(--border); padding-top:24px;
@@ -328,7 +328,7 @@
       color:#0f0f0f;
     }
     .site-scroll-sub {
-      font-family:var(--mono); font-size:13px; line-height:1.7;
+      font-family:var(--font); font-size:13px; line-height:1.7;
       color:rgba(15,15,15,.4); max-width:38ch;
       align-self:end;
     }
@@ -544,7 +544,7 @@
       color:rgba(255,255,255,.3); margin-bottom:20px;
     }
     .font-desc {
-      font-family:var(--mono); font-size:13px; line-height:1.78;
+      font-family:var(--font); font-size:13px; line-height:1.78;
       color:rgba(255,255,255,.58); max-width:44ch; margin-bottom:52px;
     }
     .font-meta-grid {
@@ -556,7 +556,7 @@
       color:rgba(255,255,255,.28); margin-bottom:6px;
     }
     .font-meta-value {
-      font-family:var(--mono); font-size:14px; font-weight:500; color:#fff;
+      font-family:var(--font); font-size:14px; font-weight:500; color:#fff;
     }
 
     .font-charset {
@@ -624,7 +624,7 @@
       color:var(--text);
     }
     .bonus-desc {
-      font-family:var(--mono); font-size:13px; line-height:1.75;
+      font-family:var(--font); font-size:13px; line-height:1.75;
       color:var(--dim); max-width:42ch;
     }
     .bonus-poster-wrap img {
@@ -713,7 +713,7 @@
     .tb-nav { display: flex; gap: 20px; }
     .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
     .tb-nav a, .tb-contact a {
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
@@ -737,11 +737,15 @@
 
   </style>
   <style id="dirtalk-skin">
-    :root{ --mono:'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace; }
+    :root{ --mono:'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+           --label:'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
     .topbar{ background:transparent !important; border-bottom:0 !important; box-shadow:none !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
     @media (min-width:1025px){ :root{ --pad:14px; --max:none; } }
-    .eyebrow,.case-meta-label,.sec-num,.font-label,.font-meta-label,.system-palette-label,.system-section-label,.system-stat-label,.system-swatch-hex,.browser-footer-label,.next-label,.bonus-tag,.tb-nav a,.tb-contact a{
+    .system-swatch-hex,.tb-nav a,.tb-contact a{
       font-family:var(--mono) !important; text-transform:uppercase;
+    }
+    .eyebrow,.case-meta-label,.sec-num,.font-label,.font-meta-label,.system-palette-label,.system-section-label,.system-stat-label,.browser-footer-label,.next-label,.bonus-tag{
+      font-family:var(--label) !important; font-weight:600; text-transform:uppercase;
     }
   </style>
 </head>

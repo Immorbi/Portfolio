@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <title>Exactpro — Maria</title>
+  <meta name="description" content="Exactpro — four years of multidisciplinary design for an independent software testing house serving global financial market infrastructure: one 1080×1350 template system flexed across campaigns, publications, events, employer brand and five country calendars. Designed by Maria Danilova.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0e14;
+      --panel: #121821;
+      --text: #f1f4f7;
+      --mut: #7e8896;
+      --dim: #b4bcc7;
+      --line: #1d2531;
+      /* Teal is the house colour; every section overrides --accent with the
+         colour that family of posts actually ran in. */
+      --accent: #5cc0bb;
+
+      --edge: 20px;
+      --gutter: 14px;
+      --sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      /* Every label, caption and piece of chrome sits in Inter; Space Grotesk
+         is left to carry the headings and the body copy. */
+      --label: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --e-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 1025px) { :root { --edge: 14px; --gutter: 14px; } }
+
+    html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      padding-top: 56px;
+      cursor: url('../../cursor.svg') 16 18, auto;
+    }
+    @media (max-width: 640px) { body { padding-top: 50px; } }
+
+    ::selection { background: var(--accent); color: #06090d; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Header (shared across cases) ── */
+    .topbar { position: fixed; inset: 0 0 auto 0; z-index: 100; background: transparent; }
+    .topbar-inner {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 18px var(--edge);
+    }
+    .tb-nav { display: flex; gap: 20px; }
+    .tb-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .tb-nav a, .tb-contact a {
+      font-family: var(--label);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text);
+      transition: opacity 0.3s var(--e-out);
+    }
+    .tb-nav a:hover, .tb-contact a:hover { opacity: 0.5; cursor: url('../../cursor2.svg') 16 18, pointer; }
+
+    @media (pointer: coarse) {
+      .tb-contact { flex-direction: row; gap: 20px; }
+      .tb-nav a, .tb-contact a { position: relative; }
+      .tb-nav a::after, .tb-contact a::after {
+        content: ""; position: absolute; inset: -14px -10px;
+      }
+    }
+
+    /* ── Shell / grid ── */
+    .shell { padding: 0 var(--edge); }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); }
+
+    /* ── Masthead ── */
+    .mast { padding-top: 40px; padding-bottom: 24px; }
+    @media (min-width: 1025px) { .mast { padding-top: 34px; } }
+    .mast .wordmark {
+      grid-column: 1 / -1; margin-bottom: clamp(26px, 4vw, 48px);
+      display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    }
+    .mast .wordmark h1 {
+      font-size: clamp(40px, 8vw, 108px); font-weight: 500;
+      letter-spacing: -0.05em; line-height: 0.9;
+    }
+    .mast .wordmark .latin {
+      font-family: var(--label); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--mut);
+    }
+    .mast .credits {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter);
+      row-gap: 20px; padding-bottom: 40px;
+    }
+    .credits .cell { grid-column: span 3; }
+    .credits dt {
+      font-family: var(--label); font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--mut); margin-bottom: 7px;
+    }
+    .credits dd { font-size: 15px; line-height: 1.35; letter-spacing: -0.01em; }
+    .mast .sub {
+      grid-column: 7 / -1;
+      font-size: clamp(17px, 1.7vw, 22px);
+      line-height: 1.4; letter-spacing: -0.015em;
+      max-width: 34ch; justify-self: end; padding-top: 10px;
+    }
+    .mast .sub b { color: inherit; font-weight: 600; }
+
+    /* ── Hero: the feed as a turning ring ── */
+    .hero {
+      /* The clip lives on the page background, so it must run edge to edge with
+         no frame around it — any border would show where the render ends. */
+      margin: clamp(8px, 2vw, 28px) 0 0;
+      background: var(--bg);
+    }
+    .hero video { width: 100%; height: auto; display: block; }
+
+    /* ── Section scaffolding ── */
+    section { position: relative; }
+    .sec { padding-top: clamp(36px, 5vw, 72px); padding-bottom: clamp(24px, 3vw, 44px); }
+    .sec-label { grid-column: 1 / 4; }
+    .sec-label .tag {
+      display: block; font-family: var(--label); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--mut);
+    }
+    .lede-2 {
+      grid-column: 4 / -1;
+      font-size: clamp(26px, 3.4vw, 46px);
+      font-weight: 500; line-height: 1.06; letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+    .lede-2 em { font-style: normal; color: inherit; }
+    .body-cols {
+      grid-column: 4 / -1; margin-top: 40px;
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 56px;
+    }
+    .body-cols p { font-size: 16.5px; line-height: 1.62; letter-spacing: -0.006em; color: var(--dim); max-width: 60ch; }
+    .body-cols p strong { font-weight: 600; color: var(--text); }
+    .body-cols p em { font-style: italic; color: var(--text); }
+
+
+    /* ── Post grid ── */
+    .posts {
+      grid-column: 1 / -1; margin-top: clamp(32px, 4vw, 56px);
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: clamp(18px, 2.4vw, 34px) clamp(16px, 2vw, 28px);
+    }
+    .posts--wide { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+    .post { margin: 0; }
+    /* The artwork itself is drawn on a rounded card, so the frame matches it
+       rather than cutting a softer shape into a hard-cornered box. */
+    .post .frame {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 18px;
+      overflow: hidden; line-height: 0;
+    }
+    .post img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+
+
+    /* ── Next ── */
+    .next { margin: 0; border-top: 1px solid var(--line); }
+    .next a {
+      display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter);
+      align-items: center; padding: clamp(44px, 6vw, 84px) 0; transition: opacity 0.4s var(--e-out);
+    }
+    .next a:hover { opacity: 0.8; cursor: url('../../cursor2.svg') 16 18, pointer; }
+    .next .lbl { grid-column: 1 / 4; font-family: var(--label); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mut); }
+    .next .ttl { grid-column: 4 / 11; font-size: clamp(34px, 6vw, 88px); font-weight: 500; letter-spacing: -0.045em; line-height: 0.98; }
+    .next .arw { grid-column: 12 / -1; justify-self: end; font-size: clamp(28px, 3vw, 44px); transition: transform 0.4s var(--e-out); }
+    .next a:hover .arw { transform: translateX(8px); }
+
+    /* ── Footer ── */
+    .foot {
+      padding: clamp(28px, 4vw, 44px) var(--edge) clamp(40px, 6vw, 72px);
+      font-family: var(--label); font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--mut); line-height: 1.9;
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--e-out), transform 0.9s var(--e-out); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .credits .cell { grid-column: span 6; }
+      .mast .sub { grid-column: 1 / -1; justify-self: start; max-width: 46ch; }
+      .sec-label { grid-column: 1 / -1; margin-bottom: 16px; }
+      .lede-2, .body-cols { grid-column: 1 / -1; }
+    }
+    /* On a phone, 21 stacked posters is several screens of scrolling. Each grid
+       becomes a swipeable strip instead: the card is sized so the next one peeks
+       in, which is the only affordance a carousel needs. */
+    @media (max-width: 720px) {
+      .posts {
+        grid-template-columns: none;
+        grid-auto-flow: column; grid-auto-columns: 76%;
+        overflow-x: auto; overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        /* run the strip to the screen edges, then put the shell padding back
+           inside it so the first card still lines up with the copy above */
+        margin-inline: calc(var(--edge) * -1);
+        padding-inline: var(--edge);
+        /* without this the snap point ignores the padding and the first card
+           parks flush to the screen edge instead of under the copy */
+        scroll-padding-inline: var(--edge);
+        scrollbar-width: none;
+      }
+      .posts::-webkit-scrollbar { display: none; }
+      .posts--wide { grid-auto-columns: 84%; }
+      .post { scroll-snap-align: start; }
+    }
+    @media (max-width: 640px) {
+      .body-cols { grid-template-columns: 1fr; gap: 22px; }
+      .next .ttl { grid-column: 1 / -1; }
+      .next .lbl, .next .arw { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <nav class="tb-nav">
+        <a href="/">Home</a>
+        <a href="/profile/">Profile</a>
+      </nav>
+      <nav class="tb-contact">
+        <a href="https://www.linkedin.com/in/mariia-danilova-3341a6236/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:damilova.danmar@gmail.com">Email</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Masthead -->
+    <div class="shell">
+      <header class="mast grid">
+        <div class="wordmark">
+          <h1>Exactpro</h1>
+          <span class="latin">Exitus Acta Probat</span>
+        </div>
+        <dl class="credits">
+          <div class="cell"><dt>Client</dt><dd>Exactpro</dd></div>
+          <div class="cell"><dt>Role</dt><dd>Multidisciplinary<br>design</dd></div>
+          <div class="cell"><dt>Scope</dt><dd>Campaign &amp; event graphics,<br>Illustration, Employer brand</dd></div>
+          <div class="cell"><dt>Year</dt><dd>2022–2026</dd></div>
+        </dl>
+        <p class="sub">An independent software testing house for the infrastructure global markets run on. For four years I designed its public face: <b>one template system</b>, flexed across campaigns, publications, conferences, hiring and five country calendars.</p>
+      </header>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" aria-label="Exactpro social posts turning in a ring">
+      <video autoplay loop muted playsinline webkit-playsinline preload="metadata"
+             width="1280" height="720" poster="hero-poster.webp"
+             aria-label="Four years of Exactpro posts turning in a ring">
+        <source src="hero.webm" type="video/webm">
+        <source src="hero.mp4" type="video/mp4">
+      </video>
+    </section>
+
+    <div class="shell">
+      <!-- The project -->
+      <section class="sec grid">
+        <div class="sec-label reveal"><span class="tag">The client</span></div>
+        <p class="lede-2 reveal">Speaking to <em>exchanges and regulators</em>, and to the testers they hire.</p>
+        <div class="body-cols reveal">
+          <p>Exactpro has been testing the technology behind financial market infrastructure since <strong>2009</strong>: market data and surveillance platforms, clearing and settlement, post-trade systems, the software that stops exchanges from failing quietly. Its motto, <em>Exitus Acta Probat</em>, sits under the logo in every lock-up: the outcome justifies the deed.</p>
+          <p>That gave the design job two audiences at once and one voice for both. Heads of technology at market infrastructures had to read <strong>proof of rigour</strong>. The QA community the company recruits and teaches from had to read something worth sharing. Nothing could look like a stock-photo consultancy, and nothing could get loose enough to embarrass a central bank.</p>
+        </div>
+      </section>
+
+      <!-- The template -->
+      <section class="sec grid">
+        <div class="sec-label reveal"><span class="tag">The system</span></div>
+        <p class="lede-2 reveal">Same frame every time. <em>Colour</em> is the only thing that moves.</p>
+        <div class="body-cols reveal">
+          <p>A testing company publishes constantly: a webinar, a conference panel, a journal paper, a national holiday, a vacancy. The posts land in a feed next to each other, weeks apart, and the only way that reads as one company is if the geometry never argues.</p>
+          <p>So the frame is fixed and the palette is the variable. Announcements run house teal, thought leadership runs blue, community events violet, hiring purple, the office calendar green. <strong>You can tell what a post is before you read it.</strong></p>
+        </div>
+      </section>
+    </div>
+
+    <div class="shell">
+      <!-- Thought leadership -->
+      <section class="sec grid" style="--accent:#4a9fe8">
+        <div class="sec-label reveal"><span class="tag">Thought leadership</span></div>
+        <p class="lede-2 reveal">Covers for work that gets read by <em>the people who regulate it</em>.</p>
+        <div class="body-cols reveal">
+          <p>The heaviest stream is publishing: papers in the <strong>WFE's Focus</strong> and the <strong>Journal of Digital Banking</strong>, webinars with the BCS, the AI Testing Talks series, sandbox case studies, hackathon debriefs. Each one arrives as a title, a couple of headshots and a deadline.</p>
+          <p>The covers are built to survive that. A blue register, a photographic ground pushed back until it is texture, and a headline set large enough to be legible as a 150-pixel thumbnail in a LinkedIn feed, which is where most of them are actually seen.</p>
+        </div>
+        <div class="posts reveal" aria-label="Thought leadership posts">
+          <figure class="post">
+            <div class="frame"><img src="posts/wfe-focus-resilience.webp" alt="Cover for the WFE Focus article Safeguarding Operational Resilience in the Era of AI-assisted Code, with two author portraits" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/wfe-focus-ai-adoption.webp" alt="Cover for the WFE Focus carousel AI Adoption — Processes, Platforms, People and Security" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/journal-digital-banking.webp" alt="Cover for a Journal of Digital Banking paper on hybrid AI testing, with two author portraits" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/webinar-ai-testing-bcs.webp" alt="Webinar announcement with BCS, Introduction to AI Testing, showing four speaker cards" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/ai-testing-talks.webp" alt="AI Testing Talks episode card on negative testing, with a speaker portrait" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/case-study-cbdc.webp" alt="Case study announcement for CBDC sandbox testing, dated 31 May 2022" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/swift-hackathon-quote.webp" alt="Quote card from the Swift Hackathon 2025 with a portrait of an Exactpro executive" loading="lazy"></div>
+          </figure>
+        </div>
+      </section>
+    </div>
+
+    <div class="shell">
+      <!-- Community -->
+      <section class="sec grid" style="--accent:#8b6cf5">
+        <div class="sec-label reveal"><span class="tag">The testing community</span></div>
+        <p class="lede-2 reveal">Twenty sponsor logos, one poster, <em>no shouting</em>.</p>
+        <div class="body-cols reveal">
+          <p>Exactpro's Tbilisi office opened in 2018 and is now the company's largest delivery centre, with <strong>230+ people</strong>. The team there founded <strong>GeoSTQB</strong>, Georgia's ISTQB member board, and runs Tester's Day, certification workshops and a partnership with Women in Tech Georgia. Those events all need posters, and posters that carry partners.</p>
+          <p>The logo wall is the real problem: twenty marks drawn at twenty different weights, on a gradient, at thumbnail size. They are knocked back to a single white, set on a fixed baseline grid, and optically sized rather than mechanically scaled, so <strong>no partner shouts over another</strong> and the panel headline still wins the frame.</p>
+        </div>
+        <div class="posts posts--wide reveal" aria-label="Testing community posts">
+          <figure class="post">
+            <div class="frame"><img src="posts/testers-day-2024.webp" alt="Tester's Day 2024 panel announcement with speaker portrait, session details and a wall of twenty partner logos" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/testers-day-2023.webp" alt="Tester's Day 2023 watch-on-demand card for the GeoSTQB status update" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/istqb-ctfl-workshops.webp" alt="ISTQB CTFL training course announcement for practice workshops, intake three" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/women-in-tech-georgia.webp" alt="Announcement of the Exactpro and Women in Tech Georgia collaboration" loading="lazy"></div>
+          </figure>
+        </div>
+      </section>
+    </div>
+
+    <div class="shell">
+      <!-- Employer brand -->
+      <section class="sec grid" style="--accent:#b45cf0">
+        <div class="sec-label reveal"><span class="tag">Employer brand</span></div>
+        <p class="lede-2 reveal">Hiring posts lead with <em>the city</em>, not the company.</p>
+        <div class="body-cols reveal">
+          <p>A vacancy competes against every other vacancy in the same feed, and the differentiator is rarely the job title. So the role gets the largest type in the system, the location gets a pin and equal billing, and the ground is a <strong>local landmark in duotone</strong>, so the post reads as a place before it reads as an ad.</p>
+          <p>The same restraint carries internal news. When the Colombo office was named Best Energy Saver again, the award became a drawn medal in a single green, not a photograph of a certificate: <strong>a recognisable object at thumbnail size</strong>, and one more colour the system already owned.</p>
+        </div>
+        <div class="posts posts--wide reveal" aria-label="Employer brand posts">
+          <figure class="post">
+            <div class="frame"><img src="posts/hiring-it-recruiter.webp" alt="Now hiring IT Recruiter in Tbilisi, Georgia, with a duotone landmark building" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/sri-lanka-energy-saver.webp" alt="Best Energy Saver award announcement for the Exactpro Sri Lanka office, with a drawn medal" loading="lazy"></div>
+          </figure>
+        </div>
+      </section>
+    </div>
+
+    <div class="shell">
+      <!-- Calendar & illustration -->
+      <section class="sec grid" style="--accent:#45c08f">
+        <div class="sec-label reveal"><span class="tag">Five calendars</span></div>
+        <p class="lede-2 reveal">Georgia, Italy, Lithuania, Australia, Sri&nbsp;Lanka: <em>drawn, not stock</em>.</p>
+        <div class="body-cols reveal">
+          <p>Offices in five countries mean five sets of national days, and a greeting post is the fastest thing in the world to make badly. The rule that keeps them from turning into clip art is <strong>one drawn emblem per post</strong>, rendered flat in that post's own palette, with the flag reduced to a ground behind it: Svetitskhoveli, the Colosseum, the Vytis knight.</p>
+          <p>Georgian and Latin run together often, so both are set at matching optical weight rather than matching point size; Georgian's lack of capitals means a headline that is merely scaled to match looks quieter than the English beside it. And once a year <strong>th2</strong>, which is both the open-source test framework and the name of the office cat, earns a circuit-board portrait, and the company gets to be funny without changing its voice.</p>
+        </div>
+        <div class="posts reveal" aria-label="Office calendar posts">
+          <figure class="post">
+            <div class="frame"><img src="posts/georgia-svetitskhovloba.webp" alt="Flat vector illustration of Svetitskhoveli Cathedral for the Georgian holiday Svetitskhovloba" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/georgia-giorgoba.webp" alt="Giorgoba greeting with a line-drawn Saint George monument and the Georgian flag" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/italy-liberation-day.webp" alt="Festa della Liberazione greeting with the map of Italy and a Rome skyline" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/italy-republic-day.webp" alt="Festa della Repubblica greeting with bunting and a Rome skyline in green" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/lithuania-statehood-day.webp" alt="Lithuanian Statehood Day greeting with the Vytis knight over the country outline" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/australia-day.webp" alt="Australia Day greeting with a flag and confetti" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/programmers-day.webp" alt="Programmer's Day post with a flat illustration of a laptop and falling code" loading="lazy"></div>
+          </figure>
+          <figure class="post">
+            <div class="frame"><img src="posts/cat-day-th2.webp" alt="International Cat Day post with a cat drawn as a circuit board, referencing the th2 mascot" loading="lazy"></div>
+          </figure>
+        </div>
+      </section>
+    </div>
+
+    <!-- Next -->
+    <div class="shell">
+      <nav class="next">
+        <a href="../the-gallery/">
+          <span class="lbl">Next case</span>
+          <span class="ttl">The Gallery</span>
+          <span class="arw" aria-hidden="true">→</span>
+        </a>
+      </nav>
+    </div>
+
+    <footer class="foot">
+      Campaign &amp; event graphics, illustration, employer brand — Maria Danilova<br>
+      Client — Exactpro · 2022–2026
+    </footer>
+  </main>
+
+  <script>
+    /* A scrollable region needs to be reachable from the keyboard, but only
+       while it is one — on desktop the grids fit and the tab stop would be dead. */
+    (function () {
+      var mq = window.matchMedia('(max-width: 720px)');
+      var strips = document.querySelectorAll('.posts');
+      function sync() {
+        strips.forEach(function (s) {
+          if (mq.matches) { s.setAttribute('tabindex', '0'); s.setAttribute('role', 'group'); }
+          else { s.removeAttribute('tabindex'); s.removeAttribute('role'); }
+        });
+      }
+      sync();
+      /* Chrome does not always deliver the media-query change event when the
+         viewport is resized programmatically, so resize is the reliable signal. */
+      mq.addEventListener('change', sync);
+      window.addEventListener('resize', sync);
+    })();
+
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+
+    /* The hero clip is decoration, not content: hold it on its poster frame when
+       the visitor has asked for less motion, and keep it off the CPU when the
+       tab is hidden or it has scrolled away. */
+    (function () {
+      var video = document.querySelector('.hero video');
+      if (!video) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      function play() {
+        if (reduce.matches) return;
+        var attempt = video.play();
+        if (attempt && typeof attempt.catch === 'function') attempt.catch(function () {});
+      }
+      function pause() { video.pause(); }
+
+      if (reduce.matches) pause();
+      reduce.addEventListener('change', function () { reduce.matches ? pause() : play(); });
+      document.addEventListener('visibilitychange', function () { document.hidden ? pause() : play(); });
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries[0].isIntersecting ? play() : pause();
+        }, { threshold: 0.1 }).observe(video);
+      }
+    })();
+  </script>
+
+</body>
+</html>

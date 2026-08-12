@@ -8,7 +8,7 @@
   <meta name="description" content="The Gallery — a collection of event posters and a recurring editorial system for an independent contemporary art space in Tbilisi.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -24,8 +24,9 @@
       --gutter: 12px;             /* grid gutter */
 
       --mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      --label: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
       --post-w: clamp(150px, 20vw, 232px);
       --post-gap: 12px;
@@ -108,17 +109,17 @@
     figure img { width: 100%; height: auto; display: block; }
     .cap {
       display: flex; justify-content: space-between; gap: 16px; margin-top: 12px;
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+      font-family: var(--label); font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--mut);
     }
     .cap .idx { color: var(--accent); }
 
     /* ── Section scaffolding ── */
     section { position: relative; }
-    .sec { padding-top: clamp(64px, 9vw, 130px); padding-bottom: clamp(40px, 5vw, 72px); }
+    .sec { padding-top: clamp(36px, 5vw, 72px); padding-bottom: clamp(24px, 3vw, 44px); }
     .sec-label { grid-column: 1 / 4; }
     .sec-label .mono {
-      display: block; font-family: var(--mono); font-size: 11px; font-weight: 700;
+      display: block; font-family: var(--label); font-size: 11px; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase; color: var(--mut);
     }
     .lede-2 {
@@ -170,7 +171,7 @@
     /* ── Social: author cards (cover + 2 examples) ── */
     .artist-strip { margin-top: clamp(32px, 4.5vw, 56px); padding: 0 var(--edge); }
     .artist-label {
-      display: block; font-family: var(--mono); font-size: 11px; font-weight: 700;
+      display: block; font-family: var(--label); font-size: 11px; font-weight: 600;
       text-transform: uppercase; letter-spacing: 0.12em; color: var(--mut);
       margin-bottom: 16px;
     }
