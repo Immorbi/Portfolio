@@ -31,8 +31,7 @@
     }
     @media (min-width: 1025px) { :root { --edge: 14px; --gutter: 14px; } }
 
-    /* clip, not hidden — the stone slabs bleed sideways and must not add a scrollbar */
-    html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+    html { -webkit-text-size-adjust: 100%; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -172,52 +171,6 @@
        Text sits on a rough-cut rock slab. The slab is deliberately larger than
        its copy so the ragged edges break out of the column and lap over the
        gold illustration bands above and below. */
-    .textframe {
-      position: relative;
-      grid-column: 1 / -1;
-      display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter);
-      padding: clamp(44px, 5vw, 84px) clamp(26px, 4vw, 70px);
-      /* Raise the whole block — stone and copy together — so the slab bites into
-         the illustration above and still clears the section below. Lifting only
-         the stone leaves the copy stranded near its bottom edge. */
-      margin-top: calc(-1 * var(--block-lift, clamp(56px, 11vw, 170px)));
-    }
-    /* The asset is a cut-out slab, not a texture: it already carries its own
-       broken edge the whole way round. So it is placed whole and uncropped, and
-       the black page reads as the surface it is lying on. Height follows from the
-       width, which keeps every edge — top, bottom and both sides — in frame. */
-    .textframe > .frame-rock {
-      position: absolute; left: 50%; top: 50%;
-      transform: translate(-50%, -50%) scaleX(var(--rock-flip, 1));
-      width: var(--rock-w, 104%);
-      height: auto;
-      /* reserve the slab before the file lands, or the block collapses to nothing */
-      aspect-ratio: 2048 / 1057;
-      max-width: none;
-      filter: brightness(var(--rock-b, 1.35)) contrast(1.04);
-      pointer-events: none; user-select: none;
-    }
-    .textframe > *:not(.frame-rock) { position: relative; z-index: 1; }
-    /* Vary the slabs by mirroring and by sliding the crop — never by turning them.
-       The rock's underside is shadowed and textureless, so it must stay at the
-       bottom; rotated up it reads as a black blob against the page, not as stone. */
-    .textframe--flip { --rock-flip: -1; --rock-pos: 32%; }
-    .textframe--turn { --rock-pos: 74%; }
-    /* Tighten the rhythm so the slabs reach the illustrations they overlap */
-    .sec:has(> .textframe) { padding-top: clamp(24px, 3vw, 48px); padding-bottom: clamp(10px, 1.6vw, 24px); }
-    /* Product mockups stay clear of the slabs; only the illustrations get lapped */
-    .landing, .screens { position: relative; z-index: 2; }
-    /* Narrow screens can't hold a whole wide slab behind tall, stacked copy — the
-       rock would be a few hundred pixels of an eight-hundred-pixel column. There
-       it goes back to filling the block, cropped at the sides only. */
-    @media (max-width: 760px) {
-      .textframe { padding: 40px 22px; }
-      .textframe > .frame-rock {
-        width: calc(100vw + 56px);
-        height: calc(100% + var(--rock-bleed, 44px) * 2);
-        object-fit: cover; object-position: var(--rock-pos, 50%) center;
-      }
-    }
     /* ── Next ── */
     .next { margin: 0; border-top: 1px solid var(--line); }
     .next a {
@@ -298,14 +251,11 @@
     <div class="shell">
       <!-- The project -->
       <section class="sec grid">
-        <div class="textframe reveal">
-        <img class="frame-rock" src="../../assets/murabex/stone.webp" alt="" aria-hidden="true" loading="lazy">
-        <div class="sec-label"><span class="mono">The project</span></div>
-        <p class="lede-2">Enterprise Islamic finance, made to feel <em>calm and precise</em>.</p>
-        <div class="body-cols">
+        <div class="sec-label reveal"><span class="mono">The project</span></div>
+        <p class="lede-2 reveal">Enterprise Islamic finance, made to feel <em>calm and precise</em>.</p>
+        <div class="body-cols reveal">
           <p>Murabex is a digital finance platform that lets institutions execute Murabaha agreements and pool liquidity through a shared, sovereign ecosystem, connecting local banks, a national exchange and international investors on one trusted rail.</p>
           <p>I led the visual design end to end: the public marketing site, the institutional product interface, and every illustration and icon in the system. The brief was to make a dense, regulated, Shari'ah-governed product feel <strong>trustworthy and effortless</strong>, gold on near-black, generous space, and a restrained interface where the data does the talking.</p>
-        </div>
         </div>
       </section>
 
@@ -333,14 +283,11 @@
     <div class="shell">
       <!-- Product interface -->
       <section class="sec grid">
-        <div class="textframe textframe--turn reveal">
-        <img class="frame-rock" src="../../assets/murabex/stone.webp" alt="" aria-hidden="true" loading="lazy">
-        <div class="sec-label"><span class="mono">Product interface</span></div>
-        <p class="lede-2">An institutional interface for a <em>regulated market</em>.</p>
-        <div class="body-cols">
+        <div class="sec-label reveal"><span class="mono">Product interface</span></div>
+        <p class="lede-2 reveal">An institutional interface for a <em>regulated market</em>.</p>
+        <div class="body-cols reveal">
           <p>Four core surfaces carry the platform: an agreements dashboard, the full agreement lifecycle, a competitive asset-trading exchange, and an automated KYC and compliance workflow. Dense tables, status systems and state machines, kept legible through hierarchy, colour-coded states and restraint.</p>
           <p>A dark operator UI with gold as the single accent. Colour is reserved for meaning, trade sides, agreement states, risk and compliance signals, so a high-throughput system stays calm and scannable.</p>
-        </div>
         </div>
 
         <div class="screens">
