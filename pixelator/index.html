@@ -7,29 +7,8 @@
 <title>Pixel Art Studio — morbimixel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @font-face {
-    font-family: 'DeFonte';
-    src: url('../DeFonte reduced Leger.ttf') format('truetype');
-    font-weight: 300;
-  }
-  @font-face {
-    font-family: 'DeFonte';
-    src: url('../DeFonte reduced Normale.ttf') format('truetype');
-    font-weight: 400;
-  }
-  @font-face {
-    font-family: 'DeFonte';
-    src: url('../DeFonte reduced DemiGras.ttf') format('truetype');
-    font-weight: 600;
-  }
-  @font-face {
-    font-family: 'DeFonte';
-    src: url('../DeFonte reduced Gros.ttf') format('truetype');
-    font-weight: 700;
-  }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -68,7 +47,7 @@
     align-items: center;
   }
   .back-link {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
@@ -80,7 +59,7 @@
   }
   .back-link:hover { opacity: 0.5; }
   .topbar-title {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
@@ -140,7 +119,7 @@
     border-radius: 0.5px;
   }
   .brand-name {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -155,7 +134,7 @@
   }
 
   .section-label {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 8px;
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -200,7 +179,7 @@
     margin-bottom: 4px;
   }
   .upload-sub {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 9px;
     color: var(--text-muted);
     line-height: 1.6;
@@ -230,7 +209,7 @@
   }
 
   .control-name {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 10px;
     font-weight: 600;
     color: var(--text);
@@ -238,7 +217,7 @@
   }
 
   .control-value {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 10px;
     font-weight: 700;
     color: var(--text-light);
@@ -284,7 +263,7 @@
     background: var(--bg);
     border: none;
     padding: 9px 6px;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 8px;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -328,7 +307,7 @@
     padding: 10px 12px;
   }
   .stat-lbl {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 8px;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -375,7 +354,7 @@
     background: var(--text);
     color: var(--bg);
     border: none;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -392,7 +371,7 @@
     background: var(--bg);
     color: var(--text);
     border: 1px solid var(--border);
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -444,7 +423,7 @@
   }
 
   .placeholder-hint {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font);
     font-size: 9px;
     font-weight: 600;
     letter-spacing: 0.12em;
