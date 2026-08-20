@@ -638,7 +638,7 @@
 
         <a class="proj" href="cases/murabex/" data-trail="assets/trail/murabex/ui-1.webp,assets/trail/murabex/ui-2.webp,assets/trail/murabex/ui-3.webp,assets/trail/murabex/ui-4.webp,assets/trail/murabex/dunes.webp">
           <div class="proj-media">
-            <img src="assets/murabex/cover.png" alt="Murabex — MX logo engraved in dark stone" loading="lazy">
+            <img src="assets/murabex/cover.webp" alt="Murabex — MX logo engraved in dark stone" loading="lazy">
           </div>
           <div class="proj-caption">
             <span class="proj-name">Murabex</span>
@@ -653,7 +653,7 @@
 
         <a class="proj" href="cases/dirtalk/" data-trail="assets/trail/dirtalk/dirtalk-poster-silhouettes.webp,assets/trail/dirtalk/dirtalk-key-visual.webp,assets/trail/dirtalk/billboard.webp,assets/trail/dirtalk/cups.webp,assets/trail/dirtalk/tote.webp,assets/trail/dirtalk/dirtalk-slogans.webp">
           <div class="proj-media">
-            <img src="cases/dirtalk/phone-player.jpg" alt="DIRTALK podcast brand — player cover" loading="lazy">
+            <img src="cases/dirtalk/phone-player.webp" alt="DIRTALK podcast brand — player cover" loading="lazy">
           </div>
           <div class="proj-caption">
             <span class="proj-name">DIRTALK Brandbook</span>
@@ -723,16 +723,14 @@
     function startSiteLoader() {
       const resourceUrls = new Set([
         'logotype3D_2.mp4',
-        'the-gallery-home-preview.mp4',
-        'Comp 1_8.web.mp4',
-        'helikon-home-preview.mp4',
         'logo.svg'
       ]);
 
-      document.querySelectorAll('img[src], source[src], video[poster]').forEach((node) => {
-        const src = node.getAttribute('src') || node.getAttribute('poster');
-        if (src) resourceUrls.add(src);
-      });
+      /* Only what the loader itself puts on screen is preloaded here. Sweeping
+         the DOM and fetching every img and source used to pull the whole feed
+         down before the first paint, which made `loading="lazy"` on the cards
+         do nothing at all. The bar is driven by elapsed time as well as by
+         these, so a shorter list does not leave it stuck. */
 
       const urls = Array.from(resourceUrls);
       const totalResources = Math.max(urls.length, 1);
