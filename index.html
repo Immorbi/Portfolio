@@ -326,6 +326,14 @@
       width: 100%;
       height: auto;
       display: block;
+      /* the head leans toward the cursor; the transition is the whole reason
+         that reads as turning rather than snapping */
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sidebar-video video { transition: none; }
     }
 
     .sidebar-bottom {
@@ -350,6 +358,7 @@
 
     /* ─── Feed ─── */
     .feed {
+      position: relative;
       flex: 1;
       min-width: 0;
       display: flex;
@@ -380,10 +389,38 @@
     }
 
     .proj-media {
+      position: relative;
       width: 100%;
       background: #f4f4f4;
       line-height: 0;
       overflow: hidden;
+      border-radius: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .proj-media { border-radius: 12px; }
+    }
+
+    /* Work drops behind the cursor as it crosses the feed. The thumbnails are
+       decoration over content that is already on the page, so they are hidden
+       from assistive tech and never take a click. */
+    .trail-shot {
+      position: absolute;
+      z-index: 3;
+      width: 150px;
+      height: auto;
+      margin: -95px 0 0 -75px;
+      border-radius: 10px;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.86);
+      transition: opacity 0.3s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: transform, opacity;
+    }
+
+    .trail-shot.in {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .proj-media video,
@@ -556,8 +593,9 @@
       </nav>
 
       <div class="sidebar-video">
-        <video autoplay loop muted playsinline webkit-playsinline preload="auto" aria-label="ASCII studio animation">
-          <source src="ascii-studio-video.mp4" type="video/mp4">
+        <video autoplay loop muted playsinline webkit-playsinline preload="auto"
+               aria-label="Halftone portrait of Maria, looking around">
+          <source src="portrait-gaze.mp4" type="video/mp4">
         </video>
       </div>
 
@@ -573,7 +611,7 @@
 
       <div class="feed-col">
 
-        <a class="proj" href="cases/the-gallery/">
+        <a class="proj" href="cases/the-gallery/" data-trail="assets/trail/the-gallery/circles.webp,assets/trail/the-gallery/sun-line.webp,assets/trail/the-gallery/was-i-ever-more.webp,assets/trail/the-gallery/labels-on-me.webp,assets/trail/the-gallery/not-a-mirror.webp,assets/trail/the-gallery/in-good-hands.webp">
           <div class="proj-media">
             <video autoplay loop muted playsinline preload="metadata" aria-label="Posters and editorial for The Gallery">
               <source src="the-gallery-home-preview.mp4" type="video/mp4">
@@ -586,7 +624,7 @@
           </div>
         </a>
 
-        <a class="proj" href="cases/helikon-art/">
+        <a class="proj" href="cases/helikon-art/" data-trail="assets/trail/helikon-art/helikon-open-call-poster.webp,assets/trail/helikon-art/helikon-intro-graphic.webp">
           <div class="proj-media">
             <video autoplay loop muted playsinline preload="metadata" aria-label="Helikon Art Center website case preview">
               <source src="helikon-home-preview.mp4" type="video/mp4">
@@ -598,7 +636,7 @@
           </div>
         </a>
 
-        <a class="proj" href="cases/murabex/">
+        <a class="proj" href="cases/murabex/" data-trail="assets/trail/murabex/ui-1.webp,assets/trail/murabex/ui-2.webp,assets/trail/murabex/ui-3.webp,assets/trail/murabex/ui-4.webp,assets/trail/murabex/dunes.webp">
           <div class="proj-media">
             <img src="assets/murabex/cover.png" alt="Murabex — MX logo engraved in dark stone" loading="lazy">
           </div>
@@ -613,7 +651,7 @@
 
       <div class="feed-col feed-col--offset">
 
-        <a class="proj" href="cases/dirtalk/">
+        <a class="proj" href="cases/dirtalk/" data-trail="assets/trail/dirtalk/dirtalk-poster-silhouettes.webp,assets/trail/dirtalk/dirtalk-key-visual.webp,assets/trail/dirtalk/billboard.webp,assets/trail/dirtalk/cups.webp,assets/trail/dirtalk/tote.webp,assets/trail/dirtalk/dirtalk-slogans.webp">
           <div class="proj-media">
             <img src="cases/dirtalk/phone-player.jpg" alt="DIRTALK podcast brand — player cover" loading="lazy">
           </div>
@@ -624,15 +662,24 @@
           </div>
         </a>
 
-        <a class="proj" href="cases/yufiko/">
+        <a class="proj" href="cases/yufiko/" data-trail="assets/trail/yufiko/sundown-session.webp,assets/trail/yufiko/preparty-1.webp,assets/trail/yufiko/yufiko-artists-dj-sets.webp,assets/trail/yufiko/yufiko-market-neon.webp,assets/trail/yufiko/yufiko-market-objects.webp">
           <div class="proj-media">
-            <video autoplay loop muted playsinline preload="metadata" aria-label="Yufiko event posters case preview">
-              <source src="cases/yufiko/cover.mp4" type="video/mp4">
-            </video>
+            <img src="cases/yufiko/cover.webp" alt="Yufiko logotype over printed flyers stacked in metal trays" loading="lazy">
           </div>
           <div class="proj-caption">
             <span class="proj-name">Yufiko</span>
             <span class="proj-meta">Event Posters, Social Media — 2025–2026</span>
+          </div>
+        </a>
+
+        <a class="proj" href="cases/exactpro/" data-trail="assets/trail/exactpro/testers-day-2024.webp,assets/trail/exactpro/hiring-it-recruiter.webp,assets/trail/exactpro/case-study-cbdc.webp,assets/trail/exactpro/georgia-svetitskhovloba.webp,assets/trail/exactpro/wfe-focus-resilience.webp,assets/trail/exactpro/cat-day-th2.webp">
+          <div class="proj-media">
+            <img src="cases/exactpro/cover.webp" alt="Exactpro — the wordmark and rotor mark on a monitor" loading="lazy">
+          </div>
+          <div class="proj-caption">
+            <span class="proj-name">Exactpro</span>
+            <span class="proj-meta">Campaign Graphics, Illustration — 2022–2026</span>
+            <span class="proj-note">One template system across five country calendars</span>
           </div>
         </a>
 
@@ -645,6 +692,9 @@
   <script>
     function ensurePreviewVideosPlay() {
       document.querySelectorAll('.proj-media video, .site-loader-video video, .sidebar-video video').forEach((video) => {
+        // The portrait pauses on purpose while it is following the cursor;
+        // forcing play() here would fight it back into the loop.
+        if (video.dataset.tracking === 'on') return;
         video.muted = true;
         video.defaultMuted = true;
         video.playsInline = true;
@@ -676,7 +726,6 @@
         'the-gallery-home-preview.mp4',
         'Comp 1_8.web.mp4',
         'helikon-home-preview.mp4',
-        'cases/yufiko/cover.mp4',
         'logo.svg'
       ]);
 
@@ -798,6 +847,136 @@
     }
     updateStatus();
     setInterval(updateStatus, 30000);
+
+    /* The portrait. Left alone she looks around on her own; once a cursor is in
+       the room she turns toward it, and loses interest when it stops.
+
+       Two things move, for two different reasons. The head leans on a CSS
+       transition, which is what makes following feel continuous. The eyes jump:
+       the clip holds her looking in every direction, but those moments are not
+       laid out in order along the timeline, so gliding the playhead between two
+       of them sends the eyes wandering through everything in between — measured
+       at 42% of the travel in the right direction, with eight reversals. A jump
+       straight to the right frame is both smoother to watch and closer to how
+       eyes actually move. GAZE holds the timestamp for each of sixteen
+       directions, read off the clip itself. */
+    (function () {
+      const portrait = document.querySelector('.sidebar-video video');
+      if (!portrait) return;
+      if (!matchMedia('(hover: hover)').matches) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const GAZE = [
+        2.467, 4.300, 2.400, 2.183, 2.133, 4.050, 1.933, 1.467,
+        1.467, 3.850, 3.850, 3.850, 3.850, 3.650, 3.650, 2.467
+      ];
+      const IDLE = 1800;  // ms of stillness before she loses interest
+      const LEAN = 10;    // px the head travels toward the cursor at most
+      const TILT = 2.2;   // deg it rolls with the lean
+
+      let sector = -1;
+      let idle = null;
+
+      function release() {
+        portrait.dataset.tracking = 'off';
+        sector = -1;
+        portrait.style.transform = '';
+        const resumed = portrait.play();
+        if (resumed && typeof resumed.catch === 'function') resumed.catch(() => {});
+      }
+
+      window.addEventListener('mousemove', (event) => {
+        const box = portrait.getBoundingClientRect();
+        if (!box.width) return;
+
+        const dx = event.clientX - (box.left + box.width / 2);
+        const dy = event.clientY - (box.top + box.height / 2);
+        const dist = Math.hypot(dx, dy) || 1;
+
+        // The lean saturates a little way out, so a cursor across the page
+        // leans no harder than one just outside her.
+        const pull = Math.min(dist / 420, 1);
+        portrait.style.transform =
+          `translate(${(dx / dist) * LEAN * pull}px, ${(dy / dist) * LEAN * pull}px)` +
+          ` rotate(${(dx / dist) * TILT * pull}deg)`;
+
+        clearTimeout(idle);
+        idle = setTimeout(release, IDLE);
+
+        const next = Math.floor(
+          ((Math.atan2(dy, dx) * 180 / Math.PI + 180) / 360) * GAZE.length
+        ) % GAZE.length;
+        if (next === sector) return;
+
+        sector = next;
+        portrait.dataset.tracking = 'on';
+        portrait.pause();
+        portrait.currentTime = GAZE[next];
+      }, { passive: true });
+    })();
+
+    /* Image trail — while the cursor crosses a case, thumbnails from that case
+       drop behind it. Each card carries its own set in data-trail, so what you
+       see is always the work you are pointing at. Pure decoration, so it stays
+       off entirely where it would be unwelcome or useless: no pointer, or a
+       stated preference for less motion. */
+    (function () {
+      const feed = document.querySelector('.feed');
+      if (!feed) return;
+      if (!matchMedia('(hover: hover)').matches) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const GAP = 110;   // px of travel between drops
+      const HOLD = 520;  // ms a thumbnail stays at full opacity
+      const FADE = 400;  // ms for it to leave
+
+      document.querySelectorAll('.proj[data-trail]').forEach((card) => {
+        const shots = card.dataset.trail.split(',');
+        let warmed = false;
+        let next = 0;
+        let lastX = 0;
+        let lastY = 0;
+        let placed = false;
+
+        // A set is only fetched once someone actually reaches for that case,
+        // so a visitor who never hovers pays nothing for any of them.
+        card.addEventListener('mouseenter', () => {
+          if (warmed) return;
+          warmed = true;
+          shots.forEach((src) => { const pre = new Image(); pre.src = src; });
+        });
+
+        // Re-entering a card should drop a thumbnail immediately rather than
+        // waiting out the gap left over from where the cursor last exited.
+        card.addEventListener('mouseleave', () => { placed = false; });
+
+        card.addEventListener('mousemove', (event) => {
+          const box = feed.getBoundingClientRect();
+          const x = event.clientX - box.left;
+          const y = event.clientY - box.top;
+
+          if (placed && Math.hypot(x - lastX, y - lastY) < GAP) return;
+          placed = true;
+          lastX = x;
+          lastY = y;
+
+          const shot = document.createElement('img');
+          shot.className = 'trail-shot';
+          shot.src = shots[next++ % shots.length];
+          shot.alt = '';
+          shot.setAttribute('aria-hidden', 'true');
+          shot.style.left = `${x}px`;
+          shot.style.top = `${y}px`;
+          feed.appendChild(shot);
+
+          requestAnimationFrame(() => shot.classList.add('in'));
+          setTimeout(() => {
+            shot.classList.remove('in');
+            setTimeout(() => shot.remove(), FADE);
+          }, HOLD);
+        }, { passive: true });
+      });
+    })();
   </script>
 
 </body>
