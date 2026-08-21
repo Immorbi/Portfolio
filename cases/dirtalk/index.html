@@ -159,14 +159,12 @@
     .tf-item .mono { margin-top: 7px; display: block; }
     .tf-glyphs { margin-left: auto; align-self: baseline; }
 
-    /* Mark & mascot */
+    /* Mark */
     .marks { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); row-gap: 8px; }
     .mark-tile { position: relative; height: clamp(240px, 30vw, 430px); background: #f0f0f3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .mark-tile img { width: 52%; height: auto; }
     .mark-tile.on-blue { background: var(--blue); }
-    .mark-tile.mascot { align-items: flex-end; }
-    .mark-tile.mascot img { width: auto; height: 88%; transform: translateY(6%); }
-    .m-a { grid-column: 1 / 5; } .m-b { grid-column: 5 / 9; } .m-c { grid-column: 9 / -1; }
+    .m-a { grid-column: 1 / 7; } .m-b { grid-column: 7 / -1; }
     .mark-cap { margin-top: 10px; }
 
     /* Palette */
@@ -222,8 +220,7 @@
 
     /* ── Digital ── */
     .digital { align-items: center; }
-    .digital .fig { grid-column: 1 / 6; background: var(--blue); }
-    .digital .txt { grid-column: 7 / 12; }
+    .digital .txt { grid-column: 1 / 9; }
     .digital .txt h2 { font-size: clamp(28px, 3.6vw, 50px); font-weight: 500; line-height: 1.03; letter-spacing: -0.04em; margin-bottom: 20px; text-wrap: balance; }
     .digital .txt p { font-size: 16.5px; line-height: 1.6; letter-spacing: -0.006em; color: #3a3a40; max-width: 42ch; }
 
@@ -258,7 +255,7 @@
       .mast .sub { grid-column: 1 / -1; justify-self: start; max-width: 46ch; }
       .split .fig, .split .txt,
       .feature .big, .feature .small,
-      .digital .fig, .digital .txt { grid-column: 1 / -1; }
+      .digital .txt { grid-column: 1 / -1; }
       .split .txt { margin-top: 20px; }
       .merch .m1 { grid-column: 1 / 7; }
       .merch .m2 { grid-column: 7 / -1; align-self: start; }
@@ -268,7 +265,7 @@
       .ph-txt, .ph-imgs { grid-column: 1 / -1; }
       .ph-imgs { margin-top: 22px; }
       .tf-glyphs { margin-left: 0; flex-basis: 100%; }
-      .m-a { grid-column: 1 / 7; } .m-b { grid-column: 7 / -1; } .m-c { grid-column: 1 / -1; }
+      .m-a { grid-column: 1 / 7; } .m-b { grid-column: 7 / -1; }
       .mark-tile { height: clamp(220px, 34vw, 340px); }
     }
 
@@ -280,7 +277,7 @@
       .next .ttl { grid-column: 1 / -1; }
       .next .lbl, .next .arw { display: none; }
       .credits .cell { grid-column: span 6; }
-      .m-a, .m-b, .m-c { grid-column: 1 / -1; }
+      .m-a, .m-b { grid-column: 1 / -1; }
       .ph-imgs { grid-template-columns: 1fr 1fr; }
     }
 
@@ -347,7 +344,7 @@
     <!-- Brand system: type / color / photography -->
     <section class="shell sec system">
 
-      <!-- Mark & mascot -->
+      <!-- Mark -->
       <div class="grid reveal" style="margin-top:clamp(28px,3.5vw,52px);">
         <div class="marks" style="transform:translateY(40px);">
           <div class="m-a">
@@ -355,9 +352,6 @@
           </div>
           <div class="m-b">
             <div class="mark-tile on-blue"><img src="dirtalk-logo-white.png" alt="DIRTALK logo — reversed white version"></div>
-          </div>
-          <div class="m-c">
-            <div class="mark-tile mascot" style="background-color:#0E38ED;"><img src="dirtalk-character.png" alt="DIRTALK brand character — the listener"></div>
           </div>
         </div>
       </div>
@@ -475,9 +469,6 @@
     <!-- Digital -->
     <section class="shell sec">
       <div class="grid digital">
-        <div class="fig reveal">
-          <figure><img src="phone-player.webp" alt="DIRTALK podcast player — Women in the Industry, Episode 12" loading="lazy"></figure>
-        </div>
         <div class="txt reveal">
           <div class="sec-label" style="grid-column:auto;"><span class="mono">Made to be heard</span></div>
           <h2 style="margin-top:18px;">From the feed to the phone in your hand.</h2>
