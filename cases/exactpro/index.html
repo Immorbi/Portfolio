@@ -219,7 +219,13 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
     }
-  </style>
+  
+    /* The header floats over whatever scrolls beneath it, so it is drawn white
+       and blended with difference: it reads black on a light ground and turns
+       white the moment it crosses dark artwork. One rule, every background. */
+    .topbar { mix-blend-mode: difference; }
+    .tb-nav a, .tb-contact a { color: #ffffff; }
+</style>
 </head>
 <body>
 

@@ -285,7 +285,13 @@
       .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
       .zoom img { transition: none; }
     }
-  </style>
+  
+    /* The header floats over whatever scrolls beneath it, so it is drawn white
+       and blended with difference: it reads black on a light ground and turns
+       white the moment it crosses dark artwork. One rule, every background. */
+    .nav { mix-blend-mode: difference; }
+    .nav a, .nav .mono { color: #ffffff; }
+</style>
 </head>
 <body>
   <script>document.documentElement.classList.add('js');</script>

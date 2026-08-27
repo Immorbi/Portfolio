@@ -726,7 +726,13 @@
     .eyebrow,.case-meta-label,.sec-num,.font-label,.font-meta-label,.system-palette-label,.system-section-label,.system-stat-label,.browser-footer-label,.next-label,.bonus-tag{
       font-family:var(--label) !important; font-weight:600; text-transform:uppercase;
     }
-  </style>
+  
+    /* The header floats over whatever scrolls beneath it, so it is drawn white
+       and blended with difference: it reads black on a light ground and turns
+       white the moment it crosses dark artwork. One rule, every background. */
+    .topbar { mix-blend-mode: difference; }
+    .tb-nav a, .tb-contact a, .back-link, .topbar-title { color: #ffffff; }
+</style>
 </head>
 <body>
 
