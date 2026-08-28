@@ -234,6 +234,26 @@
       margin-top: 10px; font-size: 11px; font-weight: 600;
       letter-spacing: 0.08em; text-transform: uppercase; color: var(--mut);
     }
+
+    /* The landing shots wear a browser; the operator screens do not. That is the
+       whole visual difference between the public site and the product. */
+    /* swapping the class off frame--wide dropped the 16:9 with it, and the
+       base 4:5 was cropping the sides off a widescreen shot */
+    .frame--browser { overflow: hidden; }
+    .frame--browser img { aspect-ratio: 16 / 9; object-fit: cover; }
+    .frame--browser .chrome {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 12px; border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .frame--browser .chrome i {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #34343a; flex: none;
+    }
+    .frame--browser .chrome .url {
+      margin-left: 10px; font-size: 10px; letter-spacing: 0.06em;
+      color: var(--mut); line-height: 1;
+    }
 </style>
 </head>
 <body>
@@ -442,10 +462,10 @@
         </div>
 
         <div class="posts posts--wide reveal" aria-label="Murabex landing page screens">
-          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/screens/desktop-hero.webp" alt="Murabex landing page — hero, Commodity Murabaha Platform" loading="lazy"></div><figcaption>The promise</figcaption></figure>
-          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/screens/desktop-participants.webp" alt="Murabex landing page — the participants in the ecosystem" loading="lazy"></div><figcaption>The participants</figcaption></figure>
-          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/screens/desktop-technology.webp" alt="Murabex landing page — the technology platform" loading="lazy"></div><figcaption>The technology</figcaption></figure>
-          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/screens/desktop-lifecycle.webp" alt="Murabex landing page — the agreement lifecycle" loading="lazy"></div><figcaption>The agreement lifecycle</figcaption></figure>
+          <figure class="post"><div class="frame frame--browser"><span class="chrome"><i></i><i></i><i></i><span class="url">murabex.com</span></span><img src="../../assets/murabex/screens/desktop-hero.webp" alt="Murabex landing page — hero, Commodity Murabaha Platform" loading="lazy"></div><figcaption>The promise</figcaption></figure>
+          <figure class="post"><div class="frame frame--browser"><span class="chrome"><i></i><i></i><i></i><span class="url">murabex.com</span></span><img src="../../assets/murabex/screens/desktop-participants.webp" alt="Murabex landing page — the participants in the ecosystem" loading="lazy"></div><figcaption>The participants</figcaption></figure>
+          <figure class="post"><div class="frame frame--browser"><span class="chrome"><i></i><i></i><i></i><span class="url">murabex.com</span></span><img src="../../assets/murabex/screens/desktop-technology.webp" alt="Murabex landing page — the technology platform" loading="lazy"></div><figcaption>The technology</figcaption></figure>
+          <figure class="post"><div class="frame frame--browser"><span class="chrome"><i></i><i></i><i></i><span class="url">murabex.com</span></span><img src="../../assets/murabex/screens/desktop-lifecycle.webp" alt="Murabex landing page — the agreement lifecycle" loading="lazy"></div><figcaption>The agreement lifecycle</figcaption></figure>
         </div>
       </section>
 
