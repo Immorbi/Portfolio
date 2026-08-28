@@ -222,6 +222,13 @@
        white the moment it crosses dark artwork. One rule, every background. */
     .topbar { mix-blend-mode: difference; }
     .tb-nav a, .tb-contact a { color: #ffffff; }
+
+    /* Murabex: a wide product shot needs its own aspect, and the dune band is
+       the one full-bleed illustration on the page. */
+    .dunes { grid-column: 1 / -1; margin-top: clamp(28px, 3.5vw, 48px); }
+    .dunes img { width: 100%; height: auto; border-radius: 18px; }
+    .frame--wide { line-height: 0; }
+    .frame--wide img { aspect-ratio: 16 / 9; object-fit: cover; }
 </style>
 </head>
 <body>
@@ -249,11 +256,11 @@
         </div>
         <dl class="credits">
           <div class="cell"><dt>Client</dt><dd>Exactpro</dd></div>
-          <div class="cell"><dt>Role</dt><dd>Multidisciplinary<br>design</dd></div>
-          <div class="cell"><dt>Scope</dt><dd>Campaign &amp; event graphics,<br>Illustration, Employer brand</dd></div>
+          <div class="cell"><dt>Role</dt><dd>Multidisciplinary design,<br>Web &amp; UI/UX</dd></div>
+          <div class="cell"><dt>Scope</dt><dd>Campaign &amp; event graphics, Employer brand,<br>Product design for Murabex</dd></div>
           <div class="cell"><dt>Year</dt><dd>2022–2026</dd></div>
         </dl>
-        <p class="sub">An independent software testing house for the infrastructure global markets run on. For four years I designed its public face: <b>one template system</b>, flexed across campaigns, publications, conferences, hiring and five country calendars.</p>
+        <p class="sub">An independent software testing house for the infrastructure global markets run on. Over five years I designed its public face — <b>one template system</b> across campaigns, hiring and five country calendars — and, inside the house, the brand site and product interface for <b>Murabex</b>.</p>
       </header>
     </div>
 
@@ -404,6 +411,34 @@
           <figure class="post">
             <div class="frame"><img src="posts/cat-day-th2.webp" alt="International Cat Day post with a cat drawn as a circuit board, referencing the th2 mascot" loading="lazy"></div>
           </figure>
+        </div>
+      </section>
+
+      <!-- Murabex, a product built inside the house -->
+      <section class="sec grid" style="--accent:#d8b56b">
+        <div class="sec-label reveal"><span class="tag">Murabex</span></div>
+        <p class="lede-2 reveal">And inside the same five years, a product: enterprise Islamic finance made to feel <em>calm and precise</em>.</p>
+        <div class="body-cols reveal">
+          <p>Murabex is a digital finance platform that lets institutions execute Murabaha agreements and pool liquidity through a shared, sovereign ecosystem — connecting local banks, a national exchange and international investors on one trusted rail.</p>
+          <p>Here the work was product rather than campaign: the public marketing site, the institutional interface, and every illustration and icon in it. The brief was to make a dense, regulated, Shari'ah-governed system feel <strong>trustworthy and effortless</strong> — gold on near-black, generous space, and an interface where the data does the talking.</p>
+        </div>
+
+        <figure class="dunes reveal">
+          <img src="../../assets/murabex/screens/dunes.webp" alt="Original gold contour-line illustration of desert dunes, drawn for Murabex" loading="lazy">
+        </figure>
+
+        <div class="posts posts--wide reveal" aria-label="Murabex landing page screens">
+          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/screens/desktop-hero.webp" alt="Murabex landing page — hero, Commodity Murabaha Platform" loading="lazy"></div></figure>
+          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/screens/desktop-participants.webp" alt="Murabex landing page — the participants in the ecosystem" loading="lazy"></div></figure>
+          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/screens/desktop-technology.webp" alt="Murabex landing page — the technology platform" loading="lazy"></div></figure>
+          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/screens/desktop-lifecycle.webp" alt="Murabex landing page — the agreement lifecycle" loading="lazy"></div></figure>
+        </div>
+
+        <div class="posts posts--wide reveal" aria-label="Murabex product interface">
+          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/ui-1.jpg" alt="Murabex agreements dashboard — Murabaha agreements and their states" loading="lazy"></div></figure>
+          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/ui-2.jpg" alt="Murabex agreement lifecycle — the workflow from draft to done" loading="lazy"></div></figure>
+          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/ui-3.jpg" alt="Murabex asset trading — a competitive exchange with quotes and timers" loading="lazy"></div></figure>
+          <figure class="post"><div class="frame frame--wide"><img src="../../assets/murabex/ui-4.jpg" alt="Murabex customer and KYC — automated compliance screening and audit trail" loading="lazy"></div></figure>
         </div>
       </section>
     </div>
